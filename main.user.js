@@ -14,7 +14,13 @@
 // 监听间隔
 var LISTENER_TIME = 1000;
 
-// 汉化配置
+/**
+ * 汉化配置
+ *
+ * 页面中使用<br>换行文本汉化示例
+ * 原文：Non-Bioseed: Ignore Space Dock, Bioseeder Ship and Probes<br>Bioseed: Ignore World Collider<br>Whitehole: Ignore Jump Ship
+ * 配置项："Non-Bioseed: Ignore Space Dock, Bioseeder Ship and Probes": "非生物种子:忽略太空码头、生物播种船和探测器\n 生物种子:忽略世界超级对撞机\n 黑洞: 忽略跃迁飞船"
+ */
 var CNZ_MAP = {
     // 侧边栏
     "More script options available in Settings tab": "设置选项卡中提供了更多脚本选项",
@@ -754,22 +760,30 @@ function textCH(target) {
             titleCH ? $(e).attr('title', titleCH) : null;
         }
 
-        // 子节点汉化
+        // 首个子节点汉化
         var firstChild = $(e).prop('firstChild');
         if (firstChild) {
 
             firstChild = firstChild.nodeValue;
             var firstChildCH = CNZ_MAP[firstChild];
-            firstChildCH ? $(e).text(firstChildCH) : null;
+            if (firstChildCH) {
+                var obj = $(e).text(firstChildCH);
+                // 替换为换行标签
+                obj.html(obj.html().replace(/\n/g,'<br/>'));
+            }
         }
 
-        // 文本汉化
-        var text = $(e).text();
-        if (text) {
+        // 末尾子节点汉化
+        var lastChild = $(e).prop('lastChild');
+        if (lastChild) {
 
-            text = text.nodeValue;
-            var textCH = CNZ_MAP[text];
-            textCH ? $(e).text(textCH) : null;
+            lastChild = lastChild.nodeValue;
+            var lastChildCH = CNZ_MAP[lastChild];
+            if (lastChildCH) {
+                obj = $(e).text(lastChildCH);
+                // 替换为换行标签
+                obj.html(obj.html().replace(/\n/g,'<br/>'));
+            }
         }
     });
 }
