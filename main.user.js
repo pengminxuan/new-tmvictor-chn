@@ -17,6 +17,9 @@ var LISTENER_TIME = 1000;
 /**
  * 汉化配置
  *
+ * 扒原文title语句：$("#配置项标签id值").find("*").each(function(index, e) {if($(e).attr('title')){console.log($(e).attr('title'))}})
+ * 扒原文text语句：$("#配置项标签id值").find("*").each(function(index, e) {if($(e).prop('firstChild').nodeValue){console.log($(e).prop('firstChild').nodeValue)}})
+ *
  * 页面中使用<br>换行文本汉化示例
  * 原文：Non-Bioseed: Ignore Space Dock, Bioseeder Ship and Probes<br>Bioseed: Ignore World Collider<br>Whitehole: Ignore Jump Ship
  * 配置项："Non-Bioseed: Ignore Space Dock, Bioseeder Ship and Probes": "非生物种子:忽略太空码头、生物播种船和探测器\n 生物种子:忽略世界超级对撞机\n 黑洞: 忽略跃迁飞船"
@@ -25,6 +28,7 @@ var CNZ_MAP = {
     // 侧边栏
     "More script options available in Settings tab": "设置选项卡中提供了更多脚本选项",
     "masterScriptToggle": "启用脚本",
+    "showSettings": "显示设置",
     "autoEvolution": "自动进化",
     "autoAchievements": "自动成就",
     "autoChallenge": "自动挑战",
@@ -39,18 +43,21 @@ var CNZ_MAP = {
     "autoARPA": "自动ARPA",
     "autoJobs": "自动工作",
     "autoCraftsmen": "自动工匠",
+    "autoPylon": null,
+    "autoQuarry": null,
     "autoSmelter": "自动冶炼",
     "autoFactory": "自动工厂",
     "autoMiningDroid": "自动采矿机器人",
     "autoGraphenePlant": "自动石墨烯厂",
     "autoAssembleGene": "自动组装基因",
+    "autoMinorTrait": null,
     "Prestige Options": "威望重置选项",
     "Bulk Sell": "批量销售",
     "Minimum money to keep :": "最低保留资金:",
     "Set": "设置",
     "Set %": "设置百分比",
 
-// 威望重置设置
+    // 威望重置设置
     "Prestige Settings": "威望重置设置",
     "Reset Prestige Settings": "威望重置设置还原",
     "Mutual Assured Destruction": "核弹重置相关",
@@ -78,12 +85,28 @@ var CNZ_MAP = {
     "If not enabled the mass ejector will not be managed by the script": "启用后，脚本才会自动管理质量喷射器喷射的物质",
     "Once we've constructed X mass ejectors the eject as much of everything as possible": "当质量喷射器数量达到指定值以后，尽可能的喷射最大质量的物质",
 
+    "Prestige Type:": null,
+    "Ascension": null,
+    "Non-Bioseed: Ignore Space Dock, Bioseeder Ship and Probes": null,
+    "Pre-MAD: Ignore A.R.P.A.": null,
+    "Wait for maximum population": null,
+    "Eject excess resources": null,
+    "(Decay Challenge) Eject rate": null,
+
     // 常规设置
     "General Settings": "常规设置",
     "Reset General Settings": "常规设置还原",
     "Always assemble genes": "是否总是用脚本进行基因组装",
 
     "Will continue assembling genes even after De Novo Sequencing is researched": "即使研究自动组装基因后，仍然用脚本进行基因组装",
+
+    "Prioritize resources for triggers": null,
+    "Prioritize resources for queue": null,
+    "Prioritize resources for Pre-MAD researches": null,
+    "Prioritize resources for Space+ for researches": null,
+    "Prioritize resources for missions": null,
+    "Always autoclick resources": null,
+    "Maximum clicks per second": null,
 
     // 政府设置
     "Government Settings": "政府设置",
@@ -94,6 +117,8 @@ var CNZ_MAP = {
     "Manage changes of government": "是否管理社会体制变化",
     "Interim Government:": "临时社会体制:",
     "Final Government:": "最终社会体制:",
+    "Second Government:": null,
+    "Space Government:": null,
 
     "Minimum tax rate for autoTax. Will still go below this amount if money storage is full": "自动税率使用的最低税率。如果资金满了，将可能低于此数值。",
     "Use this to set a minimum allowed morale. Remember that less than 100% can cause riots and weather can cause sudden swings": "设置最低允许的士气。少于100%士气可能引起税收抵制，请尽量不要设置到100%以下。另外请记得天气的影响",
@@ -106,7 +131,9 @@ var CNZ_MAP = {
     "Evolution Settings": "进化设置",
     "Reset Evolution Settings": "进化设置还原",
     "Target Universe:": "进化宇宙目标",
+    "Target Planet:": null,
     "Target Evolution:": "进化种族目标",
+    "Soft Reset": null,
     "No Plasmids": "是否激活关闭质粒效果",
     "Weak Mastery": "是否激活弱精通效果",
     "No Trade": "是否激活关闭自由贸易",
@@ -118,6 +145,25 @@ var CNZ_MAP = {
     "EM Field": "是否激活E.M.磁场",
     "Cataclysm": "是否激活大灾变",
     "Junker": "是否激活遗传绝境",
+    "Genetic Dead End": null,
+
+    "Evolution Queue": null,
+    "Queue Enabled": null,
+    "Prestige for new evolutions:": null,
+    "Current Prestige": null,
+    "Add New Evolution": null,
+    "Race": null,
+    "Settings": null,
+    "Auto Achievements (Extinction)": null,
+
+    // 星球权重设置
+    "Planet Weighting Settings": "星球权重设置",
+    "Reset Planet Weighting Settings": "星球权重设置还原",
+    "Planet Weighting = Biome Weighting + Trait Weighting + (Extras Intensity * Extras Weightings)": null,
+    "Biome": null,
+    "Trait": null,
+    "Extra": null,
+    "Achievement": "成就",
 
     // 星球独有种族警告
     "Warning! Only choose if you meet requirements: Hellscape planet": "警告！当前星球为 地狱星球 时才可选择此项，否则可能卡死",
@@ -174,6 +220,7 @@ var CNZ_MAP = {
     "Money": "资金（或收购）",
     "Morale": "吞并",
     "Conquest": "征服",
+    "Research Alien Gift": null,
 
     // 外交事务设置
     "Foreign Affairs Settings": "外交事务设置",
@@ -212,6 +259,25 @@ var CNZ_MAP = {
     "Set to less than 100 to take advantage of being able to heal more soldiers in a game day than get wounded in a typical attack": "合理设置为某个低于100的值，可以有效利用游戏内的自然愈合机制",
     "Hire a mercenary if money storage is greater than this percent": "如果资金存量大于此比例，则聘请雇佣兵",
     "Combines with the money storage percent setting to determine when to hire mercenaries": "结合资金存量比例，可以管理聘请雇佣兵的时机",
+
+    "Pacifist": null,
+    "Perform unification": null,
+    "Occupy last foreign power": null,
+    "Military Power to switch target": null,
+    "Inferior Power:": null,
+    "Superior Power:": null,
+    "Ignore": null,
+    "Influence": null,
+    "Sabotage": null,
+    "Incite": null,
+    "Annex": null,
+    "Purchase": null,
+    "Occupy": null,
+    "Sabotage foreign power when useful": null,
+    "OR if cost lower than money earned in X seconds": null,
+    "Minimum advantage": null,
+    "Maximum advantage": null,
+    "Maximum siege battalion": null,
 
     // 地狱设置
     "Hell Settings": "地狱维度设置",
@@ -259,6 +325,21 @@ var CNZ_MAP = {
     "Auto Power needs to be on for this to work": "需要开启自动供能此项才能生效",
     "Turn more and more attractors off when getting nearer to the top threat": "越接近最大恶魔数量，关闭越多吸引器信标",
 
+    "Alive soldier percentage for entering hell": null,
+
+    // 舰队设置
+    "Fleet Settings": "舰队设置",
+    "Reset Fleet Settings": "舰队设置还原",
+    "Region": "地区",
+    "Priority": "优先级",
+
+    // 质量喷射设置
+    "Mass Ejector Settings": "质量喷射设置",
+    "Reset Mass Ejector Settings": "质量喷射设置还原",
+    "Atomic Mass": null,
+    "Allow Eject": null,
+    "Mass per unit:": null,
+
     // 市场设置
     "Market Settings": "市场设置",
     "Reset Market Settings": "市场设置还原",
@@ -276,10 +357,15 @@ var CNZ_MAP = {
     "Uses the highest per second amount of these two values. Will trade for resources until this minimum money per second amount is hit": "两项中较高的数值生效。达到每秒资金收入最低值后，才会购买资源",
     "Uses the highest per second amount of these two values. Will trade for resources until this percentage of your money per second amount is hit": "两项中较高的数值生效。达到每秒资金收入最低比例后，才会购买资源",
 
+    "Galaxy Trades": null,
+    "Manage Galaxy Trades": null,
+
     // 存储设置
     "Storage Settings": "存储设置",
     "Reset Storage Settings": "存储设置还原",
     "Limit Pre-MAD Storage": "限制核弹重置之前阶段的存储",
+    "Reassign only empty storages": null,
+    "Store Overflow": null,
     "Enabled": "是否启用",
     "Weighting": "权重",
     "Max Crates": "最大板条箱",
@@ -290,12 +376,22 @@ var CNZ_MAP = {
     // 生产设置
     "Production Settings": "生产设置",
     "Reset Production Settings": "生产设置还原",
-    "Smelter": "冶炼厂相关",
     "Fuel": "燃料使用顺序",
-    "Factory": "工厂相关",
     "Override and produce money if we can't fill factories with other production": "如果其他资源储量已满，则无视相关设置，生产资金",
 
     "If all other production has been allocated and there are leftover factories then use them to produce money": "其他资源储量满以后，使用工厂生产资金。",
+
+    "Distributing:": null,
+    "Prioritize Iron": null,
+    "Prioritize Steel": null,
+    "Both, up to full storages": null,
+    "Both, up to required amounts": null,
+    "Star Power": null,
+    "Prioritize demanded craftables": null,
+    "Min Ingredients": null,
+    "Mining Drone": null,
+    "Wait for full mana": null,
+    "Ritual": null,
 
     // 工作设置
     "Job Settings": "工作设置",
@@ -348,6 +444,42 @@ var CNZ_MAP = {
     "Manage State": "是否管理供能",
     "All Buildings": "所有建筑物",
 
+    "Ignore weighting and build if storage is full": null,
+    "Prefered Shrine:": null,
+    "Any": null,
+    "Equally": null,
+    "Metal": null,
+    "Knowledge": null,
+    "Tax": null,
+
+    // 自动建筑权重设置
+    "AutoBuild Weighting Settings": "自动建筑权重设置",
+    "Reset AutoBuild Weighting Settings": "自动建筑权重设置还原",
+    "Target": "目标",
+    "Condition": "条件",
+    "Multiplier": "乘数",
+    "New building": null,
+    "Powered building": null,
+    "Low available energy": null,
+    "Power plant": null,
+    "Producing more energy than required": null,
+    "Knowledge storage": null,
+    "Have unlocked unafforable researches": null,
+    "All unlocked researches already affordable": null,
+    "Mass Ejector": null,
+    "Existed ejectors not fully utilized": null,
+    "Not housing or barrack": null,
+    "MAD prestige enabled, and affordable": null,
+    "Freight Yard, Container Port": null,
+    "Have unused crates or containers": null,
+    "All fuel depots": null,
+    "Missing Oil or Helium for techs and missions": null,
+    "Building with state (city)": null,
+    "Some instances of this building are not working": null,
+    "Building with state (space)": null,
+    "Conflicts for some resource with active trigger or queue": null,
+    "Missing consumables or support to operate": null,
+
     // ARPA设置
     "A.R.P.A. Settings": "ARPA设置",
     "Reset A.R.P.A. Settings": "ARPA设置还原",
@@ -388,6 +520,7 @@ var CNZ_MAP = {
 
     // 种族
     "Script Managed": "由脚本管理",
+    "Auto Achievements": null,
     "Antid": "蚂蚁人",
     "Mantis": "螳螂人",
     "Scorpid": "蝎子",
@@ -438,6 +571,16 @@ var CNZ_MAP = {
     "Antimatter": "反物质宇宙",
     "Evil": "邪恶宇宙",
     "Micro": "微型宇宙",
+    "Magic": null,
+
+    // 星球
+    "Most habitable": null,
+    "Most achievements": null,
+    "Highest weighting": null,
+
+    // 地区
+    "Alien 1 System": null,
+    "Alien 2 System": null,
 
     // 资源
     "Orichalcum": "奥利哈刚",
@@ -466,6 +609,18 @@ var CNZ_MAP = {
     "Lumber": "木头",
     "Chrysotile": "温石棉",
     "Food": "食物",
+    "Deuterium": null,
+    "Neutronium": null,
+    "Infernite": null,
+    "Elerium": null,
+    "Plywood": null,
+    "Brick": null,
+    "Wrought Iron": null,
+    "Sheet Metal": null,
+    "Mythril": null,
+    "Aerogel": null,
+    "Nanoweave": null,
+    "Scarletite": null,
 
     // 建筑物
     // 郊外
@@ -681,6 +836,53 @@ var CNZ_MAP = {
     // 遗迹
     "Portal East Tower": "东侧巨塔",
     "Portal West Tower": "西侧巨塔",
+
+    // 未知建筑（请补充归类一下）
+    "Portal Inferno Reactor": null,
+    "Portal Arcology": null,
+    "Alpha Processing Facility": null,
+    "Alpha Graphene Plant": null,
+    "Moon Launch": null,
+    "Sirius Thermal Collector": null,
+    "Gateway Mission": null,
+    "Gateway Starbase": null,
+    "Gateway Ship Dock": null,
+    "Stargate Station": null,
+    "Stargate Telemetry Beacon": null,
+    "Gateway Dreadnought": null,
+    "Gateway Cruiser Ship": null,
+    "Gateway Frigate Ship": null,
+    "Gateway Bolognium Ship": null,
+    "Gateway Corvette Ship": null,
+    "Gateway Scout Ship": null,
+    "Gorddon Mission": null,
+    "Gorddon Embassy": null,
+    "Gorddon Dormitory": null,
+    "Gorddon Symposium": null,
+    "Gorddon Freighter": null,
+    "Alien 1 Consulate": null,
+    "Alien 1 Resort": null,
+    "Alien 1 Vitreloy Plant": null,
+    "Alien 1 Super Freighter": null,
+    "Alien 2 Foothold": null,
+    "Alien 2 Scavenger": null,
+    "Alien 2 Armed Miner": null,
+    "Alien 2 Ore Processor": null,
+    "Chthonian Mine Layer": null,
+    "Chthonian Excavator": null,
+    "Chthonian Raider": null,
+    "Blackhole Farpoint": null,
+    "Cement Plant": null,
+    "Stargate Defense Platform": null,
+    "Stargate Depot": null,
+    "Portal Ancient Pillars": null,
+    "Portal Survey Ruins": null,
+    "Portal Guard Post": null,
+    "Portal Vault": null,
+    "Portal Archaeology": null,
+    "Portal Infernal Forge": null,
+    "Portal Gate Turret": null,
+    "Portal Infernite Mine": null,
 };
 
 (function() {
@@ -689,8 +891,6 @@ var CNZ_MAP = {
 
     sidebarListener();
     settingsListener();
-
-    console.log("TMVictor（新）汉化完成");
 })();
 
 /**
@@ -704,8 +904,6 @@ function sidebarListener() {
         var container = $("#autoScriptContainer");
         // 获取脚本弹窗
         var scriptModal = $("#scriptModal");
-        // 获取脚本设置选项
-        var settings = $("#script_settings");
 
         // 获取到侧边栏才进行汉化
         if(container.length === 1) {
@@ -768,7 +966,7 @@ function textCH(target) {
             var firstChildCH = CNZ_MAP[firstChild];
             if (firstChildCH) {
                 var obj = $(e).text(firstChildCH);
-                // 替换为换行标签
+                // 替换占位字符串\n为换行标签（&lt;br&gt;=<br>）
                 obj.html(obj.html().replace(/\n/g,'<br/>'));
             }
         }
