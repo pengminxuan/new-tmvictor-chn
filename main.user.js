@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Evolve-新版TMVictor汉化
 // @namespace    https://gitee.com/angle_god/tmvictor-localization-chinese
-// @version      1.0.1
+// @version      1.0.2
 // @description  try to take over the world!
 // @downloadURL  https://https://github.com/pengminxuan/new-tmvictor-chn/blob/main/main.user.js
 // @author       天使不见时
