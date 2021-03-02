@@ -621,7 +621,8 @@ var CNZ_MAP = {
     "Aerogel": null,
     "Nanoweave": null,
     "Scarletite": null,
-
+    
+/*
     // 建筑物
     // 郊外
     "Slave Market": "奴隶市场",
@@ -883,6 +884,7 @@ var CNZ_MAP = {
     "Portal Infernal Forge": null,
     "Portal Gate Turret": null,
     "Portal Infernite Mine": null,
+*/
 };
 
 (function() {
@@ -933,6 +935,9 @@ function settingsListener() {
 
             // 汉化脚本设置
             textCH(settings);
+            
+            //建筑名单独汉化
+            buildingNameTextCH();
         }
     }, LISTENER_TIME);
 }
@@ -994,4 +999,46 @@ function specialTextCH() {
     $("#s-quick-prestige-options").contents().filter(function(){
         return this.nodeType == 3;
     })[0].nodeValue = '威望重置选项';
+}
+
+
+//建筑名汉化
+function buildingNameTextCH()
+{
+    var buildingList = document.getElementById("script_buildingTableBody").childNodes;
+
+    //防止重复汉化
+    //if(document.querySelector("#script_portal-infernite_mineToggle > span").innerText == "地狱石矿井") return;
+
+    for(var i = 1; i < buildingList.length; i++)
+    {
+        tempA = buildingList[i].getAttribute("value");
+        tempL = tempA.indexOf('-')
+        tempB1 = tempA.substr(0,tempL)
+        tempB2 = tempA.substr(tempL+1)
+        var tempTitle
+        if(typeof(evolve.actions[tempB1][tempB2])  == "undefined")
+        {
+            var tempSubObList = Object.keys(evolve.actions[tempB1]);
+            for(var j = 0; j < tempSubObList.length; j++)
+            {
+                if(!(typeof(evolve.actions[tempB1][tempSubObList[j]][tempB2])  == "undefined"))
+                {
+                    tempTitle = evolve.actions[tempB1][tempSubObList[j]][tempB2].title;
+                    break;
+                }
+            }
+        }
+        else
+        {
+            tempTitle = evolve.actions[tempB1][tempB2].title
+        }
+
+        if(typeof(tempTitle) == "function")
+            buildingList[i].getElementsByTagName("span")[0].innerText = tempTitle()
+        else
+            buildingList[i].getElementsByTagName("span")[0].innerText = tempTitle
+
+        delete tempTitle
+    }
 }
