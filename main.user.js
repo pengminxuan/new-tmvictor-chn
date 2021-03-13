@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Evolve-新版TMVictor汉化
 // @namespace    https://gitee.com/angle_god/tmvictor-localization-chinese
-// @version      1.0.6
+// @version      1.0.7
 // @description  try to take over the world!
 // @downloadURL  https://github.com/pengminxuan/new-tmvictor-chn/blob/main/main.user.js
 // @author       天使不见时
@@ -248,6 +248,7 @@ var CNZ_MAP = {
     "Reset Minor Trait Settings": "次要特质设置还原",
     "Minor Trait": "次要特质",
     "Enabled": "是否启用",
+    "Weighting": "权重",
 
     // 触发器设置
     "Trigger Settings": "触发器设置",
@@ -390,55 +391,57 @@ var CNZ_MAP = {
     "Trade minimum money /s": "贸易允许的每秒资金收入最低值",
     "Trade minimum money percentage /s": "贸易允许的每秒资金收入最低比例",
     "Resource": "资源名称",
-    "Buy": "是否购买",
-    "Sell": "是否出售",
+    "Buy": "购买",
+    "Sell": "出售",
     "Trade For": "贸易路线购买",
     "Trade Away": "贸易路线出售",
     "Ratio": "比例",
     "Routes": "贸易路线数",
     "Min p/s": "资源收入保留",
+    "Galaxy Trades": "星际贸易",
+    "Manage Galaxy Trades": "自动管理星际贸易",
+    "Priority": "优先级",
 
     "Uses the highest per second amount of these two values. Will trade for resources until this minimum money per second amount is hit": "两项中较高的数值生效。达到每秒资金收入最低值后，才会购买资源",
     "Uses the highest per second amount of these two values. Will trade for resources until this percentage of your money per second amount is hit": "两项中较高的数值生效。达到每秒资金收入最低比例后，才会购买资源",
-
-    "Galaxy Trades": "星际贸易",
-    "Manage Galaxy Trades": "脚本管理星际贸易",
+    "Automatically adjust galaxy trade routes": "自动管理星际贸易路线",
 
     // 存储设置
     "Storage Settings": "存储设置",
     "Reset Storage Settings": "存储设置还原",
     "Limit Pre-MAD Storage": "限制核弹重置之前阶段的存储",
-    "Reassign only empty storages": "仅重新分配空闲箱子",
-    "Store Overflow": null,
-    "Weighting": "权重",
+    "Reassign only empty storages": "只在板条箱或集装箱有空余时进行重新分配",
+    "Store Overflow": "是否对溢出部分分配存储",
     "Max Crates": "最大板条箱",
     "Max Containers": "最大集装箱",
 
     "Saves resources and shortens run time by limiting storage pre-MAD": "限制核弹重置之前阶段的存储来节省资源和相应时间",
+    "Wait until storage is empty before reassigning containers to another resource, to prevent overflowing and wasting resources": "直到相应的板条箱或集装箱未装有相应资源时才考虑将它重新分配给其他资源，以防止资源溢出浪费",
 
     // 生产设置
     "Production Settings": "生产设置",
     "Reset Production Settings": "生产设置还原",
-    "Fuel": "燃料使用顺序",
-    "Override and produce money if we can't fill factories with other production": "如果其他资源储量已满，则无视相关设置，生产资金",
-
-    "If all other production has been allocated and there are leftover factories then use them to produce money": "其他资源储量满以后，使用工厂生产资金。",
-
     "Smelter": "冶炼厂",
+    "Distributing:": "分配：",
+    "Prioritize Iron": "优先熔炼铁",
+    "Prioritize Steel": "优先熔炼钢",
+    "Both, up to full storages": "同时进行熔炼，直到达到上限",
+    "Both, up to required amounts": "同时进行熔炼，直到达到需求数量",
+    "Fuel": "燃料使用顺序",
+    "Inferno": "炼狱燃料",
+    "Wood": "木材",
+    "Star": "星辰",
     "Foundry": "铸造厂",
+    "Prioritize demanded craftables": "优先制造需要的锻造物",
+    "Min Ingredients": "锻造物原料保底产量",
     "Factory": "工厂",
-    "Pylon": "水晶塔",
-    "Distributing:": "分配",
-    "Prioritize Iron": "优先炼铁",
-    "Prioritize Steel": "优先炼钢",
-    "Both, up to full storages": "同时冶炼，直到仓储上限",
-    "Both, up to required amounts": "同时冶炼，直到需求数量",
-    "Star Power": "星辰",
-    "Prioritize demanded craftables": "优先制造需求的锻造物",
-    "Min Ingredients": "最小原料保持比例",
     "Mining Drone": "采矿机器人",
-    "Wait for full mana": "等待法力回复至上限",
+    "Pylon": "水晶塔",
+    "Wait for full mana": "等待法力恢复至上限",
     "Ritual": "仪式",
+
+    "Resources already produced above maximum amount required for constructing buildings won't be crafted, if there's better options enabled and available, ignoring weighted ratio": "如果有更好的选项，则建筑暂时不需要的锻造物将被忽略，同时忽略权重设置",
+    "Cast rituals only with full mana": "只在法力达到上限时激活仪式",
 
     // 工作设置
     "Job Settings": "工作设置",
@@ -479,54 +482,55 @@ var CNZ_MAP = {
     "Priest": "牧师",
     "Archaeologist": "考古学家",
 
-    "Automatically sets the default job in order of Quarry Worker -> Lumberjack -> Crystal Miner -> Scavenger -> Farmer": "自动以石工->伐木工人->水晶矿工->清道夫->农民的顺序设置默认工作",
+    "Automatically sets the default job in order of Quarry Worker -> Lumberjack -> Scavenger -> Farmer": "自动以石工->伐木工人->清道夫->农民的顺序设置默认工作",
     "AFTER allocating breakpoints this weighting will be used to split lumberjacks, quarry workers, crystal miners and scavengers": "用于分配伐木工人，石工，水晶矿工和清道夫的数量",
 
     // 建筑设置
     "Building Settings": "建筑设置",
     "Reset Building Settings": "建筑设置还原",
-    "Building": "建筑物",
-    "Auto Build": "是否自动建造",
-    "Max Build": "建造上限",
-    "Manage State": "是否管理供能",
-    "All Buildings": "所有建筑物",
-
-    "Ignore weighting and build if storage is full": "如果仓储已满，则忽略权重进行建造",
-    "Prefered Shrine:": "圣地种类偏好",
-    "Any": "任意建造",
+    "Ignore weighting and build if storage is full": "如果存储已满，则忽略权重进行建造",
+    "Prefered Shrine:": "圣地种类偏好：",
+    "Any": "任意类型",
     "Equally": "平均分配",
     "Morale": "士气",
     "Metal": "金属",
     "Knowledge": "知识",
     "Tax": "税收",
+    "Building": "建筑物",
+    "Auto Build": "是否自动建造",
+    "Max Build": "建造上限",
+    "Auto Power": "是否自动供能",
+    "All Buildings": "所有建筑物",
+
+    "Ignore weighting and immediately construct building if it uses any capped resource, preventing wasting them by overflowing. Weight still need to be positive(above zero) for this to happen.": "如果建筑所使用的任意一项资源超过上限，则忽略权重立刻进行建造，以避免浪费资源。权重仍然需要设为正数(大于0)后此项才能生效。",
 
     // 自动建筑权重设置
     "AutoBuild Weighting Settings": "自动建筑权重设置",
     "Reset AutoBuild Weighting Settings": "自动建筑权重设置还原",
     "Target": "目标",
     "Condition": "条件",
-    "Multiplier": "乘数",
+    "Multiplier": "倍率",
     "New building": "新建筑",
     "Powered building": "用电建筑",
-    "Low available energy": "剩余电量不足",
     "Power plant": "发电厂",
-    "Producing more energy than required": "生产的电力超过需求",
-    "Knowledge storage": "科研建筑",
-    "Have unlocked unafforable researches": "知识上限不满足可研究的科技",
-    "All unlocked researches already affordable": "知识上限满足所有可研究的科技",
+    "Low available energy": "电力不足",
+    "Producing more energy than required": "电力过剩",
+    "Knowledge storage": "知识上限建筑",
+    "Have unlocked unafforable researches": "存在因知识上限不足而无法进行的研究",
+    "All unlocked researches already affordable": "不存在因知识上限不足而无法进行的研究",
     "Mass Ejector": "质量喷射器",
-    "Existed ejectors not fully utilized": "已有的喷射器尚未满负荷使用",
-    "Not housing or barrack": "提升人口与兵力之外的所有建筑",
-    "MAD prestige enabled, and affordable": "自动核爆重置激活，且相互毁灭已研发",
+    "Existed ejectors not fully utilized": "存在未完全运作的质量喷射器",
+    "Not housing or barrack": "提升人口或士兵上限以外的建筑",
+    "MAD prestige enabled, and affordable": "进行核爆重置，且已研究相互毁灭",
     "Freight Yard, Container Port": "货场与集装箱港口",
     "Have unused crates or containers": "有未使用的板条箱或集装箱",
-    "All fuel depots": "所有燃料仓库",
-    "Missing Oil or Helium for techs and missions": "当科研与探索任务所需石油、氦3等储量上限不足时",
-    "Building with state (city)": "可激活建筑（地面）",
-    "Some instances of this building are not working": "该建筑并未全部激活",
-    "Building with state (space)": "可激活建筑（太空）",
-    "Conflicts for some resource with active trigger or queue": "与队列中的建筑或触发器所需资源发生冲突",
-    "Missing consumables or support to operate": "缺乏燃料，消耗品，或支持",
+    "All fuel depots": "所有燃料存储",
+    "Missing Oil or Helium for techs and missions": "进行研究或任务需要的石油或氦-3超过存储上限",
+    "Building with state (city)": "需要调整供能的建筑(地面)",
+    "Some instances of this building are not working": "并非所有建筑都在正常供能",
+    "Building with state (space)": "需要调整供能的建筑(太空)",
+    "Conflicts for some resource with active trigger or queue": "与队列或触发器中的项目所需资源冲突",
+    "Missing consumables or support to operate": "缺少供能，无法正常运作",
 
     // ARPA设置
     "A.R.P.A. Settings": "ARPA设置",
@@ -541,9 +545,12 @@ var CNZ_MAP = {
     "Monument": "纪念碑",
     "Railway": "铁路",
     "Launch Facility": "发射设施",
+    "Nexus": "魔法回路",
+    "Asteroid Redirect": "小行星变轨",
+    "Mana Syphon": "法力虹吸",
 
-    "Overrides the below settings to still build A.R.P.A projects if resources are full": "如果储量已满，则无视下方设置，仍然进行ARPA项目的建造",
-    "A.R.P.A. projects that require crafted resources won't override and build if resources are below this amount": "如果锻造物低于此数值，相应的ARPA项目不会无视下方设置进行建造",
+    "Overrides the below settings to still build A.R.P.A projects if resources are full. This option does not applies to Mana Syphons, it won't be built unless explicitly enabled.": "如果储量已满，则无视下方设置，仍然进行ARPA项目的建造。此项对法力虹吸无效。",
+    "A.R.P.A. projects that require crafted resources won't override and build if resources are below this amount, -1 stands for maximum amount required by other buildings.": "如果锻造物低于此数值，相应的ARPA项目不会无视下方设置进行建造。设为-1则数值为其他建筑所需要的最大数量。",
     "A.R.P.A. project that require more than this percentage of a non-crafted resource won't override and build": "如果资源花费的比例高于此数值，相应的ARPA项目不会无视下方设置进行建造",
 
     // 日志设置
@@ -555,6 +562,7 @@ var CNZ_MAP = {
     "Multi-part Construction": "分项工程",
     "Research": "研究",
     "Spying": "间谍",
+    "Attack": "进攻",
     "Mercenaries": "雇佣兵",
 
     "Master switch to enable logging of script actions in the game message queue": "日志记录的主开关",
@@ -670,16 +678,6 @@ var CNZ_MAP = {
     "Aerogel": "气凝胶",
     "Nanoweave": "纳米织物",
     "Scarletite": "绯绯色金",
-
-    // title
-    "Automatically adjust galaxy trade routes": null,
-    "Wait until storage is empty before reassigning containers to another resource, to prevent overflowing and wasting resources": null,
-    "Resources already produced above maximum amount required for constructing buildings won't be crafted, if there's better options enabled and available, ignoring weighted ratio": null,
-    "Cast rituals only with full mana": null,
-    "Automatically sets the default job in order of Quarry Worker -> Lumberjack -> Scavenger -> Farmer": null,
-    "Ignore weighting and immediately construct building if it uses any capped resource, preventing wasting them by overflowing. Weight still need to be positive(above zero) for this to happen.": null,
-    "A.R.P.A. projects that require crafted resources won't override and build if resources are below this amount, -1 stands for maximum amount required by other buildings.": null,
-
 
 /*
     // 建筑物
