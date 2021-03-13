@@ -1156,10 +1156,10 @@ function triggerBuildingNameTextCH()
     buildingCNTextField.setAttribute("id", "buildingCNTextField")
     buildingCNTextField.setAttribute("style", "margin-top: 10px; margin-bottom: 10px;")
     buildingCNTextField.innerHTML =
-        '<a style="width:16%">中文名</a>'+
+        '<a style="width:16%">输入建筑中文名</a>'+
         '<a style="width:18%"><input id="buildingCNTextName"></a>'+
         '<a style="width:11%"></a>'+
-        '<a style="width:16%">英文名</a>'+
+        '<a style="width:16%">显示建筑英文名</a>'+
         '<a style="width:18%"><input id="buildingENTextName"></a>'+
         '<a style="width:21%"></a>'
 
