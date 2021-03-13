@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Evolve-新版TMVictor汉化
 // @namespace    https://gitee.com/angle_god/tmvictor-localization-chinese
-// @version      1.0.4
+// @version      1.0.5
 // @description  try to take over the world!
 // @downloadURL  https://github.com/pengminxuan/new-tmvictor-chn/blob/main/main.user.js
 // @author       天使不见时
@@ -1026,10 +1026,10 @@ function settingsListener() {
 
             // 汉化脚本设置
             textCH(settings);
-            
+
             //建筑名单独汉化
             buildingNameTextCH();
-            
+
             //建立建筑名英汉对照框
             triggerBuildingNameTextCH();
         }
@@ -1097,6 +1097,7 @@ function specialTextCH() {
 
 
 var buildingCNNameObj = {};
+var buildingENNameObj = {};
 //建筑名汉化
 function buildingNameTextCH()
 {
@@ -1137,7 +1138,10 @@ function buildingNameTextCH()
 
         //保存建筑名对照表
         if(typeof(buildingCNNameObj[tempTitleStr]) == "undefined")
+        {
            buildingCNNameObj[tempTitleStr] = buildingList[i].getElementsByTagName("span")[0].innerText
+           buildingENNameObj[buildingList[i].getElementsByTagName("span")[0].innerText] = tempTitleStr
+        }
 
         //赋值
         buildingList[i].getElementsByTagName("span")[0].innerText = tempTitleStr
@@ -1156,10 +1160,10 @@ function triggerBuildingNameTextCH()
     buildingCNTextField.setAttribute("id", "buildingCNTextField")
     buildingCNTextField.setAttribute("style", "margin-top: 10px; margin-bottom: 10px;")
     buildingCNTextField.innerHTML =
-        '<a style="width:16%">输入建筑中文名</a>'+
+        '<a style="width:16%">输入或显示建筑中文名</a>'+
         '<a style="width:18%"><input id="buildingCNTextName"></a>'+
         '<a style="width:11%"></a>'+
-        '<a style="width:16%">显示建筑英文名</a>'+
+        '<a style="width:16%">输入或显示建筑英文名</a>'+
         '<a style="width:18%"><input id="buildingENTextName"></a>'+
         '<a style="width:21%"></a>'
 
@@ -1172,10 +1176,20 @@ function triggerBuildingNameTextCH()
                 source: Object.keys(buildingCNNameObj),
                 delay: 0,
                 select: function (event, ui) {
-                    console.log(ui)
-                    console.log(ui.item.value)
-                    console.log(buildingCNNameObj[ui.item.value])
                     $('#buildingENTextName').val(buildingCNNameObj[ui.item.value])
+                }
+            });
+        }
+    });
+    //英文名列表
+    $('#buildingENTextName').on('click', function () {
+        if(!($('#buildingENTextName').hasClass("ui-autocomplete-input")))
+        {
+            $('#buildingENTextName').autocomplete({
+                source: Object.keys(buildingENNameObj),
+                delay: 0,
+                select: function (event, ui) {
+                    $('#buildingCNTextName').val(buildingENNameObj[ui.item.value])
                 }
             });
         }
