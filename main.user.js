@@ -85,8 +85,8 @@ var CNZ_MAP = {
     "If not enabled the mass ejector will not be managed by the script": "启用后，脚本才会自动管理质量喷射器喷射的物质",
     "Once we've constructed X mass ejectors the eject as much of everything as possible": "当质量喷射器数量达到指定值以后，尽可能的喷射最大质量的物质",
 
-    "Prestige Type:": null,
-    "Ascension": null,
+    "Prestige Type:": "威望重置种类",
+    "Ascension": "飞升重置相关",
     "Non-Bioseed: Ignore Space Dock, Bioseeder Ship and Probes": null,
     "Pre-MAD: Ignore A.R.P.A.": null,
     "Wait for maximum population": null,
@@ -100,13 +100,13 @@ var CNZ_MAP = {
 
     "Will continue assembling genes even after De Novo Sequencing is researched": "即使研究自动组装基因后，仍然用脚本进行基因组装",
 
-    "Prioritize resources for triggers": null,
-    "Prioritize resources for queue": null,
-    "Prioritize resources for Pre-MAD researches": null,
-    "Prioritize resources for Space+ for researches": null,
-    "Prioritize resources for missions": null,
-    "Always autoclick resources": null,
-    "Maximum clicks per second": null,
+    "Prioritize resources for triggers": "资源优先供给触发器",
+    "Prioritize resources for queue": "资源优先供给队列",
+    "Prioritize resources for Pre-MAD researches": "资源优先供给相互毁灭研究",
+    "Prioritize resources for Space+ for researches": "资源优先供给太空时代后的研究",
+    "Prioritize resources for missions": "资源优先供给任务",
+    "Always autoclick resources": "总是自动点击资源",
+    "Maximum clicks per second": "每秒最高点击次数",
 
     // 政府设置
     "Government Settings": "政府设置",
@@ -116,9 +116,9 @@ var CNZ_MAP = {
     "Maximum allowed morale": "最高允许士气",
     "Manage changes of government": "是否管理社会体制变化",
     "Interim Government:": "临时社会体制:",
-    "Final Government:": "最终社会体制:",
-    "Second Government:": null,
-    "Space Government:": null,
+    //"Final Government:": "最终社会体制:",
+    "Second Government:": "第二社会体制:",
+    "Space Government:": "太空社会体制:",
 
     "Minimum tax rate for autoTax. Will still go below this amount if money storage is full": "自动税率使用的最低税率。如果资金满了，将可能低于此数值。",
     "Use this to set a minimum allowed morale. Remember that less than 100% can cause riots and weather can cause sudden swings": "设置最低允许的士气。少于100%士气可能引起税收抵制，请尽量不要设置到100%以下。另外请记得天气的影响",
@@ -131,7 +131,7 @@ var CNZ_MAP = {
     "Evolution Settings": "进化设置",
     "Reset Evolution Settings": "进化设置还原",
     "Target Universe:": "进化宇宙目标",
-    "Target Planet:": null,
+    "Target Planet:": "进化星球目标",
     "Target Evolution:": "进化种族目标",
     "Soft Reset": null,
     "No Plasmids": "是否激活关闭质粒效果",
@@ -145,24 +145,24 @@ var CNZ_MAP = {
     "EM Field": "是否激活E.M.磁场",
     "Cataclysm": "是否激活大灾变",
     "Junker": "是否激活遗传绝境",
-    "Genetic Dead End": null,
+    "Genetic Dead End": "是否激活遗传绝境",
 
-    "Evolution Queue": null,
-    "Queue Enabled": null,
-    "Prestige for new evolutions:": null,
-    "Current Prestige": null,
-    "Add New Evolution": null,
-    "Race": null,
-    "Settings": null,
+    "Evolution Queue": "进化队列",
+    "Queue Enabled": "开启进化队列",
+    "Prestige for new evolutions:": "新进化威望阶段：",
+    "Current Prestige": "当前威望阶段设：”",
+    "Add New Evolution": "添加进化队列",
+    "Race": "种族",
+    "Settings": "设置",
     "Auto Achievements (Extinction)": null,
 
     // 星球权重设置
     "Planet Weighting Settings": "星球权重设置",
     "Reset Planet Weighting Settings": "星球权重设置还原",
-    "Planet Weighting = Biome Weighting + Trait Weighting + (Extras Intensity * Extras Weightings)": null,
-    "Biome": null,
-    "Trait": null,
-    "Extra": null,
+    "Planet Weighting = Biome Weighting + Trait Weighting + (Extras Intensity * Extras Weightings)": "星球权重 = 群系权重 + 特性权重 + (其他项数值 * 其他项权重)",
+    "Biome": "群系",
+    "Trait": "特性",
+    "Extra": "其他",
     "Achievement": "成就",
 
     // 星球独有种族警告
@@ -215,12 +215,12 @@ var CNZ_MAP = {
     "Target Theology 2:": "神学研究分支2",
     "Study": "研究先祖",
     "Deify": "神化先祖",
-    "Target Unification:": "统一方式",
+    /*"Target Unification:": "统一方式",
     "Reject": "拒绝",
     "Money": "资金（或收购）",
     "Morale": "吞并",
-    "Conquest": "征服",
-    "Research Alien Gift": null,
+    "Conquest": "征服",*/
+    "Research Alien Gift": "研究外星礼物科技",
 
     // 外交事务设置
     "Foreign Affairs Settings": "外交事务设置",
@@ -260,7 +260,7 @@ var CNZ_MAP = {
     "Hire a mercenary if money storage is greater than this percent": "如果资金存量大于此比例，则聘请雇佣兵",
     "Combines with the money storage percent setting to determine when to hire mercenaries": "结合资金存量比例，可以管理聘请雇佣兵的时机",
 
-    "Pacifist": null,
+    "Pacifist": "和平主义者",
     "Perform unification": null,
     "Occupy last foreign power": null,
     "Military Power to switch target": null,
@@ -336,9 +336,9 @@ var CNZ_MAP = {
     // 质量喷射设置
     "Mass Ejector Settings": "质量喷射设置",
     "Reset Mass Ejector Settings": "质量喷射设置还原",
-    "Atomic Mass": null,
-    "Allow Eject": null,
-    "Mass per unit:": null,
+    "Atomic Mass": "原子质量",
+    "Allow Eject": "允许喷射",
+    "Mass per unit:": "每单位质量",
 
     // 市场设置
     "Market Settings": "市场设置",
@@ -357,14 +357,14 @@ var CNZ_MAP = {
     "Uses the highest per second amount of these two values. Will trade for resources until this minimum money per second amount is hit": "两项中较高的数值生效。达到每秒资金收入最低值后，才会购买资源",
     "Uses the highest per second amount of these two values. Will trade for resources until this percentage of your money per second amount is hit": "两项中较高的数值生效。达到每秒资金收入最低比例后，才会购买资源",
 
-    "Galaxy Trades": null,
-    "Manage Galaxy Trades": null,
+    "Galaxy Trades": "星际贸易",
+    "Manage Galaxy Trades": "脚本管理星际贸易",
 
     // 存储设置
     "Storage Settings": "存储设置",
     "Reset Storage Settings": "存储设置还原",
     "Limit Pre-MAD Storage": "限制核弹重置之前阶段的存储",
-    "Reassign only empty storages": null,
+    "Reassign only empty storages": "仅重新分配空闲箱子",
     "Store Overflow": null,
     "Enabled": "是否启用",
     "Weighting": "权重",
@@ -380,18 +380,22 @@ var CNZ_MAP = {
     "Override and produce money if we can't fill factories with other production": "如果其他资源储量已满，则无视相关设置，生产资金",
 
     "If all other production has been allocated and there are leftover factories then use them to produce money": "其他资源储量满以后，使用工厂生产资金。",
-
-    "Distributing:": null,
-    "Prioritize Iron": null,
-    "Prioritize Steel": null,
-    "Both, up to full storages": null,
-    "Both, up to required amounts": null,
-    "Star Power": null,
-    "Prioritize demanded craftables": null,
-    "Min Ingredients": null,
-    "Mining Drone": null,
-    "Wait for full mana": null,
-    "Ritual": null,
+    
+    "Smelter": "冶炼厂",
+    "Foundry": "铸造厂",
+    "Factory": "工厂",
+    "Pylon": "水晶塔",
+    "Distributing:": "分配",
+    "Prioritize Iron": "优先炼铁",
+    "Prioritize Steel": "优先炼钢",
+    "Both, up to full storages": "同时冶炼，直到仓储上限",
+    "Both, up to required amounts": "同时冶炼，直到需求数量",
+    "Star Power": "星辰",
+    "Prioritize demanded craftables": "优先制造需求的锻造物",
+    "Min Ingredients": "最小原料保持比例",
+    "Mining Drone": "采矿机器人",
+    "Wait for full mana": "等待法力回复至上限",
+    "Ritual": "仪式",
 
     // 工作设置
     "Job Settings": "工作设置",
@@ -444,13 +448,14 @@ var CNZ_MAP = {
     "Manage State": "是否管理供能",
     "All Buildings": "所有建筑物",
 
-    "Ignore weighting and build if storage is full": null,
-    "Prefered Shrine:": null,
-    "Any": null,
-    "Equally": null,
-    "Metal": null,
-    "Knowledge": null,
-    "Tax": null,
+    "Ignore weighting and build if storage is full": "如果仓储已满，则忽略权重进行建造",
+    "Prefered Shrine:": "圣地种类偏好",
+    "Any": "任意建造",
+    "Equally": "平均分配",
+    "Morale": "士气",
+    "Metal": "金属",
+    "Knowledge": "知识",
+    "Tax": "税收",
 
     // 自动建筑权重设置
     "AutoBuild Weighting Settings": "自动建筑权重设置",
@@ -458,26 +463,26 @@ var CNZ_MAP = {
     "Target": "目标",
     "Condition": "条件",
     "Multiplier": "乘数",
-    "New building": null,
+    "New building": "新建筑",
     "Powered building": null,
-    "Low available energy": null,
+    "Low available energy": "可用电量低",
     "Power plant": null,
-    "Producing more energy than required": null,
+    "Producing more energy than required": "生产的电力超过所需",
     "Knowledge storage": null,
     "Have unlocked unafforable researches": null,
     "All unlocked researches already affordable": null,
     "Mass Ejector": null,
-    "Existed ejectors not fully utilized": null,
+    "Existed ejectors not fully utilized": "已有的喷射器未全功率使用",
     "Not housing or barrack": null,
     "MAD prestige enabled, and affordable": null,
     "Freight Yard, Container Port": null,
-    "Have unused crates or containers": null,
+    "Have unused crates or containers": "有未使用的板条箱或集装箱",
     "All fuel depots": null,
     "Missing Oil or Helium for techs and missions": null,
     "Building with state (city)": null,
     "Some instances of this building are not working": null,
     "Building with state (space)": null,
-    "Conflicts for some resource with active trigger or queue": null,
+    "Conflicts for some resource with active trigger or queue": "与激活的触发器或队列有资源冲突",
     "Missing consumables or support to operate": null,
 
     // ARPA设置
@@ -520,7 +525,7 @@ var CNZ_MAP = {
 
     // 种族
     "Script Managed": "由脚本管理",
-    "Auto Achievements": null,
+    "Auto Achievements": "自动完成成就",
     "Antid": "蚂蚁人",
     "Mantis": "螳螂人",
     "Scorpid": "蝎子",
@@ -571,16 +576,16 @@ var CNZ_MAP = {
     "Antimatter": "反物质宇宙",
     "Evil": "邪恶宇宙",
     "Micro": "微型宇宙",
-    "Magic": null,
+    "Magic": "魔法宇宙",
 
     // 星球
-    "Most habitable": null,
-    "Most achievements": null,
-    "Highest weighting": null,
+    "Most habitable": "最宜居",
+    "Most achievements": "最多成就",
+    "Highest weighting": "最高权重",
 
     // 地区
-    "Alien 1 System": null,
-    "Alien 2 System": null,
+    "Alien 1 System": "第四星系",
+    "Alien 2 System": "第五星系",
 
     // 资源
     "Orichalcum": "奥利哈刚",
@@ -609,19 +614,94 @@ var CNZ_MAP = {
     "Lumber": "木头",
     "Chrysotile": "温石棉",
     "Food": "食物",
-    "Deuterium": null,
-    "Neutronium": null,
-    "Infernite": null,
-    "Elerium": null,
-    "Plywood": null,
-    "Brick": null,
-    "Wrought Iron": null,
-    "Sheet Metal": null,
-    "Mythril": null,
-    "Aerogel": null,
-    "Nanoweave": null,
-    "Scarletite": null,
+    "Deuterium": "氘",
+    "Neutronium": "中子",
+    "Infernite": "地狱石",
+    "Elerium": "超铀",
+    "Plywood": "胶合板",
+    "Brick": "砌砖",
+    "Wrought Iron": "锻铁",
+    "Sheet Metal": "金属板",
+    "Mythril": "秘银",
+    "Aerogel": "气凝胶",
+    "Nanoweave": "纳米织物",
+    "Scarletite": "绯绯色金",
 
+    // title
+    "Stop taking any actions on behalf of the player.": null,
+    "You can disable rendering of settings UI once you've done with configuring script, if you experiencing performance issues. It can help a little.": null,
+    "Runs through the evolution part of the game through to founding a settlement. In Auto Achievements mode will target races that you don't have extinction\greatness achievements for yet.": null,
+    "Sends troops to battle whenever Soldiers are full and there are no wounded. Adds to your offensive battalion and switches attack type when offensive rating is greater than the rating cutoff for that attack type.": null,
+    "Sends soldiers to hell and sends them out on patrols. Adjusts maximum number of powered attractors based on threat.": null,
+    "Manages Andromeda fleet to supress piracy": null,
+    "Adjusts tax rates if your current morale is greater than your maximum allowed morale. Will always keep morale above 100%.": null,
+    "Craft when a specified crafting ratio is met. This changes throughout the game - lower in the beginning and rising as the game progresses.": null,
+    "Builds city and space building when it can an production allows (eg. Won't build a Fission Reactor if you don't have enough uranium production).": null,
+    "Manages power based on a priority order of buildings. Starts with city based building then space based.": null,
+    "Assigns crates to allow storage of resources.": null,
+    "Allows for automatic buying and selling of resources once specific ratios are met. Also allows setting up trade routes until a minimum specified money per second is reached. The will trade in and out in an attempt to maximise your trade routes.": null,
+    "Performs research when minimum requirements are met. ": null,
+    "Builds ARPA projects if user enables them to be built.": null,
+    "Assigns jobs in a priority order with multiple breakpoints. Starts with a few jobs each and works up from there. Will try to put a minimum number on lumber / stone then fill up capped jobs first.": null,
+    "Enable this and autoJobs will also manage craftsmen.": null,
+    "Manages pylon rituals": null,
+    "Manages rock quarry stone to chrysotile ratio for smoldering races": null,
+    "Manages smelter output at different stages at the game.": null,
+    "Manages factory production based on power and consumption. Produces alloys as a priority until nano-tubes then produces those as a priority.": null,
+    "Manages mining droid production.": null,
+    "Uses what fuel it can to fuel the graphene plant. Not currently user configurable.": null,
+    "Automatically assembles genes only when your knowledge is at max. Stops when DNA Sequencing is researched.": null,
+    "Purchase minor traits using genes according to their weighting settings.": null,
+    "eg. 10 equals 10%": null,
+    "Endless game": null,
+    "Allows research of Incorporeal Existence and Ascension. Ascension Machine managed by autoPower. User input still required to trigger reset, and create custom race.": null,
+    "Construct the space dock, bioseeder ship segments and probes only when bioseed is current prestige goal, and skip building world collider": null,
+    "Disables building A.R.P.A. projects untill MAD is researched": null,
+    "Wait for maximum population and soldiers to maximize plasmids gain": null,
+    "Eject resources above amount required for buildings, normally only resources with full storages will be ejected, until 'Eject everything' option is activated.": null,
+    "Set amount of ejected resources up to this percent of decay rate, only useful during Decay Challenge": null,
+    "Readjust trade routes and production to resources required for active triggers": null,
+    "Readjust trade routes and production to resources required for buildings and researches in queue": null,
+    "Readjust trade routes and production to resources required for unlocked and affordable researches": null,
+    "Readjust trade routes and production to resources required for unlocked and affordable missions": null,
+    "By default script will click only during early stage of autoBuild, to bootstrap production. With this toggled on it will continue clicking forever": null,
+    "Number of clicks performed at once, each second. Hardcapped by amount of missed resources": null,
+    "Temporary low tier government until you research other governments": null,
+    "Second government choice, chosen once becomes avaiable. Can be the same as above": null,
+    "Government for bioseed+. Chosen once you researched Quantum Manufacturing. Can be the same as above": null,
+    "Wait for user selection": null,
+    "Picks most habitable planet, based on biome and trait": null,
+    "Picks planet with most unearned achievements. Takes in account extinction achievements for planet exclusive races, and greatness achievements for planet biome, trait, and exclusive genus.": null,
+    "Picks planet with highest weighting. Should be configured in Planet Weighting Settings section.": null,
+    "Picks race with unearned Greatness achievement for bioseed runs, or with unearned Extinction achievement in other cases. Conditional races are prioritized, when available.": null,
+    "Perform soft resets untill you'll get chosen race. Useless after getting mass exintion perk.": null,
+    "Challenge mode - genetic dead end (Valdi)": null,
+    "When enabled script with evolve with queued settings, from top to bottom. During that script settings will be overriden with settings stored in queue. Queued target will be removed from list after evolution.": null,
+    "Inherited from current Prestige Settings": null,
+    "Alien Gift increases piracy, you can disable auto research of it if you want to postpone that": null,
+    "Turns attacks off and on": null,
+    "Perform unification once all three powers are subdued. autoResearch should be enabled for this to work.": null,
+    "Occupy last foreign power once other two are subdued, and unification is researched. It will speed up unification. And even if you don't want to unify at all - disabled above checkbox, and just want to plunder enemies, this option still better to keep enabled. As a side effect it will prevent you from wasting money influencing and inciting last foreign power, and allow you to occupy it during looting with sieges, for additional production bonus. Disable it only if you want annex\purchase achievements.": null,
+    "Maximum spies per foreign power": null,
+    "Switches to attack next foreign power once its power lowered down to this number. When exact numbers not know script tries to approximate it. `weak` power will be recognized as ≤75, and such. Thus, it's not recomended to set it down to 50, unless you'll increase amount of spies, to ensure you'll still see that exact value even when one of your spies is captured on mission.": null,
+    "Perform this against inferior foreign power, with military power equal or below given threshold. Complex actions includes required preparation - Annex and Purchase will incite and influence, Occupy will sabotage, until said options will be available.": null,
+    "Perform this against superior foreign power, with military power above given threshold. Complex actions includes required preparation - Annex and Purchase will incite and influence, Occupy will sabotage, until said options will be available.": null,
+    "Perform sabotage against current target if it's useful(power above 50), regardless of required power, and default action defined above": null,
+    "Hire a mercenary if remaining money will be greater than this percent": null,
+    "Minimum advantage to launch campaign, ignored during ambushes": null,
+    "Once campaign is selected, your battalion will be limited in size down this advantage, reducing potential loses": null,
+    "Maximum battalion for siege campaign. Only try to siege if it's possible with up to given amount of soldiers. Siege is expensive, if you'll be doing it with too big battalion it might be less profitable than other combat campaigns. This option not applied for unification, it's only for regular looting.": null,
+    "Adjusts ships distribution to fully supress piracy in prioritized regions. Some potential defence will be wasted, as it will use big ships to cover small holes, when it doesn't have anything fitting better. This option is *not* required: all your dreadnoughts still will be used even without this option.": null,
+    "Automatically adjust galaxy trade routes": null,
+    "Wait until storage is empty before reassigning containers to another resource, to prevent overflowing and wasting resources": null,
+    "Resources already produced above maximum amount required for constructing buildings won't be crafted, if there's better options enabled and available, ignoring weighted ratio": null,
+    "Cast rituals only with full mana": null,
+    "Automatically sets the default job in order of Quarry Worker -> Lumberjack -> Scavenger -> Farmer": null,
+    "Ignore weighting and immediately construct building if it uses any capped resource, preventing wasting them by overflowing. Weight still need to be positive(above zero) for this to happen.": null,
+    "A.R.P.A. projects that require crafted resources won't override and build if resources are below this amount, -1 stands for maximum amount required by other buildings.": null,
+
+
+/*
     // 建筑物
     // 郊外
     "Slave Market": "奴隶市场",
@@ -883,6 +963,7 @@ var CNZ_MAP = {
     "Portal Infernal Forge": null,
     "Portal Gate Turret": null,
     "Portal Infernite Mine": null,
+*/
 };
 
 (function() {
@@ -933,6 +1014,9 @@ function settingsListener() {
 
             // 汉化脚本设置
             textCH(settings);
+            
+            //建筑名单独汉化
+            buildingNameTextCH();
         }
     }, LISTENER_TIME);
 }
@@ -994,4 +1078,46 @@ function specialTextCH() {
     $("#s-quick-prestige-options").contents().filter(function(){
         return this.nodeType == 3;
     })[0].nodeValue = '威望重置选项';
+}
+
+
+//建筑名汉化
+function buildingNameTextCH()
+{
+    var buildingList = document.getElementById("script_buildingTableBody").childNodes;
+
+    //防止重复汉化
+    //if(document.querySelector("#script_portal-infernite_mineToggle > span").innerText == "地狱石矿井") return;
+
+    for(var i = 1; i < buildingList.length; i++)
+    {
+        tempA = buildingList[i].getAttribute("value");
+        tempL = tempA.indexOf('-')
+        tempB1 = tempA.substr(0,tempL)
+        tempB2 = tempA.substr(tempL+1)
+        var tempTitle
+        if(typeof(evolve.actions[tempB1][tempB2])  == "undefined")
+        {
+            var tempSubObList = Object.keys(evolve.actions[tempB1]);
+            for(var j = 0; j < tempSubObList.length; j++)
+            {
+                if(!(typeof(evolve.actions[tempB1][tempSubObList[j]][tempB2])  == "undefined"))
+                {
+                    tempTitle = evolve.actions[tempB1][tempSubObList[j]][tempB2].title;
+                    break;
+                }
+            }
+        }
+        else
+        {
+            tempTitle = evolve.actions[tempB1][tempB2].title
+        }
+
+        if(typeof(tempTitle) == "function")
+            buildingList[i].getElementsByTagName("span")[0].innerText = tempTitle()
+        else
+            buildingList[i].getElementsByTagName("span")[0].innerText = tempTitle
+
+        delete tempTitle
+    }
 }
