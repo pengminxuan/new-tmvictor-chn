@@ -957,6 +957,7 @@ var CNZ_MAP = {
 
     sidebarListener();
     settingsListener();
+    resourceListener();
 })();
 
 /**
@@ -967,18 +968,16 @@ function sidebarListener() {
     setInterval(function() {
 
         // 获取侧边栏
-        var container = $("#autoScriptContainer");
-        // 获取脚本弹窗
-        var scriptModal = $("#scriptModal");
-
+        var item = $("#autoScriptContainer");
+        
         // 获取到侧边栏才进行汉化
-        if(container.length === 1) {
+        if(item.length === 1) {
 
             // 汉化侧边栏
-            textCH(container);
+            textCH(item);
 
             // 汉化侧边栏的威望重置弹窗
-            textCH(scriptModal);
+            textCH($("#scriptModal"));
         }
 
     }, LISTENER_TIME);
@@ -992,19 +991,38 @@ function settingsListener() {
     setInterval(function() {
 
         // 获取脚本设置选项
-        var settings = $("#script_settings");
+        var item = $("#script_settings");
 
         // 获取到脚本设置选项才进行汉化
-        if(settings.length === 1) {
+        if(item.length === 1) {
 
             // 汉化脚本设置
-            textCH(settings);
+            textCH(item);
 
             //建筑名单独汉化
             buildingNameTextCH();
 
             //建立建筑名英汉对照框
             triggerBuildingNameTextCH();
+        }
+    }, LISTENER_TIME);
+}
+
+/**
+ * 资源选项卡监听
+ */
+function resourceListener() {
+
+    setInterval(function() {
+
+        // 获取脚本设置选项
+        var item = $("#mTabResource");
+
+        // 获取到脚本设置选项才进行汉化
+        if(item.length === 1) {
+
+            // 汉化脚本设置
+            textCH(item);
         }
     }, LISTENER_TIME);
 }
