@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Evolve-新版TMVictor汉化
 // @namespace    https://gitee.com/angle_god/tmvictor-localization-chinese
-// @version      1.0.1
+// @version      1.0.2
 // @description  try to take over the world!
 // @downloadURL  https://https://github.com/pengminxuan/new-tmvictor-chn/blob/main/main.user.js
 // @author       天使不见时
@@ -632,7 +632,81 @@ var CNZ_MAP = {
     "Aerogel": "气凝胶",
     "Nanoweave": "纳米织物",
     "Scarletite": "绯绯色金",
-    
+
+    // title
+    "Stop taking any actions on behalf of the player.": null,
+    "You can disable rendering of settings UI once you've done with configuring script, if you experiencing performance issues. It can help a little.": null,
+    "Runs through the evolution part of the game through to founding a settlement. In Auto Achievements mode will target races that you don't have extinction\greatness achievements for yet.": null,
+    "Sends troops to battle whenever Soldiers are full and there are no wounded. Adds to your offensive battalion and switches attack type when offensive rating is greater than the rating cutoff for that attack type.": null,
+    "Sends soldiers to hell and sends them out on patrols. Adjusts maximum number of powered attractors based on threat.": null,
+    "Manages Andromeda fleet to supress piracy": null,
+    "Adjusts tax rates if your current morale is greater than your maximum allowed morale. Will always keep morale above 100%.": null,
+    "Craft when a specified crafting ratio is met. This changes throughout the game - lower in the beginning and rising as the game progresses.": null,
+    "Builds city and space building when it can an production allows (eg. Won't build a Fission Reactor if you don't have enough uranium production).": null,
+    "Manages power based on a priority order of buildings. Starts with city based building then space based.": null,
+    "Assigns crates to allow storage of resources.": null,
+    "Allows for automatic buying and selling of resources once specific ratios are met. Also allows setting up trade routes until a minimum specified money per second is reached. The will trade in and out in an attempt to maximise your trade routes.": null,
+    "Performs research when minimum requirements are met. ": null,
+    "Builds ARPA projects if user enables them to be built.": null,
+    "Assigns jobs in a priority order with multiple breakpoints. Starts with a few jobs each and works up from there. Will try to put a minimum number on lumber / stone then fill up capped jobs first.": null,
+    "Enable this and autoJobs will also manage craftsmen.": null,
+    "Manages pylon rituals": null,
+    "Manages rock quarry stone to chrysotile ratio for smoldering races": null,
+    "Manages smelter output at different stages at the game.": null,
+    "Manages factory production based on power and consumption. Produces alloys as a priority until nano-tubes then produces those as a priority.": null,
+    "Manages mining droid production.": null,
+    "Uses what fuel it can to fuel the graphene plant. Not currently user configurable.": null,
+    "Automatically assembles genes only when your knowledge is at max. Stops when DNA Sequencing is researched.": null,
+    "Purchase minor traits using genes according to their weighting settings.": null,
+    "eg. 10 equals 10%": null,
+    "Endless game": null,
+    "Allows research of Incorporeal Existence and Ascension. Ascension Machine managed by autoPower. User input still required to trigger reset, and create custom race.": null,
+    "Construct the space dock, bioseeder ship segments and probes only when bioseed is current prestige goal, and skip building world collider": null,
+    "Disables building A.R.P.A. projects untill MAD is researched": null,
+    "Wait for maximum population and soldiers to maximize plasmids gain": null,
+    "Eject resources above amount required for buildings, normally only resources with full storages will be ejected, until 'Eject everything' option is activated.": null,
+    "Set amount of ejected resources up to this percent of decay rate, only useful during Decay Challenge": null,
+    "Readjust trade routes and production to resources required for active triggers": null,
+    "Readjust trade routes and production to resources required for buildings and researches in queue": null,
+    "Readjust trade routes and production to resources required for unlocked and affordable researches": null,
+    "Readjust trade routes and production to resources required for unlocked and affordable missions": null,
+    "By default script will click only during early stage of autoBuild, to bootstrap production. With this toggled on it will continue clicking forever": null,
+    "Number of clicks performed at once, each second. Hardcapped by amount of missed resources": null,
+    "Temporary low tier government until you research other governments": null,
+    "Second government choice, chosen once becomes avaiable. Can be the same as above": null,
+    "Government for bioseed+. Chosen once you researched Quantum Manufacturing. Can be the same as above": null,
+    "Wait for user selection": null,
+    "Picks most habitable planet, based on biome and trait": null,
+    "Picks planet with most unearned achievements. Takes in account extinction achievements for planet exclusive races, and greatness achievements for planet biome, trait, and exclusive genus.": null,
+    "Picks planet with highest weighting. Should be configured in Planet Weighting Settings section.": null,
+    "Picks race with unearned Greatness achievement for bioseed runs, or with unearned Extinction achievement in other cases. Conditional races are prioritized, when available.": null,
+    "Perform soft resets untill you'll get chosen race. Useless after getting mass exintion perk.": null,
+    "Challenge mode - genetic dead end (Valdi)": null,
+    "When enabled script with evolve with queued settings, from top to bottom. During that script settings will be overriden with settings stored in queue. Queued target will be removed from list after evolution.": null,
+    "Inherited from current Prestige Settings": null,
+    "Alien Gift increases piracy, you can disable auto research of it if you want to postpone that": null,
+    "Turns attacks off and on": null,
+    "Perform unification once all three powers are subdued. autoResearch should be enabled for this to work.": null,
+    "Occupy last foreign power once other two are subdued, and unification is researched. It will speed up unification. And even if you don't want to unify at all - disabled above checkbox, and just want to plunder enemies, this option still better to keep enabled. As a side effect it will prevent you from wasting money influencing and inciting last foreign power, and allow you to occupy it during looting with sieges, for additional production bonus. Disable it only if you want annex\purchase achievements.": null,
+    "Maximum spies per foreign power": null,
+    "Switches to attack next foreign power once its power lowered down to this number. When exact numbers not know script tries to approximate it. `weak` power will be recognized as ≤75, and such. Thus, it's not recomended to set it down to 50, unless you'll increase amount of spies, to ensure you'll still see that exact value even when one of your spies is captured on mission.": null,
+    "Perform this against inferior foreign power, with military power equal or below given threshold. Complex actions includes required preparation - Annex and Purchase will incite and influence, Occupy will sabotage, until said options will be available.": null,
+    "Perform this against superior foreign power, with military power above given threshold. Complex actions includes required preparation - Annex and Purchase will incite and influence, Occupy will sabotage, until said options will be available.": null,
+    "Perform sabotage against current target if it's useful(power above 50), regardless of required power, and default action defined above": null,
+    "Hire a mercenary if remaining money will be greater than this percent": null,
+    "Minimum advantage to launch campaign, ignored during ambushes": null,
+    "Once campaign is selected, your battalion will be limited in size down this advantage, reducing potential loses": null,
+    "Maximum battalion for siege campaign. Only try to siege if it's possible with up to given amount of soldiers. Siege is expensive, if you'll be doing it with too big battalion it might be less profitable than other combat campaigns. This option not applied for unification, it's only for regular looting.": null,
+    "Adjusts ships distribution to fully supress piracy in prioritized regions. Some potential defence will be wasted, as it will use big ships to cover small holes, when it doesn't have anything fitting better. This option is *not* required: all your dreadnoughts still will be used even without this option.": null,
+    "Automatically adjust galaxy trade routes": null,
+    "Wait until storage is empty before reassigning containers to another resource, to prevent overflowing and wasting resources": null,
+    "Resources already produced above maximum amount required for constructing buildings won't be crafted, if there's better options enabled and available, ignoring weighted ratio": null,
+    "Cast rituals only with full mana": null,
+    "Automatically sets the default job in order of Quarry Worker -> Lumberjack -> Scavenger -> Farmer": null,
+    "Ignore weighting and immediately construct building if it uses any capped resource, preventing wasting them by overflowing. Weight still need to be positive(above zero) for this to happen.": null,
+    "A.R.P.A. projects that require crafted resources won't override and build if resources are below this amount, -1 stands for maximum amount required by other buildings.": null,
+
+
 /*
     // 建筑物
     // 郊外
