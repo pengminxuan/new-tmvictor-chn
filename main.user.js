@@ -1,10 +1,11 @@
 // ==UserScript==
 // @name         Evolve-新版TMVictor汉化
 // @namespace    https://gitee.com/angle_god/tmvictor-localization-chinese
-// @version      1.0.7
+// @version      1.1.0
 // @description  try to take over the world!
 // @downloadURL  https://github.com/pengminxuan/new-tmvictor-chn/blob/main/main.user.js
 // @author       天使不见时
+// @author       DSLM
 // @author       by22dgb
 // @match        https://likexia.gitee.io/evolve/
 // @match        https://wdjwxh.github.io/Evolve-Scripting-Edition/
@@ -944,6 +945,7 @@ var CNZ_MAP = {
 */
 
     // 杂项
+    "Auto Eject": "是否自动喷射",
     "Enable ejecting of this resource. When to eject is set in the Prestige Settings tab.": "允许喷射此项资源。进行喷射的时机在威望重置设置下。",
     "Enable buying of this resource. When to buy is set in the Settings tab.": "允许购买此项资源。进行购买的时机在市场设置下。",
     "Enable selling of this resource. When to sell is set in the Settings tab.": "允许出售此项资源。进行出售的时机在市场设置下。",
