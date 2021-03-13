@@ -1030,31 +1030,13 @@ function textCH(target) {
             titleCH ? $(e).attr('title', titleCH) : null;
         }
 
-        // 首个子节点汉化
-        var firstChild = $(e).prop('firstChild');
-        if (firstChild) {
-
-            firstChild = firstChild.nodeValue;
-            var firstChildCH = CNZ_MAP[firstChild];
-            if (firstChildCH) {
-                var obj = $(e).text(firstChildCH);
-                // 替换占位字符串\n为换行标签（&lt;br&gt;=<br>）
-                obj.html(obj.html().replace(/\n/g,'<br/>'));
-            }
-        }
-
-        // 末尾子节点汉化
-        var lastChild = $(e).prop('lastChild');
-        if (lastChild) {
-
-            lastChild = lastChild.nodeValue;
-            var lastChildCH = CNZ_MAP[lastChild];
-            if (lastChildCH) {
-                obj = $(e).text(lastChildCH);
-                // 替换为换行标签
-                obj.html(obj.html().replace(/\n/g,'<br/>'));
-            }
-        }
+        // 汉化当前节点下所有Text类型（nodeType==3）的子节点
+        $(e).contents().filter(function () {
+            return this.nodeType == 3;
+        }).each(function () {
+            var nodeValueCH = CNZ_MAP[this.nodeValue];
+            nodeValueCH ? this.nodeValue = nodeValueCH : null;
+        })
     });
 }
 
