@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Evolve-新版TMVictor汉化
 // @namespace    https://gitee.com/angle_god/tmvictor-localization-chinese
-// @version      1.1.1
+// @version      1.1.2
 // @description  try to take over the world!
 // @downloadURL  https://github.com/pengminxuan/new-tmvictor-chn/blob/main/main.user.js
 // @author       天使不见时
@@ -285,6 +285,7 @@ var CNZ_MAP = {
     // 研究设置
     "Research Settings": "研究设置",
     "Reset Research Settings": "研究设置还原",
+    "Research Enhanced Air Filters": "是否研究增强型空气过滤网",
     "Target Theology 1:": "神学研究分支1",
     "Anthropology": "人类学",
     "Fanaticism": "狂热信仰",
@@ -292,6 +293,7 @@ var CNZ_MAP = {
     "Study": "研究先祖",
     "Deify": "神化先祖",
 
+    "Allows auto reasearch of Enhanced Air Filters": "允许自动研究增强型空气过滤网",
     "Picks Anthropology for MAD prestige, and Fanaticism for others": "进行核弹重置时选择人类学，其余情况下选择狂热信仰",
     "Picks Deify for Ascension prestige, and Study for others": "进行飞升重置时选择神化先祖，其余情况下选择研究先祖",
 
@@ -411,11 +413,17 @@ var CNZ_MAP = {
     "Launch Chthonian Assault Mission when it can be won with minimal loses (4500+ total fleet power, one Frigate will be lost)": "当战力达到最高要求时自动进行幽冥星系任务(4500以上总战力，将损失1艘大型护卫舰)",
 
     // 质量喷射设置
-    "Mass Ejector Settings": "质量喷射设置",
-    "Reset Mass Ejector Settings": "质量喷射设置还原",
+    "Ejector & Supply Settings": "质量喷射及补给设置",
+    "Reset Ejector & Supply Settings": "质量喷射及补给设置还原",
+    "Manage Supplies": "是否自动补给",
     "Atomic Mass": "原子质量",
-    "Allow Eject": "允许喷射",
-    "Mass per unit: ": "每单位质量：",
+    "Eject": "允许喷射",
+    "Supply Value": "补给价值",
+    "Supply": "允许补给",
+    "Export ": "使用",
+    ", Gain ": "，获得",
+
+    "Send excess resources to Spire. Normal resources send when they're near storage cap, craftables - when above requirements. Takes priority over ejector.": "将多余的资源用于补给。普通资源将在接近上限时用于补给，锻造物将在超过需求时用于补给。优先级高于质量喷射器。",
 
     // 市场设置
     "Market Settings": "市场设置",
@@ -443,12 +451,14 @@ var CNZ_MAP = {
     "Reset Storage Settings": "存储设置还原",
     "Limit Pre-MAD Storage": "限制核弹重置之前阶段的存储",
     "Reassign only empty storages": "只在板条箱或集装箱有空余时进行重新分配",
+    "Assign buffer storage": "是否分配缓冲用的存储",
     "Store Overflow": "是否对溢出部分分配存储",
     "Max Crates": "最大板条箱",
     "Max Containers": "最大集装箱",
 
     "Saves resources and shortens run time by limiting storage pre-MAD": "限制核弹重置之前阶段的存储来节省资源和相应时间",
     "Wait until storage is empty before reassigning containers to another resource, to prevent overflowing and wasting resources": "直到相应的板条箱或集装箱未装有相应资源时才考虑将它重新分配给其他资源，以防止资源溢出浪费",
+    "With this option enable script assigns 3% more resources above required amounts, ensuring that required quantity will be actually reached, even if other part of script trying to sell\eject\switch production, etc.": "设置后，脚本将以超过需要数值的3%进行分配，以保证能达到所需要的数值，以避免脚本其他功能的干扰。",
 
     // 生产设置
     "Production Settings": "生产设置",
@@ -522,6 +532,7 @@ var CNZ_MAP = {
     // 建筑设置
     "Building Settings": "建筑设置",
     "Reset Building Settings": "建筑设置还原",
+    "Manage Spire": "是否自动管理尖塔",
     "Ignore weighting and build if storage is full": "如果存储已满，则忽略权重进行建造",
     "Prefered Shrine:": "圣地种类偏好：",
     "Any": "任意类型",
@@ -536,6 +547,7 @@ var CNZ_MAP = {
     "Auto Power": "是否自动供能",
     "All Buildings": "所有建筑物",
 
+    "Enables special logic for Purifier, Port, Base Camp, and Mech Bays. At first script will try to maximize supplies cap, building up as many ports and camps as possible at best ratio, then build up as many mech bays as current supplies cap allows, and only after that switch support to mech bays.": "启用空气净化器，港口，登陆营地和机甲舱专用的逻辑。脚本将首先最大化补给上限，以最佳比例建造港口和登陆营地，然后尽可能地建造机甲舱，之后再启用机甲舱。",
     "Ignore weighting and immediately construct building if it uses any capped resource, preventing wasting them by overflowing. Weight still need to be positive(above zero) for this to happen.": "如果建筑所使用的任意一项资源超过上限，则忽略权重立刻进行建造，以避免浪费资源。权重仍然需要设为正数(大于0)后此项才能生效。",
 
     // 自动建筑权重设置
@@ -563,7 +575,12 @@ var CNZ_MAP = {
     "Building with state (city)": "需要调整供能的建筑(地面)",
     "Some instances of this building are not working": "并非所有建筑都在正常供能",
     "Building with state (space)": "需要调整供能的建筑(太空)",
-    "Missing consumables or support to operate": "缺少供能，无法正常运作",
+    "Building with consumption": "供能物资不足的建筑",
+    "Missing consumables to operate": "缺少供能物资，无法正常运转",
+    "Support consumer": "需要花费支持的建筑",
+    "Missing support to operate": "缺少支持，无法正常运转",
+    "Support provider": "提供支持的建筑",
+    "Provided support not currently needed": "提供的支持超过了目前的需求",
 
     // ARPA设置
     "A.R.P.A. Settings": "ARPA设置",
@@ -979,6 +996,7 @@ var CNZ_MAP = {
     // 杂项
     "Auto Eject": "是否自动喷射",
     "Enable ejecting of this resource. When to eject is set in the Prestige Settings tab.": "允许喷射此项资源。进行喷射的时机在威望重置设置下。",
+    "Enable supply of this resource. ": "允许使用此项资源进行补给。",
     "Enable buying of this resource. When to buy is set in the Settings tab.": "允许购买此项资源。进行购买的时机在市场设置下。",
     "Enable selling of this resource. When to sell is set in the Settings tab.": "允许出售此项资源。进行出售的时机在市场设置下。",
     "Enable trading for this resource. Max routes is set in the Settings tab.": "允许使用贸易路线购买此项资源。贸易路线的上限在市场设置下。",
