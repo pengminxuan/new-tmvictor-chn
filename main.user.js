@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Evolve-新版TMVictor汉化
 // @namespace    https://gitee.com/angle_god/tmvictor-localization-chinese
-// @version      1.1.2
+// @version      1.1.3
 // @description  try to take over the world!
 // @downloadURL  https://github.com/pengminxuan/new-tmvictor-chn/blob/main/main.user.js
 // @author       天使不见时
@@ -106,8 +106,8 @@ var CNZ_MAP = {
     "Required population": "人口阈值",
     "Required probes": "播种前至少需要的太空探测器数量",
     "Save up Soul Gems for reset": "是否保留重置所需数量的灵魂宝石",
-    "Required minimum solar mass": "太阳质量阈值，达到后才会进行黑洞重置",
-    "Stabilise blackhole until minimum solar mass reached": "是否在达到太阳质量阈值之前，一直稳定黑洞",
+    "Minimum solar mass for reset": "太阳质量阈值，达到后才会进行黑洞重置",
+    "Stabilise blackhole": "是否稳定黑洞",
     "Enable mass ejector": "是否自动进行质量喷射",
     "Eject excess resources": "是否喷射多余的资源",
     "(Decay Challenge) Eject rate": "(衰变挑战)喷射比例",
@@ -128,7 +128,7 @@ var CNZ_MAP = {
     "Required number of probes before launching bioseeder ship": "达到太空探测器所需数量后，才进行播种重置",
     "Save up enough Soul Gems for reset, only excess gems will be used. This option does not affect triggers.": "保留重置所需数量的灵魂宝石，只使用超过相应数量的灵魂宝石。不影响触发器。",
     "Required minimum solar mass of blackhole before prestiging": "达到太阳质量阈值后，才进行黑洞重置",
-    "Stabilises the blackhole with exotic materials until minimum solar mass is reached": "达到太阳质量阈值之前，不会选择奇异灌输，而会一直选择稳定黑洞",
+    "Stabilises the blackhole with exotic materials, during whitehole run won't go beyond minimum mass set above": "一直选择稳定黑洞，进行黑洞重置时不会超过上面的太阳质量阈值",
     "If not enabled the mass ejector will not be managed by the script": "启用后，脚本才会自动管理质量喷射器喷射的物质",
     "Eject resources above amount required for buildings, normally only resources with full storages will be ejected, until 'Eject everything' option is activated.": "将超出建筑需要的资源用于喷射，而不是像通常只是喷射达到上限的资源。",
     "Set amount of ejected resources up to this percent of decay rate, only useful during Decay Challenge": "只要衰变比例高于这个数值，就会使用相应资源进行喷射，只在衰变挑战中有效。",
@@ -180,17 +180,6 @@ var CNZ_MAP = {
     "Target Planet:": "欲选择的星球：",
     "Target Evolution:": "欲进化的种族：",
     "Soft Reset": "是否进行软重置",
-    "No Plasmids": "关闭质粒效果",
-    "Weak Mastery": "弱精通效果",
-    "No Trade": "关闭自由贸易",
-    "No Manual Crafting": "关闭手工制作",
-    "Reduced CRISPER": "CRISPR弱折扣",
-    "Joyless": "无趣",
-    "Decay": "衰变",
-    "Steelen": "禁钢",
-    "EM Field": "E.M.磁场",
-    "Cataclysm": "大灾变",
-    "Genetic Dead End": "遗传绝境",
     "Evolution Queue": "进化队列",
     "Queue Enabled": "是否开启进化队列",
     "Repeat Queue": "是否重复队列",
@@ -281,6 +270,7 @@ var CNZ_MAP = {
     "This condition is met when you have 'count' or greater amount of buildings": "当相应建筑的数量达到相应数值后，视为满足条件",
     "Research technology": "进行相应研究",
     "Build buildings up to 'count' amount": "建造建筑，数量上限为计数",
+    "Build projects up to 'count' amount": "建造ARPA项目，数量上限为计数",
 
     // 研究设置
     "Research Settings": "研究设置",
@@ -346,6 +336,7 @@ var CNZ_MAP = {
     // 地狱设置
     "Hell Settings": "地狱维度设置",
     "Reset Hell Settings": "地狱维度设置还原",
+    "Show Souls Gems income rate": "显示灵魂宝石收入",
     "Entering Hell": "进入地狱维度",
     "Turn off patrol and surveyor log messages": "关闭巡逻队和勘探者相关的日志",
     "Automatically enter hell and adjust patrol count and hell garrison size": "自动进入地狱维度并调整巡逻队数量和规模",
@@ -370,6 +361,7 @@ var CNZ_MAP = {
     "All Attractors on below this threat": "恶魔生物数量低于此数值时开启所有吸引器信标",
     "All Attractors off above this threat": "恶魔生物数量高于此数值时关闭所有吸引器信标",
 
+    "Track gained soul gems, and show rate per hour. Shown number based only on past gains, thus it won't react on hell adjustments immediately - it'll need some time to accumulate new data. Also, for first hour\\few gems after enabling this option\\reloading page shown number will be aproximated.": "记录获得的灵魂宝石数量，并计算出每小时的获取量。因此，在进行调整以后，需要一定时间才能体现在数字上。在刚开启此选项，或者是刷新页面后，获取量将为预估值。",
     "Automatically turns off the hell patrol and surveyor log messages": "自动关闭巡逻队和勘探者相关的日志",
     "Sets patrol count according to required garrison and patrol size": "根据需要的驻扎士兵和巡逻队规模调整巡逻队数量",
     "Home garrison maximum": "驻军上限",
@@ -409,8 +401,8 @@ var CNZ_MAP = {
     "Assaulting Alien 2 increases maximum piracy up to 500, script won't do it until this knowledge cap is reached. Regardless of set value it won't ever try to assault until you have big enough fleet to do it without loses.": "进行第五星系任务后，海盗的活动会更加剧烈，因此脚本只会在到达相应数值的知识上限时进行研究。另外，除非您能够无损伤地完成任务，否则脚本也不会自动进行此任务。",
     "Won't ever launch assault mission on Chthonian": "不会自动进行幽冥星系任务",
     "Launch Chthonian Assault Mission when it can be won with any loses (1250+ total fleet power, many ships will be lost)": "不计损失，当战力达到最低要求时自动进行幽冥星系任务(1250以上总战力，损失会极大)",
-    "Launch Chthonian Assault Mission when it can be won with average loses (2500+ total fleet power, two Frigates will be lost)": "当战力达到中等要求时自动进行幽冥星系任务(2500以上总战力，将损失2艘大型护卫舰)",
-    "Launch Chthonian Assault Mission when it can be won with minimal loses (4500+ total fleet power, one Frigate will be lost)": "当战力达到最高要求时自动进行幽冥星系任务(4500以上总战力，将损失1艘大型护卫舰)",
+    "Not avaialable in Banana Republic challenge. Launch Chthonian Assault Mission when it can be won with average loses (2500+ total fleet power, two Frigates will be lost)": "在香蕉共和国挑战中不可用。当战力达到中等要求时自动进行幽冥星系任务(2500以上总战力，将损失2艘大型护卫舰)",
+    "Not avaialable in Banana Republic challenge. Launch Chthonian Assault Mission when it can be won with minimal loses (4500+ total fleet power, one Frigate will be lost)": "在香蕉共和国挑战中不可用。当战力达到最高要求时自动进行幽冥星系任务(4500以上总战力，将损失1艘大型护卫舰)",
 
     // 质量喷射设置
     "Ejector & Supply Settings": "质量喷射及补给设置",
@@ -585,11 +577,8 @@ var CNZ_MAP = {
     // ARPA设置
     "A.R.P.A. Settings": "ARPA设置",
     "Reset A.R.P.A. Settings": "ARPA设置还原",
-    "Override and build if storage is full": "如果储量已满，则无视其他设置，进行建造",
-    "Minimum craftables to keep if overriding": "至少需要相应锻造物数量，才可无视其他设置",
-    "Maximim percent of resources if overriding": "如果无视其他设置，至多使用的资源比例",
+    "Scale weighting with progress": "进度权重",
     "Project": "项目",
-    "Ignore Min Money": "忽略最低金钱",
     "Supercollider": "超级对撞机",
     "Stock Exchange": "证券交易所",
     "Monument": "纪念碑",
@@ -599,9 +588,7 @@ var CNZ_MAP = {
     "Asteroid Redirect": "小行星变轨",
     "Mana Syphon": "法力虹吸",
 
-    "Overrides the below settings to still build A.R.P.A projects if resources are full. This option does not applies to Mana Syphon, unless Vacuum Collapse prestige is enabled.": "如果储量已满，则无视下方设置，仍然进行ARPA项目的建造。除非进行真空坍缩重置，否则此项对法力虹吸无效。",
-    "A.R.P.A. projects that require crafted resources won't override and build if resources are below this amount, -1 stands for maximum amount required by other buildings.": "如果锻造物低于此数值，相应的ARPA项目不会无视下方设置进行建造。设为-1则数值为其他建筑所需要的最大数量。",
-    "A.R.P.A. project that require more than this percentage of a non-crafted resource won't override and build": "如果资源花费的比例高于此数值，相应的ARPA项目不会无视下方设置进行建造",
+    "Projects weighing scales  with current progress, making script more eager to spend resources on finishing nearly constructed projects.": "随着项目接近完成而提高权重，使脚本更优先进行接近完成的项目。",
 
     // 日志设置
     "Logging Settings": "日志设置",
