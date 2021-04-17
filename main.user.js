@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Evolve-新版TMVictor汉化
 // @namespace    https://gitee.com/angle_god/tmvictor-localization-chinese
-// @version      1.1.3
+// @version      1.2.0
 // @description  try to take over the world!
 // @downloadURL  https://github.com/pengminxuan/new-tmvictor-chn/blob/main/main.user.js
 // @author       天使不见时
@@ -41,6 +41,7 @@ var CNZ_MAP = {
     "autoEvolution": "自动进化",
     "autoFight": "自动战斗",
     "autoHell": "自动地狱维度",
+    "autoMech": "自动机甲",
     "autoFleet": "自动仙女座舰队",
     "autoTax": "自动税率",
     "autoCraft": "自动锻造",
@@ -71,6 +72,7 @@ var CNZ_MAP = {
     "Runs through the evolution part of the game through to founding a settlement. In Auto Achievements mode will target races that you don\'t have extinction\\greatness achievements for yet.": "自动进行进化阶段。如果选择自动完成成就，则会优先考虑还未完成过毁灭类成就或者伟大类成就的种族。",
     "Sends troops to battle whenever Soldiers are full and there are no wounded. Adds to your offensive battalion and switches attack type when offensive rating is greater than the rating cutoff for that attack type.": "当士兵已满员且没有伤兵时让他们进行战斗。当战斗评级足够以后，会自动切换战役类型。",
     "Sends soldiers to hell and sends them out on patrols. Adjusts maximum number of powered attractors based on threat.": "将士兵派往地狱维度并自动分配巡逻队。根据恶魔生物数量自动调节吸引器信标的数量。",
+    "Builds most effective large mechs for current spire floor. Least effective will be scrapped to make room for new ones.": "建造效率最高的大型机甲。将根据当前的情况调整机甲配置。",
     "Manages Andromeda fleet to supress piracy": "自动分配仙女座星系的舰队以压制海盗活动",
     "Adjusts tax rates if your current morale is greater than your maximum allowed morale. Will always keep morale above 100%.": "如果当前的士气高于上限，则会自动调整税率。会尽可能将士气保持在100%以上。",
     "Craft when a specified crafting ratio is met. This changes throughout the game - lower in the beginning and rising as the game progresses.": "资源到达某个比例以后自动将它们转换为锻造物。在游戏开始时比例较低，随着游戏进展而不断提升。",
@@ -99,6 +101,7 @@ var CNZ_MAP = {
     "None": "无",
     "Mutual Assured Destruction": "核弹重置",
     "Bioseed": "播种重置",
+    "Cataclysm": "大灾变重置",
     "Whitehole": "黑洞重置",
     "Vacuum Collapse": "真空坍缩",
     "Ascension": "飞升重置",
@@ -140,11 +143,17 @@ var CNZ_MAP = {
     // 常规设置
     "General Settings": "常规设置",
     "Reset General Settings": "常规设置还原",
+    "Production": "生产",
     "Prioritize resources for triggers": "资源是否优先分配给触发器",
     "Prioritize resources for queue": "资源是否优先分配给队列",
     "Prioritize resources for Pre-MAD researches": "资源是否优先分配给相互毁灭前的研究",
     "Prioritize resources for Space+ researches": "资源是否优先分配给太空后的研究",
     "Prioritize resources for missions": "资源是否优先分配给任务",
+    "Queue": "队列",
+    "Save resources for queued buildings": "是否保留资源以保证队列中建筑物的建造",
+    "Save resources for queued researches": "是否保留资源以保证队列中的研究",
+    "Save resources for queued projects": "是否保留资源以保证队列中的ARPA项目建造",
+    "Auto clicker": "自动点击",
     "Always assemble genes": "是否总是用脚本进行基因组装",
     "Always autoclick resources": "是否总是自动收集资源",
     "Maximum clicks per second": "每秒最高点击次数",
@@ -153,6 +162,10 @@ var CNZ_MAP = {
     "Readjust trade routes and production to resources required for buildings and researches in queue": "将贸易路线和生产资源调整为队列中的建筑和研究所需要的资源",
     "Readjust trade routes and production to resources required for unlocked and affordable researches (Works only with no active triggers, or queue)": "将贸易路线和生产资源调整为已解锁且上限足够的研究所需要的资源(只在触发器和队列中没有内容激活时生效)",
     "Readjust trade routes and production to resources required for unlocked and affordable researches (Works only with no active triggers, or queue": "将贸易路线和生产资源调整为已解锁且上限足够的研究所需要的资源(只在触发器和队列中没有内容激活时生效)",
+    "Readjust trade routes and production to resources required for unlocked and affordable missions": "将贸易路线和生产资源调整为已解锁且上限足够的任务所需要的资源",
+    "Script won't use resources needed for queued buildings. 'No Queue Order' game setting switches whether it save resources for next item, or whole queue.": "脚本不会使用队列中建筑所需要的资源。如果开启乱序队列，则整个队列中的资源都将不会使用，否则只会考虑队列中第一项。",
+    "Script won't use resources needed for queued researches. 'No Queue Order' game setting switches whether it save resources for next item, or whole queue.": "脚本不会使用队列中研究所需要的资源。如果开启乱序队列，则整个队列中的资源都将不会使用，否则只会考虑队列中第一项。",
+    "Script won't use resources needed for queued projects. 'No Queue Order' game setting switches whether it save resources for next item, or whole queue.": "脚本不会使用队列中ARPA项目所需要的资源。如果开启乱序队列，则整个队列中的资源都将不会使用，否则只会考虑队列中第一项。",
     "Will continue assembling genes even after De Novo Sequencing is researched": "即使研究自动组装基因后，仍然用脚本进行基因组装",
     "By default script will click only during early stage of autoBuild, to bootstrap production. With this toggled on it will continue clicking forever": "默认情况下脚本只在游戏初期自动收集资源，开启此项后将一直自动收集资源",
     "Number of clicks performed at once, each second. Hardcapped by amount of missed resources": "每秒自动收集资源的点击次数。上限为当前资源数量与库存上限的差值",
@@ -181,7 +194,7 @@ var CNZ_MAP = {
     "Reset Evolution Settings": "进化设置还原",
     "Target Universe:": "欲选择的宇宙：",
     "Target Planet:": "欲选择的星球：",
-    "Target Evolution:": "欲进化的种族：",
+    "Target Race:": "欲进化的种族：",
     "Soft Reset": "是否进行软重置",
     "Evolution Queue": "进化队列",
     "Queue Enabled": "是否开启进化队列",
@@ -195,11 +208,14 @@ var CNZ_MAP = {
     "Auto Achievements (Greatness)": "自动成就(伟大类)",
     "Auto Achievements (Pillars)": "自动成就(永恒立柱)",
 
+    "Chosen universe will be automatically selected after appropriate reset": "在特定重置后自动选择相应的宇宙",
+    "Chosen planet will be automatically selected after appropriate reset": "在特定重置后自动选择相应的星球",
     "Wait for user selection": "等待玩家选择",
     "Picks most habitable planet, based on biome and trait": "根据生物群系和星球特性，选择最佳的星球",
     "Picks planet with most unearned achievements. Takes in account extinction achievements for planet exclusive races, and greatness achievements for planet biome, trait, and exclusive genus.": "选择可以尽可能多完成成就的星球。将考虑毁灭类成就中星球特有的种族，以及伟大类成就中生物群系，星球特征和特有的种群。",
     "Picks planet with highest weighting. Should be configured in Planet Weighting Settings section.": "选择星球权重最高的星球。可以在下面的星球权重设置中进行更进一步的设置。",
     "Picks race with not infused pillar for Ascension, with unearned Greatness achievement for Bioseed, or with unearned Extinction achievement in other cases. Conditional races are prioritized, when available.": "优先选择还没有在永恒立柱上嵌入和谐水晶的种族，或者是完成伟大类成就的种群，或者是还没有完成毁灭类成就的种族。特有的种族如果可以选择，将优先进行选择。",
+    "Chosen race will be automatically selected during next evolution": "下个进化阶段自动选择相应的种族",
     "Perform soft resets until you'll get chosen race. Useless after getting mass exintion perk.": "直到选中想要选择的种族之前一直进行软重置。在获得大灭绝特权后就没有必要选择了。",
     "When enabled script with evolve with queued settings, from top to bottom. During that script settings will be overriden with settings stored in queue. Queued target will be removed from list after evolution.": "按照队列从上至下进行进化。队列中有项目存在时，优先于脚本的进化设置生效。在完成进化后，相应的队列项目将被移除。",
     "When enabled applied evolution targets will be moved to the end of queue, instead of being removed": "开启后，队列中的项目在完成进化后将回到队列末尾，而不是被移除",
@@ -288,7 +304,9 @@ var CNZ_MAP = {
 
     "Allows auto reasearch of Enhanced Air Filters": "允许自动研究增强型空气过滤网",
     "Picks Anthropology for MAD prestige, and Fanaticism for others": "进行核弹重置时选择人类学，其余情况下选择狂热信仰",
+    "Theology 1 technology to research, have no effect after getting Transcendence perk": "神学研究分支1的选择，获得超越特权以后失效",
     "Picks Deify for Ascension prestige, and Study for others": "进行飞升重置时选择神化先祖，其余情况下选择研究先祖",
+    "Theology 2 technology to research": "神学研究分支2的选择",
 
     // 外交事务设置
     "Foreign Affairs Settings": "外交事务设置",
@@ -315,6 +333,7 @@ var CNZ_MAP = {
     "... and at least this percentage of your garrison is not injured": "...且需要未受伤士兵人数大于此比例",
     "Hire mercenary if money storage greater than percent": "如果资金存量大于此比例，则聘请雇佣兵",
     "OR if cost lower than money earned in X seconds": "或者聘请花费小于此秒数的资金产量，则聘请雇佣兵",
+    "AND amount of dead soldiers above this number": "并且需要阵亡士兵数量大于此数值，才会聘请雇佣兵",
     "Minimum advantage": "最低优势",
     "Maximum advantage": "最高优势",
     "Maximum siege battalion": "最高围城士兵数",
@@ -332,11 +351,12 @@ var CNZ_MAP = {
     "Set to less than 100 to take advantage of being able to heal more soldiers in a game day than get wounded in a typical attack": "合理设置为某个低于100的值，可以有效利用游戏内的自然愈合机制",
     "Hire a mercenary if remaining money after purchase will be greater than this percent": "如果聘请后剩余资金大于此比例，则聘请雇佣兵",
     "Combines with the money storage percent setting to determine when to hire mercenaries": "结合剩余资金比例，可以管理聘请雇佣兵的时机",
+    "Hire a mercenary only when current amount of dead soldiers above given number": "只在阵亡士兵数量超过此数值时聘请雇佣兵",
     "Minimum advantage to launch campaign, ignored during ambushes": "进行相应战役类型最少需要的优势。进行伏击时忽略此项",
     "Once campaign is selected, your battalion will be limited in size down this advantage, reducing potential loses": "当选择相应战役类型后，参加战斗的士兵数将限制在尽可能接近此优势的数量，以减少损失",
     "Maximum battalion for siege campaign. Only try to siege if it's possible with up to given amount of soldiers. Siege is expensive, if you'll be doing it with too big battalion it might be less profitable than other combat campaigns. This option does not applied for unification, it's only for regular looting.": "进行围城的最大士兵数。只在此数值的士兵数量可以进行围城时这么做。围城的损失通常很大，如果需要大量士兵才能进行的话，收益将无法弥补损失。此项与是否统一无关，只应用于攻击获取资源。",
 
-    // 地狱设置
+    // 地狱维度设置
     "Hell Settings": "地狱维度设置",
     "Reset Hell Settings": "地狱维度设置还原",
     "Show Souls Gems income rate": "显示灵魂宝石收入",
@@ -353,16 +373,16 @@ var CNZ_MAP = {
     "Automatically adjust patrol size": "自动调整巡逻队规模",
     "Minimum patrol attack rating": "单支巡逻队最低战斗评级",
     "Percent of current threat as base patrol rating": "恶魔生物基础评级与数量比例",
-    "Lower Rating for each active Predator Drone by": "每个掠食者无人机减少恶魔生物评级",
-    "Lower Rating for each active War Droid by": "每个战斗机器人减少恶魔生物评级",
-    "Lower Rating for each Bootcamp by": "每个新兵训练营减少恶魔生物评级",
+    " Lower Rating for each active Predator Drone by": "\xa0\xa0\xa0\xa0 每个掠食者无人机减少恶魔生物评级",
+    " Lower Rating for each active War Droid by": "\xa0\xa0\xa0\xa0 每个战斗机器人减少恶魔生物评级",
+    " Lower Rating for each Bootcamp by": "\xa0\xa0\xa0\xa0 每个新兵训练营减少恶魔生物评级",
     "Increase patrol rating by up to this when soldiers die": "士兵阵亡时增加巡逻队战斗评级至此数值",
-    "Start increasing patrol rating at this home garrison fill percent": "当驻军到达此比例时开始增加巡逻队战斗评级",
-    "Full patrol rating increase below this home garrison fill percent": "当驻军低于此比例时将巡逻队战斗评级增加到最大",
+    " Start increasing patrol rating at this home garrison fill percent": "\xa0\xa0\xa0\xa0 当驻军到达此比例时开始增加巡逻队战斗评级",
+    " Full patrol rating increase below this home garrison fill percent": "\xa0\xa0\xa0\xa0 当驻军低于此比例时将巡逻队战斗评级增加到最大",
     "Attractors": "吸引器信标",
     "Adapt how many Attractors Auto Power can turn on based on threat": "使自动供能可以根据恶魔生物数量调整吸引器信标的供能状态",
-    "All Attractors on below this threat": "恶魔生物数量低于此数值时开启所有吸引器信标",
-    "All Attractors off above this threat": "恶魔生物数量高于此数值时关闭所有吸引器信标",
+    " All Attractors on below this threat": "\xa0\xa0\xa0\xa0 恶魔生物数量低于此数值时开启所有吸引器信标",
+    " All Attractors off above this threat": "\xa0\xa0\xa0\xa0 恶魔生物数量高于此数值时关闭所有吸引器信标",
 
     "Track gained soul gems, and show rate per hour. Shown number based only on past gains, thus it won't react on hell adjustments immediately - it'll need some time to accumulate new data. Also, for first hour\\few gems after enabling this option\\reloading page shown number will be aproximated.": "记录获得的灵魂宝石数量，并计算出每小时的获取量。因此，在进行调整以后，需要一定时间才能体现在数字上。在刚开启此选项，或者是刷新页面后，获取量将为预估值。",
     "Automatically turns off the hell patrol and surveyor log messages": "自动关闭巡逻队和勘探者相关的日志",
@@ -384,6 +404,33 @@ var CNZ_MAP = {
     "Auto Power needs to be on for this to work": "需要开启自动供能此项才能生效",
     "Turn more and more attractors off when getting nearer to the top threat": "越接近最大恶魔数量，关闭越多吸引器信标",
 
+    // 机甲设置
+    "Mech Settings": "机甲设置",
+    "Reset Mech Settings": "机甲设置还原",
+    "Scrap mechs:": "解体机甲：",
+    "Single worst": "逐个低效",
+    "All inefficient": "所有低效",
+    "Build mechs:": "制造机甲：",
+    "Random good": "最佳设计",
+    "Current design": "当前设计",
+    "Prefered mech size:": "偏好的机甲尺寸：",
+    "Gravity mech size:": "重力环境下的机甲尺寸：",
+    "Save up full supplies for next floor": "为下一层提前积攒补给",
+    "Fill remaining bay space with smaller mechs": "使用尺寸更小的机甲填充剩余的机舱空间",
+
+    "Configures what will be scrapped": "设置解体机甲的情况",
+    "Nothing will be scrapped automatically": "不自动解体机甲",
+    "Scrap mechs with worst efficiency one by one, when they can be replaced with better ones": "逐个解体效率最低的机甲，以更换为更好的机甲",
+    "Scrap all mechs with bad efficiency, replacing them with good ones, E.g. it will be able to scrap 30 mechs of 10% efficiency, and replace them with 10 mechs of 200% efficiency at once. Which will have a better immediate performance than slow replacement of them one by one. But if you're climbing spire too fast you may finish current floor before bay will be repopulated back to full, and risking to enter next floor with half-empty bay of suboptimal mechs.": "解体所有效率低的机甲，并更换为更好的机甲。如果尖塔进度较快，不建议选择此项，因为可能会在建造机甲过程中又上了一层，导致再度解体。",
+    "Configures what will be build": "设置制造机甲的情况",
+    "Nothing will be build automatically": "不自动制造机甲",
+    "Build random mech with size chosen below, and best possible efficiency": "制造大小为下方选择的，效率最高的机甲",
+    "Build whatever currently set in Mech Lab": "按照机甲实验室当前的设计来制造机甲",
+    "Size of mech for autobuild": "自动制造的机甲尺寸",
+    "Override prefered size with this on floors with high gravity": "重力环境下自动制造的机甲尺寸",
+    "Stop building new mechs close to next floor, preparing to build bunch of new mechs": "在接近下一层时停止制造新的机甲，以保留补给",
+    "Once mech bay is packed with optimal mechs of prefered size up to the limit fill up remaining space with smaller mechs, if possible": "当机舱空间已经不足以再制造偏好尺寸的机甲时，将考虑制造尺寸更小的机甲",
+
     // 舰队设置
     "Fleet Settings": "舰队设置",
     "Reset Fleet Settings": "舰队设置还原",
@@ -404,8 +451,9 @@ var CNZ_MAP = {
     "Assaulting Alien 2 increases maximum piracy up to 500, script won't do it until this knowledge cap is reached. Regardless of set value it won't ever try to assault until you have big enough fleet to do it without loses.": "进行第五星系任务后，海盗的活动会更加剧烈，因此脚本只会在到达相应数值的知识上限时进行研究。另外，除非您能够无损伤地完成任务，否则脚本也不会自动进行此任务。",
     "Won't ever launch assault mission on Chthonian": "不会自动进行幽冥星系任务",
     "Launch Chthonian Assault Mission when it can be won with any loses (1250+ total fleet power, many ships will be lost)": "不计损失，当战力达到最低要求时自动进行幽冥星系任务(1250以上总战力，损失会极大)",
-    "Not avaialable in Banana Republic challenge. Launch Chthonian Assault Mission when it can be won with average loses (2500+ total fleet power, two Frigates will be lost)": "在香蕉共和国挑战中不可用。当战力达到中等要求时自动进行幽冥星系任务(2500以上总战力，将损失2艘大型护卫舰)",
-    "Not avaialable in Banana Republic challenge. Launch Chthonian Assault Mission when it can be won with minimal loses (4500+ total fleet power, one Frigate will be lost)": "在香蕉共和国挑战中不可用。当战力达到最高要求时自动进行幽冥星系任务(4500以上总战力，将损失1艘大型护卫舰)",
+    "Not available in Banana Republic challenge. Launch Chthonian Assault Mission when it can be won with average loses (2500+ total fleet power, two Frigates will be lost)": "在香蕉共和国挑战中不可用。当战力达到中等要求时自动进行幽冥星系任务(2500以上总战力，将损失2艘大型护卫舰)",
+    "Not available in Banana Republic challenge. Launch Chthonian Assault Mission when it can be won with minimal loses (4500+ total fleet power, one Frigate will be lost)": "在香蕉共和国挑战中不可用。当战力达到最高要求时自动进行幽冥星系任务(4500以上总战力，将损失1艘大型护卫舰)",
+    "Assault Chthonian when chosen outcome is achievable": "当满足任务条件时自动进行幽冥星系任务",
 
     // 质量喷射设置
     "Ejector & Supply Settings": "质量喷射及补给设置",
@@ -447,6 +495,7 @@ var CNZ_MAP = {
     "Limit Pre-MAD Storage": "限制核弹重置之前阶段的存储",
     "Reassign only empty storages": "只在板条箱或集装箱有空余时进行重新分配",
     "Assign buffer storage": "是否分配缓冲用的存储",
+    "Assign only for prioritized resources": "只对优先的资源分配存储",
     "Store Overflow": "是否对溢出部分分配存储",
     "Max Crates": "最大板条箱",
     "Max Containers": "最大集装箱",
@@ -454,16 +503,17 @@ var CNZ_MAP = {
     "Saves resources and shortens run time by limiting storage pre-MAD": "限制核弹重置之前阶段的存储来节省资源和相应时间",
     "Wait until storage is empty before reassigning containers to another resource, to prevent overflowing and wasting resources": "直到相应的板条箱或集装箱未装有相应资源时才考虑将它重新分配给其他资源，以防止资源溢出浪费",
     "With this option enable script assigns 3% more resources above required amounts, ensuring that required quantity will be actually reached, even if other part of script trying to sell\eject\switch production, etc.": "设置后，脚本将以超过需要数值的3%进行分配，以保证能达到所需要的数值，以避免脚本其他功能的干扰。",
+    "Assign storages only for prioritized resources, up to amount required by whatever demanded it. Such as queue or trigger costs. You don't normally need it, this can be useful when you need all your storage space to afford single building, and want to fully focus on it. Warning! Enabling this option without `Reassign only empty storages` will instantly unassign all your crates and containers, and may lead to loss of resources.": "只对优先的资源分配存储，即触发器或队列等所需要的资源，上限为所需要的数值。通常只建议在非常需要集中所有存储来进行建造时选择此项。另外请注意，如果选择此项时没有选择“只在板条箱或集装箱有空余时进行重新分配”，则会立刻取消分配所有板条箱和集装箱，由此可能会导致资源损失。",
 
     // 生产设置
     "Production Settings": "生产设置",
     "Reset Production Settings": "生产设置还原",
     "Smelter": "冶炼厂",
-    "Distributing:": "分配：",
+    "Smelters production:": "冶炼厂生产：",
     "Prioritize Iron": "优先熔炼铁",
     "Prioritize Steel": "优先熔炼钢",
-    "Both, up to full storages": "同时进行熔炼，直到达到上限",
-    "Both, up to required amounts": "同时进行熔炼，直到达到需求数量",
+    "Up to full storages": "直到达到上限",
+    "Up to required amounts": "直到达到需求数量",
     "Fuel": "燃料使用顺序",
     "Inferno": "炼狱燃料",
     "Wood": "木材",
@@ -477,6 +527,11 @@ var CNZ_MAP = {
     "Wait for full mana": "等待法力恢复至上限",
     "Ritual": "仪式",
 
+    "Produce only Iron, untill storage capped, and switch to Steel after that": "只冶炼铁，直到铁达到存储上限，再切换为冶炼钢",
+    "Produce as much Steel as possible, untill storage capped, and switch to Iron after that": "只冶炼钢，直到钢达到存储上限，再切换为冶炼铁",
+    "Produce both Iron and Steel at ratio which will fill both storages at same time for both": "以一定的比例同时冶炼铁和钢，保证它们同时达到存储上限",
+    "Produce both Iron and Steel at ratio which will produce maximum amount of resources required for buildings at same time for both": "以一定的比例同时冶炼铁和钢，保证它们同时达到建筑的需求",
+    "Distribution of smelters between iron and steel": "冶炼厂冶炼铁和钢的方式",
     "Resources already produced above maximum amount required for constructing buildings won't be crafted, if there's better options enabled and available, ignoring weighted ratio": "如果有更好的选项，则建筑暂时不需要的锻造物将被忽略，同时忽略权重设置",
     "Cast rituals only with full mana": "只在法力达到上限时激活仪式",
 
@@ -529,6 +584,7 @@ var CNZ_MAP = {
     "Reset Building Settings": "建筑设置还原",
     "Manage Spire": "是否自动管理尖塔",
     "Ignore weighting and build if storage is full": "如果存储已满，则忽略权重进行建造",
+    "Do not wait for resources without income": "忽略无产量的资源",
     "Prefered Shrine:": "圣地种类偏好：",
     "Any": "任意类型",
     "Equally": "平均分配",
@@ -544,6 +600,7 @@ var CNZ_MAP = {
 
     "Enables special logic for Purifier, Port, Base Camp, and Mech Bays. At first script will try to maximize supplies cap, building up as many ports and camps as possible at best ratio, then build up as many mech bays as current supplies cap allows, and only after that switch support to mech bays.": "启用空气净化器，港口，登陆营地和机甲舱专用的逻辑。脚本将首先最大化补给上限，以最佳比例建造港口和登陆营地，然后尽可能地建造机甲舱，之后再启用机甲舱。",
     "Ignore weighting and immediately construct building if it uses any capped resource, preventing wasting them by overflowing. Weight still need to be positive(above zero) for this to happen.": "如果建筑所使用的任意一项资源超过上限，则忽略权重立刻进行建造，以避免浪费资源。权重仍然需要设为正数(大于0)后此项才能生效。",
+    "Weighting checks will ignore resources without positive income(craftables, inactive factory goods, etc), buildings with such resources will not delay other buildings.": "权重将忽略无产量的资源(例如锻造物，未进行生产的产物等)，如果有相应的建筑物需要这些资源，则不会因此影响其他建筑的建造。",
 
     // 自动建筑权重设置
     "AutoBuild Weighting Settings": "自动建筑权重设置",
@@ -600,6 +657,7 @@ var CNZ_MAP = {
     "Specials": "特殊",
     "Construction": "建造",
     "Multi-part Construction": "分项工程",
+    "A.R.P.A Progress": "ARPA项目",
     "Research": "研究",
     "Spying": "间谍",
     "Attack": "进攻",
@@ -609,6 +667,7 @@ var CNZ_MAP = {
     "If logging is enabled then logs Specials actions": "启用后，记录特殊操作",
     "If logging is enabled then logs Construction actions": "启用后，记录建造操作",
     "If logging is enabled then logs Multi-part Construction actions": "启用后，记录分项工程建造操作",
+    "If logging is enabled then logs A.R.P.A Progress actions": "启用后，记录ARPA项目建造操作",
     "If logging is enabled then logs Research actions": "启用后，记录研究操作",
     "If logging is enabled then logs Spying actions": "启用后，记录间谍活动",
     "If logging is enabled then logs Attack actions": "启用后，记录进攻行为",
