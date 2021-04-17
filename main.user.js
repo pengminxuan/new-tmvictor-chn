@@ -23,6 +23,9 @@ var LISTENER_TIME = 1000;
 /**
  * 汉化配置
  *
+ * ==========2021.04.17 前缀空格处理方案==========
+ * " "(全角空格) => "\xa0\xa0\xa0\xa0 "
+ *
  * 扒原文title语句：$("#配置项标签id值").find("*").each(function(index, e) {if($(e).attr('title')){console.log($(e).attr('title'))}})
  * 扒原文text语句：$("#配置项标签id值").find("*").each(function(index, e) {if($(e).prop('firstChild').nodeValue){console.log($(e).prop('firstChild').nodeValue)}})
  *
@@ -1092,7 +1095,8 @@ function textCH(target) {
             return this.nodeType == 3;
         }).each(function () {
             var nodeValueCH = CNZ_MAP[this.nodeValue];
-            nodeValueCH ? this.nodeValue = nodeValueCH : null;
+            console.log(nodeValueCH);
+            nodeValueCH ? this.nodeValue = nodeValueCH.replace() : null;
         })
     });
 }
