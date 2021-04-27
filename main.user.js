@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Evolve-新版TMVictor汉化
 // @namespace    https://gitee.com/angle_god/tmvictor-localization-chinese
-// @version      1.2.2
+// @version      1.2.3
 // @description  try to take over the world!
 // @downloadURL  https://github.com/pengminxuan/new-tmvictor-chn/blob/main/main.user.js
 // @author       天使不见时
@@ -49,6 +49,7 @@ var CNZ_MAP = {
     "autoPower": "自动供能",
     "autoStorage": "自动存储",
     "autoMarket": "自动市场",
+    "autoGalaxyMarket": "自动星际贸易",
     "autoResearch": "自动研究",
     "autoARPA": "自动ARPA",
     "autoJobs": "自动工作",
@@ -80,6 +81,7 @@ var CNZ_MAP = {
     "Manages power based on a priority order of buildings. Starts with city based building then space based.": "根据建筑的优先级自动管理供能。从地面建筑开始，然后再考虑太空建筑。",
     "Assigns crates and containers to resources needed for buildings enabled for auto build, queued buildings, and enabled projects": "自动分配箱子来管理自动建造、队列中的建筑、以及ARPA项目所需的资源存储。",
     "Allows for automatic buying and selling of resources once specific ratios are met. Also allows setting up trade routes until a minimum specified money per second is reached. The will trade in and out in an attempt to maximise your trade routes.": "当资源到达某个比例以后自动买卖相应资源。也可以设置自动使用贸易路线进行交易，并且可以设置交易时最小的资金收入。将尽可能使用所有的贸易路线。",
+    "Manages galaxy trade routes": "自动管理星际贸易路线",
     "Performs research when minimum requirements are met. ": "当满足相应条件时自动进行研究。",
     "Builds ARPA projects if user enables them to be built.": "自动建造玩家允许建造的ARPA项目。",
     "Assigns jobs in a priority order with multiple breakpoints. Starts with a few jobs each and works up from there. Will try to put a minimum number on lumber / stone then fill up capped jobs first.": "以相应优先级和多个阈值来自动分配工作。将先满足第一阈值后，再考虑第二阈值，然后再考虑最终阈值。在考虑其他工作前会先考虑伐木工人和石工数量。",
@@ -410,7 +412,7 @@ var CNZ_MAP = {
     "Scrap mechs:": "解体机甲：",
     "Single worst": "逐个低效",
     "All inefficient": "所有低效",
-    "Mixed": "混合",
+    "Excess inefficient": "超过低效",
     "Build mechs:": "制造机甲：",
     "Random good": "最佳设计",
     "Current design": "当前设计",
@@ -419,23 +421,25 @@ var CNZ_MAP = {
     "Save up full supplies for next floor": "为下一层提前积攒补给",
     "Fill remaining bay space with smaller mechs": "使用尺寸更小的机甲填充剩余的机舱空间",
     "Manage Spire Buildings": "是否管理尖塔建筑",
-    "Fill bays before buildings new ones": "是否在建造机甲舱之前先填满剩余的机舱空间",
+    "Fill bays before building new ones": "是否在建造机甲舱之前先填满剩余的机舱空间",
+    "Maximize bays before replacing mechs": "是否在更换机甲之前先最大化建造机甲舱",
 
     "Configures what will be scrapped": "设置解体机甲的情况",
     "Nothing will be scrapped automatically": "不自动解体机甲",
     "Scrap mechs with worst efficiency one by one, when they can be replaced with better ones": "逐个解体效率最低的机甲，以更换为更好的机甲",
-    "Scrap all mechs with bad efficiency, replacing them with good ones, E.g. it will be able to scrap 30 mechs of 10% efficiency, and replace them with 10 mechs of 200% efficiency at once. Which will have a better immediate performance than slow replacement of them one by one. But if you're climbing spire too fast you may finish current floor before bay will be repopulated back to full, and risking to enter next floor with half-empty bay of suboptimal mechs.": "解体所有效率低的机甲，并更换为更好的机甲。如果尖塔进度较快，不建议选择此项，因为可能会在建造机甲过程中又上了一层，导致再度解体。",
-    "Works as 'Single worst' while more bays still can be builded, and as 'All inefficient' after that.": "在还可以建造更多机甲舱时切换为逐个低效，之后切换为所有低效。",
+    "Scrap all mechs with bad efficiency, replacing them with good ones, E.g. it will be able to scrap 30 mechs of 10% efficiency, and replace them with 10 mechs of 200% efficiency at once. This option will clear current floor at best possible speed, but if you're climbing spire too fast you may finish current floor before bay will be repopulated with new mechs back to full, and risking to enter next floor with half-empty bay of suboptimal mechs.": "解体所有效率低的机甲，并更换为更好的机甲。如果尖塔进度较快，不建议选择此项，因为可能会在建造机甲过程中又上了一层，导致再度解体。",
+    "Compromise between two options above: scrap as much inefficient mechs as possible, preserving enough of old mechs to have full mech bay by the moment when floor will be cleared, based on progress and earning estimations.": "结合以上两个选项，根据进度，在保留足够多机甲的前提下，尽可能解体所有低效的机甲。",
     "Configures what will be build": "设置制造机甲的情况",
     "Nothing will be build automatically": "不自动制造机甲",
     "Build random mech with size chosen below, and best possible efficiency": "制造大小为下方选择的，效率最高的机甲",
     "Build whatever currently set in Mech Lab": "按照机甲实验室当前的设计来制造机甲",
-    "Size of mech for autobuild": "自动制造的机甲尺寸",
+    "Size of random mechs": "最佳设计的机甲尺寸",
     "Override prefered size with this on floors with high gravity": "重力环境下自动制造的机甲尺寸",
     "Stop building new mechs close to next floor, preparing to build bunch of new mechs suited for next enemy": "在接近下一层时停止制造新的机甲，以保留补给",
     "Once mech bay is packed with optimal mechs of prefered size up to the limit fill up remaining space with smaller mechs, if possible": "当机舱空间已经不足以再制造偏好尺寸的机甲时，将考虑制造尺寸更小的机甲",
-    "Enables special powering logic for Purifier, Port, Base Camp, and Mech Bays. At first script will try to maximize supplies cap, building up as many ports and camps as possible at best ratio, then build up as many mech bays as current supplies cap allows, and only after that switch support to mech bays. This option requires Auto Build and Auto Power.": "启用空气净化器，港口，登陆营地和机甲舱专用的供能逻辑。脚本将首先最大化补给上限，以最佳比例建造港口和登陆营地，然后尽可能地建造机甲舱，之后再启用机甲舱。此项需要开启自动供能和自动建筑。",
-    "Fill existed bays with mechs first, before spending resources on spire buildings": "在花费资源建造尖塔建筑之前，先建造机甲填满剩余的机舱空间",
+    "Enables special powering logic for Purifier, Port, Base Camp, and Mech Bays. Script will try to maximize supplies cap, building as many ports and camps as possible at best ratio, disabling mech bays when more support needed. With this cap it'll build up as many mech bays as possible, and once maximum bays is built - it'll turn them all on. This option requires Auto Build and Auto Power.": "启用空气净化器，港口，登陆营地和机甲舱专用的供能逻辑。脚本将首先最大化补给上限，以最佳比例建造港口和登陆营地，然后尽可能地建造机甲舱，之后再启用机甲舱。此项需要开启自动供能和自动建筑。",
+    "Fill mech bays up to current limit before spending resources on additional spire buildings": "在花费资源建造尖塔建筑之前，先建造机甲填满剩余的机舱空间",
+    "Scrap old mechs only when no new bays and purifiers can be builded": "只在无法建造机甲舱和空气净化器时解体机甲",
 
     // 舰队设置
     "Fleet Settings": "舰队设置",
@@ -488,12 +492,10 @@ var CNZ_MAP = {
     "Routes": "贸易路线数",
     "Min p/s": "资源收入保留",
     "Galaxy Trades": "星际贸易",
-    "Manage Galaxy Trades": "自动管理星际贸易",
     "Priority": "优先级",
 
     "Uses the highest per second amount of these two values. Will trade for resources until this minimum money per second amount is hit": "两项中较高的数值生效。达到每秒资金收入最低值后，才会购买资源",
     "Uses the highest per second amount of these two values. Will trade for resources until this percentage of your money per second amount is hit": "两项中较高的数值生效。达到每秒资金收入最低比例后，才会购买资源",
-    "Automatically adjust galaxy trade routes": "自动管理星际贸易路线",
 
     // 存储设置
     "Storage Settings": "存储设置",
@@ -508,7 +510,7 @@ var CNZ_MAP = {
 
     "Saves resources and shortens run time by limiting storage pre-MAD": "限制核弹重置之前阶段的存储来节省资源和相应时间",
     "Wait until storage is empty before reassigning containers to another resource, to prevent overflowing and wasting resources": "直到相应的板条箱或集装箱未装有相应资源时才考虑将它重新分配给其他资源，以防止资源溢出浪费",
-    "With this option enable script assigns 3% more resources above required amounts, ensuring that required quantity will be actually reached, even if other part of script trying to sell\eject\switch production, etc.": "设置后，脚本将以超过需要数值的3%进行分配，以保证能达到所需要的数值，以避免脚本其他功能的干扰。",
+    "Assigns 3% more resources above required amounts, ensuring that required quantity will be actually reached, even if other part of script trying to sell\\eject\\switch production, etc.": "以超过需要数值的3%进行分配，以保证能达到所需要的数值，以避免脚本其他功能的干扰。",
     "Assign storages only for prioritized resources, up to amount required by whatever demanded it. Such as queue or trigger costs. You don't normally need it, this can be useful when you need all your storage space to afford single building, and want to fully focus on it. Warning! Enabling this option without `Reassign only empty storages` will instantly unassign all your crates and containers, and may lead to loss of resources.": "只对优先的资源分配存储，即触发器或队列等所需要的资源，上限为所需要的数值。通常只建议在非常需要集中所有存储来进行建造时选择此项。另外请注意，如果选择此项时没有选择“只在板条箱或集装箱有空余时进行重新分配”，则会立刻取消分配所有板条箱和集装箱，由此可能会导致资源损失。",
 
     // 生产设置
@@ -654,7 +656,7 @@ var CNZ_MAP = {
     "Asteroid Redirect": "小行星变轨",
     "Mana Syphon": "法力虹吸",
 
-    "Projects weighing scales  with current progress, making script more eager to spend resources on finishing nearly constructed projects.": "随着项目接近完成而提高权重，使脚本更优先进行接近完成的项目。",
+    "Projects weighting scales  with current progress, making script more eager to spend resources on finishing nearly constructed projects.": "随着项目接近完成而提高权重，使脚本更优先进行接近完成的项目。",
 
     // 日志设置
     "Logging Settings": "日志设置",
