@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Evolve-新版TMVictor汉化
 // @namespace    https://gitee.com/angle_god/tmvictor-localization-chinese
-// @version      1.2.3
+// @version      1.2.4
 // @description  try to take over the world!
 // @downloadURL  https://github.com/pengminxuan/new-tmvictor-chn/blob/main/main.user.js
 // @author       天使不见时
@@ -135,7 +135,7 @@ var CNZ_MAP = {
     "Required number of workers and soldiers before performing MAD reset": "达到相应数量的市民和士兵后，才进行核弹重置",
     "Required number of probes before launching bioseeder ship": "达到太空探测器所需数量后，才进行播种重置",
     "Save up enough Soul Gems for reset, only excess gems will be used. This option does not affect triggers.": "保留重置所需数量的灵魂宝石，只使用超过相应数量的灵魂宝石。不影响触发器。",
-    "Required minimum solar mass of blackhole before prestiging": "达到太阳质量阈值后，才进行黑洞重置",
+    "Required minimum solar mass of blackhole before prestiging. Script do not stabilize on blackhole run, this number will need to be reached naturally": "达到太阳质量阈值后，才进行黑洞重置。脚本不会在威望重置类型为黑洞重置时稳定黑洞，需要自然达到此质量",
     "Stabilises the blackhole with exotic materials, during whitehole run won't go beyond minimum mass set above": "一直选择稳定黑洞，进行黑洞重置时不会超过上面的太阳质量阈值",
     "If not enabled the mass ejector will not be managed by the script": "启用后，脚本才会自动管理质量喷射器喷射的物质",
     "Eject resources above amount required for buildings, normally only resources with full storages will be ejected, until 'Eject everything' option is activated.": "将超出建筑需要的资源用于喷射，而不是像通常只是喷射达到上限的资源。",
@@ -626,7 +626,7 @@ var CNZ_MAP = {
     "All unlocked researches already affordable": "不存在因知识上限不足而无法进行的研究",
     "Mass Ejector": "质量喷射器",
     "Existed ejectors not fully utilized": "存在未完全运作的质量喷射器",
-    "Not housing or barrack": "提升人口或士兵上限以外的建筑",
+    "Not housing, barrack, or knowledge building": "提升人口、士兵或知识上限以外的建筑",
     "MAD prestige enabled, and affordable": "进行核爆重置，且已研究相互毁灭",
     "Freight Yard, Container Port": "货场与集装箱港口",
     "Have unused crates or containers": "有未使用的板条箱或集装箱",
