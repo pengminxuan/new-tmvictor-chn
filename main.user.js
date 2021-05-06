@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Evolve-新版TMVictor汉化
 // @namespace    https://gitee.com/angle_god/tmvictor-localization-chinese
-// @version      1.2.4
+// @version      1.2.5
 // @description  try to take over the world!
 // @downloadURL  https://github.com/pengminxuan/new-tmvictor-chn/blob/main/main.user.js
 // @author       天使不见时
@@ -76,22 +76,22 @@ var CNZ_MAP = {
     "Builds most effective large mechs for current spire floor. Least effective will be scrapped to make room for new ones.": "建造效率最高的大型机甲。将根据当前的情况调整机甲配置。",
     "Manages Andromeda fleet to supress piracy": "自动分配仙女座星系的舰队以压制海盗活动",
     "Adjusts tax rates if your current morale is greater than your maximum allowed morale. Will always keep morale above 100%.": "如果当前的士气高于上限，则会自动调整税率。会尽可能将士气保持在100%以上。",
-    "Craft when a specified crafting ratio is met. This changes throughout the game - lower in the beginning and rising as the game progresses.": "资源到达某个比例以后自动将它们转换为锻造物。在游戏开始时比例较低，随着游戏进展而不断提升。",
-    "Builds city and space building when it can an production allows (eg. Won\'t build a Fission Reactor if you don\'t have enough uranium production).": "当资源产量到达允许阈值时自动建造建筑(例如：如果铀产量不足，则不会建造裂变反应堆)。",
-    "Manages power based on a priority order of buildings. Starts with city based building then space based.": "根据建筑的优先级自动管理供能。从地面建筑开始，然后再考虑太空建筑。",
-    "Assigns crates and containers to resources needed for buildings enabled for auto build, queued buildings, and enabled projects": "自动分配箱子来管理自动建造、队列中的建筑、以及ARPA项目所需的资源存储。",
+    "Automatically produce craftable resources, thresholds when it happens depends on current demands and stocks.": "自动将资源转换为锻造物，进行转换的阈值根据当前需求和储量而定。",
+    "Construct buildings based on their weightings(user configured), and various rules(e.g. it won\'t build building which have no support to run)": "根据玩家设置的权重自动建造建筑，同时需要满足一定条件(例如：不会在支持不够时建造消耗相应支持的建筑)",
+    "Manages power based on a priority order of buildings. Also disables currently useless buildings to save up resources.": "根据建筑的优先级自动管理供能。同时会自动关闭无用的建筑，以节省资源。",
+    "Assigns crates and containers to resources needed for buildings enabled for Auto Build, queued buildings, researches, and enabled projects": "自动分配箱子来管理自动建造、队列中的建筑、研究、以及ARPA项目所需的资源存储。",
     "Allows for automatic buying and selling of resources once specific ratios are met. Also allows setting up trade routes until a minimum specified money per second is reached. The will trade in and out in an attempt to maximise your trade routes.": "当资源到达某个比例以后自动买卖相应资源。也可以设置自动使用贸易路线进行交易，并且可以设置交易时最小的资金收入。将尽可能使用所有的贸易路线。",
     "Manages galaxy trade routes": "自动管理星际贸易路线",
-    "Performs research when minimum requirements are met. ": "当满足相应条件时自动进行研究。",
+    "Performs research when minimum requirements are met.": "当满足相应条件时自动进行研究。",
     "Builds ARPA projects if user enables them to be built.": "自动建造玩家允许建造的ARPA项目。",
     "Assigns jobs in a priority order with multiple breakpoints. Starts with a few jobs each and works up from there. Will try to put a minimum number on lumber / stone then fill up capped jobs first.": "以相应优先级和多个阈值来自动分配工作。将先满足第一阈值后，再考虑第二阈值，然后再考虑最终阈值。在考虑其他工作前会先考虑伐木工人和石工数量。",
-    "Enable this and autoJobs will also manage craftsmen.": "自动分配工匠。",
+    "With this option autoJobs will also manage craftsmens.": "自动分配工匠。",
     "Manages pylon rituals": "自动管理水晶塔符文",
     "Manages rock quarry stone to chrysotile ratio for smoldering races": "烈焰种族自动管理石头和温石棉的比例",
-    "Manages smelter output at different stages at the game.": "自动管理冶炼厂的生产。",
-    "Manages factory production based on power and consumption. Produces alloys as a priority until nano-tubes then produces those as a priority.": "根据供能和消耗，自动管理工厂的生产。优先生产合金，直到纳米管解锁，之后优先生产这两种资源。",
+    "Manages smelter fuel and production.": "自动管理冶炼厂的生产。",
+    "Manages factory production.": "自动管理工厂的生产。",
     "Manages mining droid production.": "自动管理采矿机器人的生产。",
-    "Uses what fuel it can to fuel the graphene plant. Not currently user configurable.": "自动管理石墨烯厂的燃料。暂时无法手动控制。",
+    "Manages graphene plant. Not user configurable - just uses least demanded resource for fuel.": "自动管理石墨烯厂的燃料。无法手动控制，会自动使用需求最少的燃料。",
     "Automatically assembles genes only when your knowledge is at max. Stops when DNA Sequencing is researched.": "当知识满了以后，自动进行基因重组。进行首次测序时不生效。",
     "Purchase minor traits using genes according to their weighting settings.": "根据相应的权重，自动使用基因购买次要特质。",
     "eg. 10 equals 10%": "例如：10代表10%",
@@ -107,6 +107,7 @@ var CNZ_MAP = {
     "Whitehole": "黑洞重置",
     "Vacuum Collapse": "真空坍缩",
     "Ascension": "飞升重置",
+    "Demonic Infusion": "恶魔灌注",
     "Ignore useless buildings": "忽略无用的建筑",
     "Barracks after unification": "研究统一后的兵营比例",
     "Pre-MAD: Ignore A.R.P.A.": "是否在研究相互毁灭前不建造ARPA项目",
@@ -120,6 +121,8 @@ var CNZ_MAP = {
     "Eject excess resources": "是否喷射多余的资源",
     "(Decay Challenge) Eject rate": "(衰变挑战)喷射比例",
     "Eject everything once X mass ejectors constructed": "当质量喷射器数量达到指定值以后，无视其他设置，喷射最大质量的物质",
+    "Minimum spire floor for reset": "进行恶魔灌注的层数阈值",
+    "Use Dark Energy Bomb": "是否使用暗能量炸弹",
 
     "Endless game": "不会自动重置",
     "MAD prestige once MAD has been researched and all soldiers are home": "当研究相互毁灭，且士兵全部存活时，进行核弹重置",
@@ -128,6 +131,7 @@ var CNZ_MAP = {
     "Infuses the blackhole with exotic materials to perform prestige": "自动选择奇异灌输，触发黑洞重置",
     "Build Mana Syphons until the end": "自动建造法力虹吸，触发真空坍缩",
     "Allows research of Incorporeal Existence and Ascension. Ascension Machine managed by autoPower. User input still required to trigger reset, and create custom race.": "允许研究无形存在和飞升。飞升装置由自动供能进行管理。仍然需要玩家手动触发飞升并创建自建种族。",
+    "Sacrifice your entire civilization to absorb the essence of a greater demon lord": "注入恶魔之力，牺牲整个文明，成为恶魔领主",
     "Space Dock, Bioseeder Ship and Probes will be constructed only when Bioseed prestige enabled. World Collider won't be constructed during Bioseed. Jump Ship won't be constructed during Whitehole. Stellar Engine won't be constucted during Vacuum Collapse.": "只在需要进行播种重置时建造星际船坞、生命播种飞船和星际探测器，并且不建造世界超级对撞机。进行黑洞重置时不建造跃迁飞船。进行真空坍缩时不建造恒星引擎。",
     "Percent of barracks to keep enabled after unification, disabling some of them can reduce stress. All barracks will be enabled back when Bioseeder Ship will be at 90%, or after building World Collider": "研究统一后进行供能的兵营比例，取消供能可以提升士气。当生命播种飞船达到90段分项工程，或者是建造世界超级对撞机后，所有兵营将全部恢复供能。",
     "Disables building A.R.P.A. projects until MAD is researched": "直到研究相互毁灭之前，不建造ARPA项目",
@@ -141,6 +145,8 @@ var CNZ_MAP = {
     "Eject resources above amount required for buildings, normally only resources with full storages will be ejected, until 'Eject everything' option is activated.": "将超出建筑需要的资源用于喷射，而不是像通常只是喷射达到上限的资源。",
     "Set amount of ejected resources up to this percent of decay rate, only useful during Decay Challenge": "只要衰变比例高于这个数值，就会使用相应资源进行喷射，只在衰变挑战中有效。",
     "Once we've constructed X mass ejectors the eject as much of everything as possible": "当质量喷射器数量达到指定值以后，尽可能的喷射最大质量的物质",
+    "Perform reset after climbing up to this spire floor": "到达相应层数后才进行恶魔灌注",
+    "Kill Demon Lord with Dark Energy Bomb": "用暗能量炸弹送恶魔领主上西天",
 
     // 常规设置
     "General Settings": "常规设置",
@@ -551,6 +557,8 @@ var CNZ_MAP = {
     "Final Quarry Worker Weighting": "最终石工权重",
     "Final Crystal Miner Weighting": "最终水晶矿工权重",
     "Final Scavenger Weighting": "最终清道夫权重",
+    "Disable miners in Andromeda": "到达仙女座星系以后禁用矿工",
+    "Craft manually when possible": "如果可以的话，手动进行锻造",
     "Job": "工作",
     "1st Pass Max": "第一阈值",
     "2nd Pass Max": "第二阈值",
@@ -586,6 +594,8 @@ var CNZ_MAP = {
 
     "Automatically sets the default job in order of Quarry Worker -> Lumberjack -> Crystal Miner -> Scavenger -> Hunter -> Farmer": "自动以石工->伐木工人->水晶矿工->清道夫->猎人->农民的顺序设置默认工作",
     "AFTER allocating breakpoints this weighting will be used to split lumberjacks, quarry workers, crystal miners and scavengers": "用于分配伐木工人，石工，水晶矿工和清道夫的数量",
+    "Disable Miners and Coal Miners after reaching Andromeda": "到达仙女座星系以后禁用矿工和煤矿工人",
+    "Disable non-Scarletite crafters when manual craft is allowed": "如果可以手动进行锻造，则禁用除了绯绯色金工匠以外的其他所有工匠",
 
     // 建筑设置
     "Building Settings": "建筑设置",
@@ -609,6 +619,12 @@ var CNZ_MAP = {
     "Ignore weighting and immediately construct building if it uses any capped resource, preventing wasting them by overflowing. Weight still need to be positive(above zero) for this to happen.": "如果建筑所使用的任意一项资源超过上限，则忽略权重立刻进行建造，以避免浪费资源。权重仍然需要设为正数(大于0)后此项才能生效。",
     "Weighting checks will ignore resources without positive income(craftables, inactive factory goods, etc), buildings with such resources will not delay other buildings.": "权重将忽略无产量的资源(例如锻造物，未进行生产的产物等)，如果有相应的建筑物需要这些资源，则不会因此影响其他建筑的建造。",
     "East Tower and West Tower won't be built until minimum suppression is reached": "达到相应安全指数以后，才会开始建造西侧巨塔和东侧巨塔",
+    "Build any Shrines, whenever have resources for it": "只要资源足够就建造圣地",
+    "Build all Shrines equally": "平均建造所有类型的圣地",
+    "Build only Morale Shrines": "只建造提升士气的圣地",
+    "Build only Metal Shrines": "只建造提升金属产量的圣地",
+    "Build only Knowledge Shrines": "只建造提升知识的圣地",
+    "Build only Tax Shrines": "只建造提升税收的圣地",
 
     // 自动建筑权重设置
     "AutoBuild Weighting Settings": "自动建筑权重设置",
@@ -670,6 +686,8 @@ var CNZ_MAP = {
     "Spying": "间谍",
     "Attack": "进攻",
     "Mercenaries": "雇佣兵",
+    "Mech Build": "制造机甲",
+    "Mech Scrap": "解体机甲",
 
     "Master switch to enable logging of script actions in the game message queue": "日志记录的主开关",
     "If logging is enabled then logs Specials actions": "启用后，记录特殊操作",
@@ -680,6 +698,8 @@ var CNZ_MAP = {
     "If logging is enabled then logs Spying actions": "启用后，记录间谍活动",
     "If logging is enabled then logs Attack actions": "启用后，记录进攻行为",
     "If logging is enabled then logs Mercenaries actions": "启用后，记录雇佣兵操作",
+    "If logging is enabled then logs Mech Build actions": "启用后，记录制造机甲操作",
+    "If logging is enabled then logs Mech Scrap actions": "启用后，记录解体机甲操作",
 
     // 种族
     "Script Managed": "由脚本管理",
@@ -1052,8 +1072,9 @@ var CNZ_MAP = {
 
     // 杂项
     "Auto Eject": "是否自动喷射",
+    "Auto Supply": "是否自动补给",
     "Enable ejecting of this resource. When to eject is set in the Prestige Settings tab.": "允许喷射此项资源。进行喷射的时机在威望重置设置下。",
-    "Enable supply of this resource. ": "允许使用此项资源进行补给。",
+    "Enable supply of this resource.": "允许使用此项资源进行补给。",
     "Enable buying of this resource. When to buy is set in the Settings tab.": "允许购买此项资源。进行购买的时机在市场设置下。",
     "Enable selling of this resource. When to sell is set in the Settings tab.": "允许出售此项资源。进行出售的时机在市场设置下。",
     "Enable trading for this resource. Max routes is set in the Settings tab.": "允许使用贸易路线购买此项资源。贸易路线的上限在市场设置下。",
