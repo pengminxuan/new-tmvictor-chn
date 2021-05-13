@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name         Evolve-新版TMVictor汉化
 // @namespace    https://gitee.com/angle_god/tmvictor-localization-chinese
-// @version      1.2.5
+// @version      1.2.6
 // @description  try to take over the world!
-// @downloadURL  https://github.com/pengminxuan/new-tmvictor-chn/blob/main/main.user.js
+// @downloadURL  https://github.com/pengminxuan/new-tmvictor-chn/raw/main/main.user.js
 // @author       天使不见时
 // @author       DSLM
 // @author       by22dgb
@@ -108,6 +108,7 @@ var CNZ_MAP = {
     "Vacuum Collapse": "真空坍缩",
     "Ascension": "飞升重置",
     "Demonic Infusion": "恶魔灌注",
+    "Use all Accelerated Time": "是否在重置前用完所有的加速时间",
     "Ignore useless buildings": "忽略无用的建筑",
     "Barracks after unification": "研究统一后的兵营比例",
     "Pre-MAD: Ignore A.R.P.A.": "是否在研究相互毁灭前不建造ARPA项目",
@@ -121,6 +122,8 @@ var CNZ_MAP = {
     "Eject excess resources": "是否喷射多余的资源",
     "(Decay Challenge) Eject rate": "(衰变挑战)喷射比例",
     "Eject everything once X mass ejectors constructed": "当质量喷射器数量达到指定值以后，无视其他设置，喷射最大质量的物质",
+    "Skip Custom Race": "是否忽略自建种族",
+    "Wait for Pillar": "是否等待永恒之柱",
     "Minimum spire floor for reset": "进行恶魔灌注的层数阈值",
     "Use Dark Energy Bomb": "是否使用暗能量炸弹",
 
@@ -132,6 +135,7 @@ var CNZ_MAP = {
     "Build Mana Syphons until the end": "自动建造法力虹吸，触发真空坍缩",
     "Allows research of Incorporeal Existence and Ascension. Ascension Machine managed by autoPower. User input still required to trigger reset, and create custom race.": "允许研究无形存在和飞升。飞升装置由自动供能进行管理。仍然需要玩家手动触发飞升并创建自建种族。",
     "Sacrifice your entire civilization to absorb the essence of a greater demon lord": "注入恶魔之力，牺牲整个文明，成为恶魔领主",
+    "Delay reset until all accelerated time will be used": "直到用完所有的加速时间才进行重置",
     "Space Dock, Bioseeder Ship and Probes will be constructed only when Bioseed prestige enabled. World Collider won't be constructed during Bioseed. Jump Ship won't be constructed during Whitehole. Stellar Engine won't be constucted during Vacuum Collapse.": "只在需要进行播种重置时建造星际船坞、生命播种飞船和星际探测器，并且不建造世界超级对撞机。进行黑洞重置时不建造跃迁飞船。进行真空坍缩时不建造恒星引擎。",
     "Percent of barracks to keep enabled after unification, disabling some of them can reduce stress. All barracks will be enabled back when Bioseeder Ship will be at 90%, or after building World Collider": "研究统一后进行供能的兵营比例，取消供能可以提升士气。当生命播种飞船达到90段分项工程，或者是建造世界超级对撞机后，所有兵营将全部恢复供能。",
     "Disables building A.R.P.A. projects until MAD is researched": "直到研究相互毁灭之前，不建造ARPA项目",
@@ -145,6 +149,8 @@ var CNZ_MAP = {
     "Eject resources above amount required for buildings, normally only resources with full storages will be ejected, until 'Eject everything' option is activated.": "将超出建筑需要的资源用于喷射，而不是像通常只是喷射达到上限的资源。",
     "Set amount of ejected resources up to this percent of decay rate, only useful during Decay Challenge": "只要衰变比例高于这个数值，就会使用相应资源进行喷射，只在衰变挑战中有效。",
     "Once we've constructed X mass ejectors the eject as much of everything as possible": "当质量喷射器数量达到指定值以后，尽可能的喷射最大质量的物质",
+    "Perform reset without making any changes to custom. This option is required, script won't ascend automatically without it enabled.": "不对自建种族进行任何修改就进行重置。只有开启此项才能自动进行飞升重置。",
+    "Wait for Pillar before ascending, unless it was done earlier": "直到永恒之柱上嵌入水晶后才进行重置",
     "Perform reset after climbing up to this spire floor": "到达相应层数后才进行恶魔灌注",
     "Kill Demon Lord with Dark Energy Bomb": "用暗能量炸弹送恶魔领主上西天",
 
