@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Evolve-新版TMVictor汉化
 // @namespace    https://gitee.com/angle_god/tmvictor-localization-chinese
-// @version      1.2.6
+// @version      1.2.7
 // @description  try to take over the world!
 // @downloadURL  https://github.com/pengminxuan/new-tmvictor-chn/raw/main/main.user.js
 // @author       天使不见时
@@ -1132,14 +1132,14 @@ function settingsListener() {
         // 获取到脚本设置选项才进行汉化
         if(item.length === 1) {
 
-            // 汉化脚本设置
-            textCH(item);
-
             //建筑名单独汉化
             buildingNameTextCH();
 
             //建立建筑名英汉对照框
             triggerBuildingNameTextCH();
+
+            // 汉化脚本设置
+            textCH(item);
         }
     }, LISTENER_TIME);
 }
