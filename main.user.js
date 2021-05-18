@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Evolve-新版TMVictor汉化
 // @namespace    https://gitee.com/angle_god/tmvictor-localization-chinese
-// @version      1.2.8
+// @version      1.2.8.1
 // @description  try to take over the world!
 // @downloadURL  https://github.com/pengminxuan/new-tmvictor-chn/raw/main/main.user.js
 // @author       天使不见时
@@ -659,6 +659,7 @@ var CNZ_MAP = {
     "Build only Metal Shrines": "只建造提升金属产量的圣地",
     "Build only Knowledge Shrines": "只建造提升知识的圣地",
     "Build only Tax Shrines": "只建造提升税收的圣地",
+    "Auto Build shrines only at moons of chosen shrine": "只在对应月相时建造相应的圣地",
 
     // 自动建筑权重设置
     "AutoBuild Weighting Settings": "自动建筑权重设置",
@@ -711,6 +712,7 @@ var CNZ_MAP = {
     // 日志设置
     "Logging Settings": "日志设置",
     "Reset Logging Settings": "日志设置还原",
+    "Script Messages": "脚本信息",
     "Enable logging": "是否启用日志，下方设置为相关日志类型",
     "Specials": "特殊",
     "Construction": "建造",
@@ -722,6 +724,9 @@ var CNZ_MAP = {
     "Mercenaries": "雇佣兵",
     "Mech Build": "制造机甲",
     "Mech Scrap": "解体机甲",
+    "Game Messages": "游戏信息",
+    "List of message IDs to filter, all game messages can be found ": "下方输入需要屏蔽的信息ID，ID列表如下：",
+    "here": "点击此处",
 
     "Master switch to enable logging of script actions in the game message queue": "日志记录的主开关",
     "If logging is enabled then logs Specials actions": "启用后，记录特殊操作",
@@ -1168,7 +1173,6 @@ function settingsListener() {
 
             // 汉化脚本设置
             textCH(item);
-
         }
     }, LISTENER_TIME);
 }
