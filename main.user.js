@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Evolve-新版TMVictor汉化
 // @namespace    https://gitee.com/angle_god/tmvictor-localization-chinese
-// @version      1.2.7
+// @version      1.2.8
 // @description  try to take over the world!
 // @downloadURL  https://github.com/pengminxuan/new-tmvictor-chn/raw/main/main.user.js
 // @author       天使不见时
@@ -125,6 +125,7 @@ var CNZ_MAP = {
     "Skip Custom Race": "是否忽略自建种族",
     "Wait for Pillar": "是否等待永恒之柱",
     "Minimum spire floor for reset": "进行恶魔灌注的层数阈值",
+    "Maximum mech potential for reset": "进行恶魔灌注的最大机甲潜力",
     "Use Dark Energy Bomb": "是否使用暗能量炸弹",
 
     "Endless game": "不会自动重置",
@@ -152,6 +153,7 @@ var CNZ_MAP = {
     "Perform reset without making any changes to custom. This option is required, script won't ascend automatically without it enabled.": "不对自建种族进行任何修改就进行重置。只有开启此项才能自动进行飞升重置。",
     "Wait for Pillar before ascending, unless it was done earlier": "直到永恒之柱上嵌入水晶后才进行重置",
     "Perform reset after climbing up to this spire floor": "到达相应层数后才进行恶魔灌注",
+    "Perform reset only if current mech team potential below given amount. Full bay of best mechs will have `1` potential. This allows to postpone reset while your team is still good, and can clear some floors fast.": "只在当前机甲潜力低于相应数值后才进行恶魔灌注。机甲舱充满最好设计的机甲时潜力为1。这样就可以在机甲战斗力还较高的时候延迟恶魔灌注，同时也可以更快地通过一些楼层。",
     "Kill Demon Lord with Dark Energy Bomb": "用暗能量炸弹送恶魔领主上西天",
 
     // 常规设置
@@ -236,24 +238,48 @@ var CNZ_MAP = {
     "Inherited from current Prestige Settings": "与当前的威望重置类型一致",
 
     // 星球独有种族警告
-    "Warning! This race have special requirements: Hellscape planet. This condition is currently met.": "警告！此种族的特殊要求为：地狱星球。当前满足此条件。",
-    "Warning! This race have special requirements: Eden planet. This condition is currently met.": "警告！此种族的特殊要求为：伊甸园星球。当前满足此条件。",
-    "Warning! This race have special requirements: Oceanic planet. This condition is currently met.": "警告！此种族的特殊要求为：海洋星球。当前满足此条件。",
-    "Warning! This race have special requirements: Challenge genes unlocked. This condition is currently met.": "警告！此种族的特殊要求为：已解锁相应挑战基因。当前满足此条件。",
-    "Warning! This race have special requirements: Forest planet. This condition is currently met.": "警告！此种族的特殊要求为：森林星球。当前满足此条件。",
-    "Warning! This race have special requirements: Volcanic planet. This condition is currently met.": "警告！此种族的特殊要求为：火山星球。当前满足此条件。",
-    "Warning! This race have special requirements: Tundra planet. This condition is currently met.": "警告！此种族的特殊要求为：苔原星球。当前满足此条件。",
-    "Warning! This race have special requirements: Desert planet. This condition is currently met.": "警告！此种族的特殊要求为：沙漠星球。当前满足此条件。",
-    "Warning! This race have special requirements: Custom designed race. This condition is currently met.": "警告！此种族的特殊要求为：已解锁自建种族。当前满足此条件。",
-    "Warning! This race have special requirements: Hellscape planet. This condition is currently not met.": "警告！此种族的特殊要求为：地狱星球。当前不满足此条件。",
-    "Warning! This race have special requirements: Eden planet. This condition is currently not met.": "警告！此种族的特殊要求为：伊甸园星球。当前不满足此条件。",
-    "Warning! This race have special requirements: Oceanic planet. This condition is currently not met.": "警告！此种族的特殊要求为：海洋星球。当前不满足此条件。",
-    "Warning! This race have special requirements: Challenge genes unlocked. This condition is currently not met.": "警告！此种族的特殊要求为：已解锁相应挑战基因。当前不满足此条件。",
-    "Warning! This race have special requirements: Forest planet. This condition is currently not met.": "警告！此种族的特殊要求为：森林星球。当前不满足此条件。",
-    "Warning! This race have special requirements: Volcanic planet. This condition is currently not met.": "警告！此种族的特殊要求为：火山星球。当前不满足此条件。",
-    "Warning! This race have special requirements: Tundra planet. This condition is currently not met.": "警告！此种族的特殊要求为：苔原星球。当前不满足此条件。",
-    "Warning! This race have special requirements: Desert planet. This condition is currently not met.": "警告！此种族的特殊要求为：沙漠星球。当前不满足此条件。",
-    "Warning! This race have special requirements: Custom designed race. This condition is currently not met.": "警告！此种族的特殊要求为：已解锁自建种族。当前不满足此条件。",
+    "Warning! This race have special requirements: Hellscape planet. This condition is met.": "警告！此种族的特殊要求为：地狱星球。当前满足此条件。",
+    "Warning! This race have special requirements: Eden planet. This condition is met.": "警告！此种族的特殊要求为：伊甸园星球。当前满足此条件。",
+    "Warning! This race have special requirements: Oceanic planet. This condition is met.": "警告！此种族的特殊要求为：海洋星球。当前满足此条件。",
+    "Warning! This race have special requirements: Challenge genes unlocked. This condition is met.": "警告！此种族的特殊要求为：已解锁相应挑战基因。当前满足此条件。",
+    "Warning! This race have special requirements: Forest planet. This condition is met.": "警告！此种族的特殊要求为：森林星球。当前满足此条件。",
+    "Warning! This race have special requirements: Volcanic planet. This condition is met.": "警告！此种族的特殊要求为：火山星球。当前满足此条件。",
+    "Warning! This race have special requirements: Tundra planet. This condition is met.": "警告！此种族的特殊要求为：苔原星球。当前满足此条件。",
+    "Warning! This race have special requirements: Desert planet. This condition is met.": "警告！此种族的特殊要求为：沙漠星球。当前满足此条件。",
+    "Warning! This race have special requirements: Custom designed race. This condition is met.": "警告！此种族的特殊要求为：已解锁自建种族。当前满足此条件。",
+    "Warning! This race have special requirements: Hellscape planet. This condition is not met.": "警告！此种族的特殊要求为：地狱星球。当前不满足此条件。",
+    "Warning! This race have special requirements: Eden planet. This condition is not met.": "警告！此种族的特殊要求为：伊甸园星球。当前不满足此条件。",
+    "Warning! This race have special requirements: Oceanic planet. This condition is not met.": "警告！此种族的特殊要求为：海洋星球。当前不满足此条件。",
+    "Warning! This race have special requirements: Challenge genes unlocked. This condition is not met.": "警告！此种族的特殊要求为：已解锁相应挑战基因。当前不满足此条件。",
+    "Warning! This race have special requirements: Forest planet. This condition is not met.": "警告！此种族的特殊要求为：森林星球。当前不满足此条件。",
+    "Warning! This race have special requirements: Volcanic planet. This condition is not met.": "警告！此种族的特殊要求为：火山星球。当前不满足此条件。",
+    "Warning! This race have special requirements: Tundra planet. This condition is not met.": "警告！此种族的特殊要求为：苔原星球。当前不满足此条件。",
+    "Warning! This race have special requirements: Desert planet. This condition is not met.": "警告！此种族的特殊要求为：沙漠星球。当前不满足此条件。",
+    "Warning! This race have special requirements: Custom designed race. This condition is not met.": "警告！此种族的特殊要求为：已解锁自建种族。当前不满足此条件。",
+    "Warning! This race have special requirements: Hellscape planet. This condition is bypassed. Race will have 20% penalty.": "警告！此种族的特殊要求为：地狱星球。当前可使用此种族，但受到20%的产量惩罚。",
+    "Warning! This race have special requirements: Eden planet. This condition is bypassed. Race will have 20% penalty.": "警告！此种族的特殊要求为：伊甸园星球。当前可使用此种族，但受到20%的产量惩罚。",
+    "Warning! This race have special requirements: Oceanic planet. This condition is bypassed. Race will have 20% penalty.": "警告！此种族的特殊要求为：海洋星球。当前可使用此种族，但受到20%的产量惩罚。",
+    "Warning! This race have special requirements: Forest planet. This condition is bypassed. Race will have 20% penalty.": "警告！此种族的特殊要求为：森林星球。当前可使用此种族，但受到20%的产量惩罚。",
+    "Warning! This race have special requirements: Volcanic planet. This condition is bypassed. Race will have 20% penalty.": "警告！此种族的特殊要求为：火山星球。当前可使用此种族，但受到20%的产量惩罚。",
+    "Warning! This race have special requirements: Tundra planet. This condition is bypassed. Race will have 20% penalty.": "警告！此种族的特殊要求为：苔原星球。当前可使用此种族，但受到20%的产量惩罚。",
+    "Warning! This race have special requirements: Desert planet. This condition is bypassed. Race will have 20% penalty.": "警告！此种族的特殊要求为：沙漠星球。当前可使用此种族，但受到20%的产量惩罚。",
+    "Warning! This race have special requirements: Custom designed race. This condition is bypassed. Race will have 20% penalty.": "警告！此种族的特殊要求为：已解锁自建种族。当前可使用此种族，但受到20%的产量惩罚。",
+    "Warning! This race have special requirements: Hellscape planet. This condition is bypassed. Race will have 10% penalty.": "警告！此种族的特殊要求为：地狱星球。当前可使用此种族，但受到10%的产量惩罚。",
+    "Warning! This race have special requirements: Eden planet. This condition is bypassed. Race will have 10% penalty.": "警告！此种族的特殊要求为：伊甸园星球。当前可使用此种族，但受到10%的产量惩罚。",
+    "Warning! This race have special requirements: Oceanic planet. This condition is bypassed. Race will have 10% penalty.": "警告！此种族的特殊要求为：海洋星球。当前可使用此种族，但受到10%的产量惩罚。",
+    "Warning! This race have special requirements: Forest planet. This condition is bypassed. Race will have 10% penalty.": "警告！此种族的特殊要求为：森林星球。当前可使用此种族，但受到10%的产量惩罚。",
+    "Warning! This race have special requirements: Volcanic planet. This condition is bypassed. Race will have 10% penalty.": "警告！此种族的特殊要求为：火山星球。当前可使用此种族，但受到10%的产量惩罚。",
+    "Warning! This race have special requirements: Tundra planet. This condition is bypassed. Race will have 10% penalty.": "警告！此种族的特殊要求为：苔原星球。当前可使用此种族，但受到10%的产量惩罚。",
+    "Warning! This race have special requirements: Desert planet. This condition is bypassed. Race will have 10% penalty.": "警告！此种族的特殊要求为：沙漠星球。当前可使用此种族，但受到10%的产量惩罚。",
+    "Warning! This race have special requirements: Custom designed race. This condition is bypassed. Race will have 10% penalty.": "警告！此种族的特殊要求为：已解锁自建种族。当前可使用此种族，但受到10%的产量惩罚。",
+    "Warning! This race have special requirements: Hellscape planet. This condition is bypassed. Race will have 5% penalty.": "警告！此种族的特殊要求为：地狱星球。当前可使用此种族，但受到5%的产量惩罚。",
+    "Warning! This race have special requirements: Eden planet. This condition is bypassed. Race will have 5% penalty.": "警告！此种族的特殊要求为：伊甸园星球。当前可使用此种族，但受到5%的产量惩罚。",
+    "Warning! This race have special requirements: Oceanic planet. This condition is bypassed. Race will have 5% penalty.": "警告！此种族的特殊要求为：海洋星球。当前可使用此种族，但受到5%的产量惩罚。",
+    "Warning! This race have special requirements: Forest planet. This condition is bypassed. Race will have 5% penalty.": "警告！此种族的特殊要求为：森林星球。当前可使用此种族，但受到5%的产量惩罚。",
+    "Warning! This race have special requirements: Volcanic planet. This condition is bypassed. Race will have 5% penalty.": "警告！此种族的特殊要求为：火山星球。当前可使用此种族，但受到5%的产量惩罚。",
+    "Warning! This race have special requirements: Tundra planet. This condition is bypassed. Race will have 5% penalty.": "警告！此种族的特殊要求为：苔原星球。当前可使用此种族，但受到5%的产量惩罚。",
+    "Warning! This race have special requirements: Desert planet. This condition is bypassed. Race will have 5% penalty.": "警告！此种族的特殊要求为：沙漠星球。当前可使用此种族，但受到5%的产量惩罚。",
+    "Warning! This race have special requirements: Custom designed race. This condition is bypassed. Race will have 5% penalty.": "警告！此种族的特殊要求为：已解锁自建种族。当前可使用此种族，但受到5%的产量惩罚。",
 
     "Challenge mode - no plasmids": "挑战模式-关闭质粒效果",
     "Challenge mode - weak mastery": "挑战模式-弱精通效果",
@@ -418,9 +444,9 @@ var CNZ_MAP = {
     "Auto Power needs to be on for this to work": "需要开启自动供能此项才能生效",
     "Turn more and more attractors off when getting nearer to the top threat": "越接近最大恶魔数量，关闭越多吸引器信标",
 
-    // 机甲设置
-    "Mech Settings": "机甲设置",
-    "Reset Mech Settings": "机甲设置还原",
+    // 机甲及尖塔设置
+    "Mech & Spire Settings": "机甲及尖塔设置",
+    "Reset Mech & Spire Settings": "机甲及尖塔设置还原",
     "Scrap mechs:": "解体机甲：",
     "Single worst": "逐个低效",
     "All inefficient": "所有低效",
@@ -435,6 +461,7 @@ var CNZ_MAP = {
     "Manage Spire Buildings": "是否管理尖塔建筑",
     "Fill bays before building new ones": "是否在建造机甲舱之前先填满剩余的机舱空间",
     "Maximize bays before replacing mechs": "是否在更换机甲之前先最大化建造机甲舱",
+    "Maximum mech potential for Waygate": "是否在进入地狱之门之前先最大化机甲潜力",
 
     "Configures what will be scrapped": "设置解体机甲的情况",
     "Nothing will be scrapped automatically": "不自动解体机甲",
@@ -452,6 +479,7 @@ var CNZ_MAP = {
     "Enables special powering logic for Purifier, Port, Base Camp, and Mech Bays. Script will try to maximize supplies cap, building as many ports and camps as possible at best ratio, disabling mech bays when more support needed. With this cap it'll build up as many mech bays as possible, and once maximum bays is built - it'll turn them all on. This option requires Auto Build and Auto Power.": "启用空气净化器，港口，登陆营地和机甲舱专用的供能逻辑。脚本将首先最大化补给上限，以最佳比例建造港口和登陆营地，然后尽可能地建造机甲舱，之后再启用机甲舱。此项需要开启自动供能和自动建筑。",
     "Fill mech bays up to current limit before spending resources on additional spire buildings": "在花费资源建造尖塔建筑之前，先建造机甲填满剩余的机舱空间",
     "Scrap old mechs only when no new bays and purifiers can be builded": "只在无法建造机甲舱和空气净化器时解体机甲",
+    "Fight Demon Lord only when current mech team potential below given amount. Full bay of best mechs will have `1` potential. Damage against Demon Lord does not affected by floor modifiers, thus it most time-efficient to fight him while current mechs can't fight properly against regular monsters, and need some time for rebuilding.": "只在机甲潜力低于相应数值时与恶魔领主进行战斗。机甲舱充满最好设计的机甲时潜力为1。恶魔领主的强度不受楼层影响，所以在普通敌人需要时间太久时转为攻击恶魔领主会更有效率。",
 
     // 舰队设置
     "Fleet Settings": "舰队设置",
@@ -609,7 +637,7 @@ var CNZ_MAP = {
     "Ignore weighting and build if storage is full": "如果存储已满，则忽略权重进行建造",
     "Do not wait for resources without income": "忽略无产量的资源",
     "Minimum suppression for Towers": "巨塔安全指数阈值",
-    "Prefered Shrine:": "圣地种类偏好：",
+    "Magnificent Shrine:": "圣地种类偏好：",
     "Any": "任意类型",
     "Equally": "平均分配",
     "Morale": "士气",
@@ -1140,6 +1168,7 @@ function settingsListener() {
 
             // 汉化脚本设置
             textCH(item);
+
         }
     }, LISTENER_TIME);
 }
