@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Evolve-新版TMVictor汉化
 // @namespace    https://gitee.com/angle_god/tmvictor-localization-chinese
-// @version      1.2.9
+// @version      1.2.9.1
 // @description  try to take over the world!
 // @downloadURL  https://github.com/pengminxuan/new-tmvictor-chn/raw/main/main.user.js
 // @author       天使不见时
@@ -193,9 +193,9 @@ var CNZ_MAP = {
     "Minimum allowed morale": "最低允许士气",
     "Maximum allowed morale": "最高允许士气",
     "Manage changes of government": "是否管理社会体制变化",
-    "Interim Government:": "临时社会体制：",
-    "Second Government:": "第二社会体制：",
-    "Space Government:": "太空社会体制：",
+    "Interim Government": "临时社会体制",
+    "Second Government": "第二社会体制",
+    "Space Government": "太空社会体制",
 
     "Minimum tax rate for autoTax. Will still go below this amount if money storage is full": "自动税率使用的最低税率。如果资金满了，将可能低于此数值。",
     "Use this to set a minimum allowed morale. Remember that less than 100% can cause riots and weather can cause sudden swings": "设置最低允许的士气。少于100%士气可能引起税收抵制，请尽量不要设置到100%以下。另外请记得天气的影响",
@@ -208,9 +208,9 @@ var CNZ_MAP = {
     // 进化设置
     "Evolution Settings": "进化设置",
     "Reset Evolution Settings": "进化设置还原",
-    "Target Universe:": "欲选择的宇宙：",
-    "Target Planet:": "欲选择的星球：",
-    "Target Race:": "欲进化的种族：",
+    "Target Universe": "欲选择的宇宙",
+    "Target Planet": "欲选择的星球",
+    "Target Race": "欲进化的种族",
     "Soft Reset": "是否进行软重置",
     "Evolution Queue": "进化队列",
     "Queue Enabled": "是否开启进化队列",
@@ -335,10 +335,10 @@ var CNZ_MAP = {
     "Research Settings": "研究设置",
     "Reset Research Settings": "研究设置还原",
     "Research Enhanced Air Filters": "是否研究增强型空气过滤网",
-    "Target Theology 1:": "神学研究分支1",
+    "Target Theology 1": "神学研究分支1",
     "Anthropology": "人类学",
     "Fanaticism": "狂热信仰",
-    "Target Theology 2:": "神学研究分支2",
+    "Target Theology 2": "神学研究分支2",
     "Study": "研究先祖",
     "Deify": "神化先祖",
 
@@ -358,8 +358,8 @@ var CNZ_MAP = {
     "Train spies": "派遣间谍",
     "Maximum spies": "最大间谍数",
     "Military Power to switch target": "改变目标至少需要的军事力量",
-    "Inferior Power:": "对较弱小的国家进行的间谍活动：",
-    "Superior Power:": "对较强大的国家进行的间谍活动：",
+    "Inferior Power": "对较弱小的国家进行的间谍活动",
+    "Superior Power": "对较强大的国家进行的间谍活动",
     "Ignore": "忽略",
     "Influence": "亲善",
     "Sabotage": "破坏",
@@ -447,15 +447,15 @@ var CNZ_MAP = {
     // 机甲及尖塔设置
     "Mech & Spire Settings": "机甲及尖塔设置",
     "Reset Mech & Spire Settings": "机甲及尖塔设置还原",
-    "Scrap mechs:": "解体机甲：",
+    "Scrap mechs": "解体机甲",
     "Single worst": "逐个低效",
     "All inefficient": "所有低效",
     "Excess inefficient": "超过低效",
-    "Build mechs:": "制造机甲：",
+    "Build mechs": "制造机甲",
     "Random good": "最佳设计",
     "Current design": "当前设计",
-    "Prefered mech size:": "偏好的机甲尺寸：",
-    "Gravity mech size:": "重力环境下的机甲尺寸：",
+    "Prefered mech size": "偏好的机甲尺寸",
+    "Gravity mech size": "重力环境下的机甲尺寸",
     "Save up full supplies for next floor": "为下一层提前积攒补给",
     "Fill remaining bay space with smaller mechs": "使用尺寸更小的机甲填充剩余的机舱空间",
     "Manage Spire Buildings": "是否管理尖塔建筑",
@@ -488,7 +488,7 @@ var CNZ_MAP = {
     "Mininum knowledge for Embassy": "建造大使馆的知识阈值",
     "Mininum knowledge for Alien Gift": "研究外星礼物的知识阈值",
     "Mininum knowledge for Alien 2 Assault": "进行第五星系任务的知识阈值",
-    "Chthonian Mission:": "幽冥星系任务条件",
+    "Chthonian Mission": "幽冥星系任务条件",
     "Manual assault": "不自动进行",
     "Ignore casualties": "忽略损失",
     "Lose 2 Frigates": "损失2艘大型护卫舰",
@@ -557,7 +557,7 @@ var CNZ_MAP = {
     "Production Settings": "生产设置",
     "Reset Production Settings": "生产设置还原",
     "Smelter": "冶炼厂",
-    "Smelters production:": "冶炼厂生产：",
+    "Smelters production": "冶炼厂生产",
     "Prioritize Iron": "优先熔炼铁",
     "Prioritize Steel": "优先熔炼钢",
     "Up to full storages": "直到达到上限",
@@ -639,7 +639,7 @@ var CNZ_MAP = {
     "Ignore weighting and build if storage is full": "如果存储已满，则忽略权重进行建造",
     "Do not wait for resources without income": "忽略无产量的资源",
     "Minimum suppression for Towers": "巨塔安全指数阈值",
-    "Magnificent Shrine:": "圣地种类偏好：",
+    "Magnificent Shrine": "圣地种类偏好",
     "Any": "任意类型",
     "Equally": "平均分配",
     "Morale": "士气",
