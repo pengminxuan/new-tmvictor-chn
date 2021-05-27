@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Evolve-新版TMVictor汉化
 // @namespace    https://gitee.com/angle_god/tmvictor-localization-chinese
-// @version      1.2.9.1
+// @version      1.2.9.2
 // @description  try to take over the world!
 // @downloadURL  https://github.com/pengminxuan/new-tmvictor-chn/raw/main/main.user.js
 // @author       天使不见时
@@ -238,15 +238,15 @@ var CNZ_MAP = {
     "Inherited from current Prestige Settings": "与当前的威望重置类型一致",
 
     // 星球独有种族警告
-    "Warning! This race have special requirements: Hellscape planet. This condition is met.": "警告！此种族的特殊要求为：地狱星球。当前满足此条件。",
-    "Warning! This race have special requirements: Eden planet. This condition is met.": "警告！此种族的特殊要求为：伊甸园星球。当前满足此条件。",
-    "Warning! This race have special requirements: Oceanic planet. This condition is met.": "警告！此种族的特殊要求为：海洋星球。当前满足此条件。",
-    "Warning! This race have special requirements: Challenge genes unlocked. This condition is met.": "警告！此种族的特殊要求为：已解锁相应挑战基因。当前满足此条件。",
-    "Warning! This race have special requirements: Forest planet. This condition is met.": "警告！此种族的特殊要求为：森林星球。当前满足此条件。",
-    "Warning! This race have special requirements: Volcanic planet. This condition is met.": "警告！此种族的特殊要求为：火山星球。当前满足此条件。",
-    "Warning! This race have special requirements: Tundra planet. This condition is met.": "警告！此种族的特殊要求为：苔原星球。当前满足此条件。",
-    "Warning! This race have special requirements: Desert planet. This condition is met.": "警告！此种族的特殊要求为：沙漠星球。当前满足此条件。",
-    "Warning! This race have special requirements: Custom designed race. This condition is met.": "警告！此种族的特殊要求为：已解锁自建种族。当前满足此条件。",
+    "This race have special requirements: Hellscape planet. This condition is met.": "此种族的特殊要求为：地狱星球。当前满足此条件。",
+    "This race have special requirements: Eden planet. This condition is met.": "此种族的特殊要求为：伊甸园星球。当前满足此条件。",
+    "This race have special requirements: Oceanic planet. This condition is met.": "此种族的特殊要求为：海洋星球。当前满足此条件。",
+    "This race have special requirements: Challenge genes unlocked. This condition is met.": "此种族的特殊要求为：已解锁相应挑战基因。当前满足此条件。",
+    "This race have special requirements: Forest planet. This condition is met.": "此种族的特殊要求为：森林星球。当前满足此条件。",
+    "This race have special requirements: Volcanic planet. This condition is met.": "此种族的特殊要求为：火山星球。当前满足此条件。",
+    "This race have special requirements: Tundra planet. This condition is met.": "此种族的特殊要求为：苔原星球。当前满足此条件。",
+    "This race have special requirements: Desert planet. This condition is met.": "此种族的特殊要求为：沙漠星球。当前满足此条件。",
+    "This race have special requirements: Custom designed race. This condition is met.": "此种族的特殊要求为：已解锁自建种族。当前满足此条件。",
     "Warning! This race have special requirements: Hellscape planet. This condition is not met.": "警告！此种族的特殊要求为：地狱星球。当前不满足此条件。",
     "Warning! This race have special requirements: Eden planet. This condition is not met.": "警告！此种族的特殊要求为：伊甸园星球。当前不满足此条件。",
     "Warning! This race have special requirements: Oceanic planet. This condition is not met.": "警告！此种族的特殊要求为：海洋星球。当前不满足此条件。",
