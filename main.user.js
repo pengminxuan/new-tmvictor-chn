@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Evolve-新版TMVictor汉化
 // @namespace    https://gitee.com/angle_god/tmvictor-localization-chinese
-// @version      1.2.8.1
+// @version      1.2.9
 // @description  try to take over the world!
 // @downloadURL  https://github.com/pengminxuan/new-tmvictor-chn/raw/main/main.user.js
 // @author       天使不见时
@@ -570,6 +570,7 @@ var CNZ_MAP = {
     "Prioritize demanded craftables": "优先制造需要的锻造物",
     "Min Ingredients": "锻造物原料保底产量",
     "Factory": "工厂",
+    "Minimum materials to preserve": "工厂原料保底产量",
     "Mining Drone": "采矿机器人",
     "Pylon": "水晶塔",
     "Wait for full mana": "等待法力恢复至上限",
@@ -581,6 +582,7 @@ var CNZ_MAP = {
     "Produce both Iron and Steel at ratio which will produce maximum amount of resources required for buildings at same time for both": "以一定的比例同时冶炼铁和钢，保证它们同时达到建筑的需求",
     "Distribution of smelters between iron and steel": "冶炼厂冶炼铁和钢的方式",
     "Resources already produced above maximum amount required for constructing buildings won't be crafted, if there's better options enabled and available, ignoring weighted ratio": "如果有更好的选项，则建筑暂时不需要的锻造物将被忽略，同时忽略权重设置",
+    "Factory will craft resoruces only when all required material above given ration": "工厂只在所有需要的材料都高于保底产量时制造相应产品",
     "Cast rituals only with full mana": "只在法力达到上限时激活仪式",
 
     // 工作设置
