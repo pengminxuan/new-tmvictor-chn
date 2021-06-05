@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Evolve-新版TMVictor汉化
 // @namespace    https://gitee.com/angle_god/tmvictor-localization-chinese
-// @version      1.2.9.2
+// @version      1.3.0
 // @description  try to take over the world!
 // @downloadURL  https://github.com/pengminxuan/new-tmvictor-chn/raw/main/main.user.js
 // @author       天使不见时
@@ -196,6 +196,7 @@ var CNZ_MAP = {
     "Interim Government": "临时社会体制",
     "Second Government": "第二社会体制",
     "Space Government": "太空社会体制",
+    "Governor": "总督",
 
     "Minimum tax rate for autoTax. Will still go below this amount if money storage is full": "自动税率使用的最低税率。如果资金满了，将可能低于此数值。",
     "Use this to set a minimum allowed morale. Remember that less than 100% can cause riots and weather can cause sudden swings": "设置最低允许的士气。少于100%士气可能引起税收抵制，请尽量不要设置到100%以下。另外请记得天气的影响",
@@ -204,6 +205,7 @@ var CNZ_MAP = {
     "Temporary low tier government until you research other governments": "当研究其他社会体制之前，用于过渡的临时社会体制",
     "Second government choice, chosen once becomes avaiable. Can be the same as above": "第二社会体制，当此社会体制可用后立刻进行切换。可以与上面的社会体制相同。",
     "Government for bioseed+. Chosen once you researched Quantum Manufacturing. Can be the same as above": "用于播种之后的社会体制，当研究量子制造以后立刻进行切换。可以与上面的社会体制相同。",
+    "Chosen governor will be appointed.": "将使用选中的总督。",
 
     // 进化设置
     "Evolution Settings": "进化设置",
@@ -334,19 +336,19 @@ var CNZ_MAP = {
     // 研究设置
     "Research Settings": "研究设置",
     "Reset Research Settings": "研究设置还原",
-    "Research Enhanced Air Filters": "是否研究增强型空气过滤网",
     "Target Theology 1": "神学研究分支1",
     "Anthropology": "人类学",
     "Fanaticism": "狂热信仰",
     "Target Theology 2": "神学研究分支2",
     "Study": "研究先祖",
     "Deify": "神化先祖",
+    "Ignored researches": "忽略的研究",
 
-    "Allows auto reasearch of Enhanced Air Filters": "允许自动研究增强型空气过滤网",
     "Picks Anthropology for MAD prestige, and Fanaticism for others": "进行核弹重置时选择人类学，其余情况下选择狂热信仰",
     "Theology 1 technology to research, have no effect after getting Transcendence perk": "神学研究分支1的选择，获得超越特权以后失效",
     "Picks Deify for Ascension prestige, and Study for others": "进行飞升重置时选择神化先祖，其余情况下选择研究先祖",
     "Theology 2 technology to research": "神学研究分支2的选择",
+    "Listed researches won't be purchased without manual input, or user defined trigger. On top of this list script will also ignore some other special techs, such as Limit Collider, Dark Energy Bomb, Exotic Infusion, etc.": "脚本将不会进行相应的自动研究。部分特殊研究同样不会自动进行，例如限制对撞机，暗能量炸弹和奇异灌输等。",
 
     // 外交事务设置
     "Foreign Affairs Settings": "外交事务设置",
@@ -420,7 +422,6 @@ var CNZ_MAP = {
     " Start increasing patrol rating at this home garrison fill percent": "\xa0\xa0\xa0\xa0 当驻军到达此比例时开始增加巡逻队战斗评级",
     " Full patrol rating increase below this home garrison fill percent": "\xa0\xa0\xa0\xa0 当驻军低于此比例时将巡逻队战斗评级增加到最大",
     "Attractors": "吸引器信标",
-    "Adapt how many Attractors Auto Power can turn on based on threat": "使自动供能可以根据恶魔生物数量调整吸引器信标的供能状态",
     " All Attractors on below this threat": "\xa0\xa0\xa0\xa0 恶魔生物数量低于此数值时开启所有吸引器信标",
     " All Attractors off above this threat": "\xa0\xa0\xa0\xa0 恶魔生物数量高于此数值时关闭所有吸引器信标",
 
@@ -441,8 +442,7 @@ var CNZ_MAP = {
     "Larger patrols are less effective, but also have fewer deaths": "更大的巡逻队效率更低，但阵亡也更少",
     "This is the higher number": "较高数值",
     "This is the lower number": "较低数值",
-    "Auto Power needs to be on for this to work": "需要开启自动供能此项才能生效",
-    "Turn more and more attractors off when getting nearer to the top threat": "越接近最大恶魔数量，关闭越多吸引器信标",
+    "Turn more and more attractors off when getting nearer to the top threat. Auto Power needs to be on for this to work.": "越接近最大恶魔数量，关闭越多吸引器信标。需要开启自动供能此项才能生效。",
 
     // 机甲及尖塔设置
     "Mech & Spire Settings": "机甲及尖塔设置",
@@ -456,30 +456,53 @@ var CNZ_MAP = {
     "Current design": "当前设计",
     "Prefered mech size": "偏好的机甲尺寸",
     "Gravity mech size": "重力环境下的机甲尺寸",
+    "Always": "常时",
+    "Prefered": "偏好",
+    "Random": "随机",
+    "Never": "永不",
+    "Special mechs": "特殊装备",
+    "Minimum scouts ratio": "侦察机甲最低比例",
+    "Maximum mech potential for Waygate": "是否在进入地狱之门之前先最大化机甲潜力",
     "Save up full supplies for next floor": "为下一层提前积攒补给",
     "Fill remaining bay space with smaller mechs": "使用尺寸更小的机甲填充剩余的机舱空间",
-    "Manage Spire Buildings": "是否管理尖塔建筑",
-    "Fill bays before building new ones": "是否在建造机甲舱之前先填满剩余的机舱空间",
-    "Maximize bays before replacing mechs": "是否在更换机甲之前先最大化建造机甲舱",
-    "Maximum mech potential for Waygate": "是否在进入地狱之门之前先最大化机甲潜力",
+    "Build spire buildings only with full bay": "是否在建造尖塔建筑之前先填满剩余的机舱空间",
+    "Scrap mechs only after building maximum bays": "是否在解体机甲之前先最大化建造机甲舱",
+    "Mech Stats": "机甲属性计算",
+    "Compact": "小型化",
+    "Efficient": "补给中",
+    "Special": "特殊",
+    "Gravity": "重力",
+    "Scouts": "侦察机甲",
+    "Power Per Size\xa0": "每空间战斗力",
+    "Power Per Supply\xa0": "每补给战斗力",
+    "Power Per Gems\xa0": "每宝石战斗力",
 
-    "Configures what will be scrapped": "设置解体机甲的情况",
+    "Configures what will be scrapped. Infernal mechs won't ever be scrapped.": "设置解体机甲的情况。不会解体地狱化的机甲。",
     "Nothing will be scrapped automatically": "不自动解体机甲",
     "Scrap mechs with worst efficiency one by one, when they can be replaced with better ones": "逐个解体效率最低的机甲，以更换为更好的机甲",
     "Scrap all mechs with bad efficiency, replacing them with good ones, E.g. it will be able to scrap 30 mechs of 10% efficiency, and replace them with 10 mechs of 200% efficiency at once. This option will clear current floor at best possible speed, but if you're climbing spire too fast you may finish current floor before bay will be repopulated with new mechs back to full, and risking to enter next floor with half-empty bay of suboptimal mechs.": "解体所有效率低的机甲，并更换为更好的机甲。如果尖塔进度较快，不建议选择此项，因为可能会在建造机甲过程中又上了一层，导致再度解体。",
     "Compromise between two options above: scrap as much inefficient mechs as possible, preserving enough of old mechs to have full mech bay by the moment when floor will be cleared, based on progress and earning estimations.": "结合以上两个选项，根据进度，在保留足够多机甲的前提下，尽可能解体所有低效的机甲。",
-    "Configures what will be build": "设置制造机甲的情况",
+    "Configures what will be build. Infernal mechs won't ever be build.": "设置制造机甲的情况。不会制造地狱化的机甲。",
     "Nothing will be build automatically": "不自动制造机甲",
     "Build random mech with size chosen below, and best possible efficiency": "制造大小为下方选择的，效率最高的机甲",
     "Build whatever currently set in Mech Lab": "按照机甲实验室当前的设计来制造机甲",
+    "Select biggest affordable mech based on current amount of Soul Gems, and Supplies storage cap": "根据当前的灵魂宝石数量和补给上限，尽可能选择最佳的机甲尺寸",
     "Size of random mechs": "最佳设计的机甲尺寸",
     "Override prefered size with this on floors with high gravity": "重力环境下自动制造的机甲尺寸",
+    "Add special equipment to all mechs": "所有机甲都使用特殊装备",
+    "Add special equipment when it doesn't reduce efficiency for current floor": "当特殊装备不降低当前层效率时使用特殊装备",
+    "Special equipment will have same chance to be added as all others": "所有特殊装备都可能使用",
+    "Never add special equipment": "永不使用特殊装备",
+    "Configures special equip": "设置特殊装备",
+    "Scouts compensate terrain penalty of suboptimal mechs. Build them up to this ratio.": "侦察机甲可以抵消楼层生态对机甲的惩罚。以此比例建造它们。",
+    "Fight Demon Lord only when current mech team potential below given amount. Full bay of best mechs will have `1` potential. Damage against Demon Lord does not affected by floor modifiers, thus it most time-efficient to fight him while current mechs can't fight properly against regular monsters, and need some time for rebuilding. Auto Power needs to be on for this to work.": "只在机甲潜力低于相应数值时与恶魔领主进行战斗。机甲舱充满最好设计的机甲时潜力为1。恶魔领主的强度不受楼层影响，所以在普通敌人需要时间太久时转为攻击恶魔领主会更有效率。需要开启自动供能此项才能生效。",
+    "Fill mech bays up to current limit before spending resources on additional spire buildings": "在花费资源建造尖塔建筑之前，先建造机甲填满剩余的机舱空间",
+    "Scrap old mechs only when no new bays and purifiers can be builded": "只在无法建造机甲舱和空气净化器时解体机甲",
+    "This switch have no ingame effect, and used to configure calculator below": "用于下方计算",
+    "This input have no ingame effect, and used to configure calculator below": "用于下方计算",
     "Stop building new mechs close to next floor, preparing to build bunch of new mechs suited for next enemy": "在接近下一层时停止制造新的机甲，以保留补给",
     "Once mech bay is packed with optimal mechs of prefered size up to the limit fill up remaining space with smaller mechs, if possible": "当机舱空间已经不足以再制造偏好尺寸的机甲时，将考虑制造尺寸更小的机甲",
     "Enables special powering logic for Purifier, Port, Base Camp, and Mech Bays. Script will try to maximize supplies cap, building as many ports and camps as possible at best ratio, disabling mech bays when more support needed. With this cap it'll build up as many mech bays as possible, and once maximum bays is built - it'll turn them all on. This option requires Auto Build and Auto Power.": "启用空气净化器，港口，登陆营地和机甲舱专用的供能逻辑。脚本将首先最大化补给上限，以最佳比例建造港口和登陆营地，然后尽可能地建造机甲舱，之后再启用机甲舱。此项需要开启自动供能和自动建筑。",
-    "Fill mech bays up to current limit before spending resources on additional spire buildings": "在花费资源建造尖塔建筑之前，先建造机甲填满剩余的机舱空间",
-    "Scrap old mechs only when no new bays and purifiers can be builded": "只在无法建造机甲舱和空气净化器时解体机甲",
-    "Fight Demon Lord only when current mech team potential below given amount. Full bay of best mechs will have `1` potential. Damage against Demon Lord does not affected by floor modifiers, thus it most time-efficient to fight him while current mechs can't fight properly against regular monsters, and need some time for rebuilding.": "只在机甲潜力低于相应数值时与恶魔领主进行战斗。机甲舱充满最好设计的机甲时潜力为1。恶魔领主的强度不受楼层影响，所以在普通敌人需要时间太久时转为攻击恶魔领主会更有效率。",
 
     // 舰队设置
     "Fleet Settings": "舰队设置",
@@ -556,6 +579,7 @@ var CNZ_MAP = {
     // 生产设置
     "Production Settings": "生产设置",
     "Reset Production Settings": "生产设置还原",
+    "Chrysotile weighting": "温石棉权重",
     "Smelter": "冶炼厂",
     "Smelters production": "冶炼厂生产",
     "Prioritize Iron": "优先熔炼铁",
@@ -576,13 +600,14 @@ var CNZ_MAP = {
     "Wait for full mana": "等待法力恢复至上限",
     "Ritual": "仪式",
 
+    "Chrysotile weighting for autoQuarry, applies after adjusting to difference between current amounts of Stone and Chrysotile": "自动温石棉控制使用的权重，根据当前的石头和温石棉差值来应用权重",
     "Produce only Iron, untill storage capped, and switch to Steel after that": "只冶炼铁，直到铁达到存储上限，再切换为冶炼钢",
     "Produce as much Steel as possible, untill storage capped, and switch to Iron after that": "只冶炼钢，直到钢达到存储上限，再切换为冶炼铁",
     "Produce both Iron and Steel at ratio which will fill both storages at same time for both": "以一定的比例同时冶炼铁和钢，保证它们同时达到存储上限",
     "Produce both Iron and Steel at ratio which will produce maximum amount of resources required for buildings at same time for both": "以一定的比例同时冶炼铁和钢，保证它们同时达到建筑的需求",
     "Distribution of smelters between iron and steel": "冶炼厂冶炼铁和钢的方式",
     "Resources already produced above maximum amount required for constructing buildings won't be crafted, if there's better options enabled and available, ignoring weighted ratio": "如果有更好的选项，则建筑暂时不需要的锻造物将被忽略，同时忽略权重设置",
-    "Factory will craft resoruces only when all required material above given ration": "工厂只在所有需要的材料都高于保底产量时制造相应产品",
+    "Factory will craft resources only when all required material above given ration": "工厂只在所有需要的材料都高于保底产量时制造相应产品",
     "Cast rituals only with full mana": "只在法力达到上限时激活仪式",
 
     // 工作设置
@@ -662,6 +687,7 @@ var CNZ_MAP = {
     "Build only Knowledge Shrines": "只建造提升知识的圣地",
     "Build only Tax Shrines": "只建造提升税收的圣地",
     "Auto Build shrines only at moons of chosen shrine": "只在对应月相时建造相应的圣地",
+    "First toggle enables basic automation based on priority, power, support, and consumption. Second enables logic made specially for particlular building, their effects are different, but generally it tries to behave smarter than just staying enabled all the time.": "第一个开关会根据优先级，供能情况，支持，和消耗情况来控制供能。第二个开关可以更好地根据当前情况控制特定建筑的供能。",
 
     // 自动建筑权重设置
     "AutoBuild Weighting Settings": "自动建筑权重设置",
@@ -694,11 +720,16 @@ var CNZ_MAP = {
     "Missing support to operate": "缺少支持，无法正常运转",
     "Support provider": "提供支持的建筑",
     "Provided support not currently needed": "提供的支持超过了目前的需求",
+    "Horseshoes": "马蹄铁",
+    "No more Horseshoes needed": "暂时不需要马蹄铁",
+    "Meditation Chamber": "冥想室",
+    "No more Meditation Space needed": "暂时不需要冥想室",
 
     // ARPA设置
     "A.R.P.A. Settings": "ARPA设置",
     "Reset A.R.P.A. Settings": "ARPA设置还原",
     "Scale weighting with progress": "进度权重",
+    "Prefered progress step": "每次建造进度百分比",
     "Project": "项目",
     "Supercollider": "超级对撞机",
     "Stock Exchange": "证券交易所",
@@ -710,6 +741,7 @@ var CNZ_MAP = {
     "Mana Syphon": "法力虹吸",
 
     "Projects weighting scales  with current progress, making script more eager to spend resources on finishing nearly constructed projects.": "随着项目接近完成而提高权重，使脚本更优先进行接近完成的项目。",
+    "Projects will be weighted and build in this steps. Increasing number can speed up constructing. Step will be adjusted down when preferred step above remaining amount, or surpass storage caps. Weightings below will be multiplied by current step. Projects builded by triggers will always have maximum possible step.": "每次建造时建造相应百分比的项目。触发器永远使用100%的百分比。",
 
     // 日志设置
     "Logging Settings": "日志设置",
