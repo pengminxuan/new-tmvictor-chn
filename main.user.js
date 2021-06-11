@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Evolve-新版TMVictor汉化
 // @namespace    https://gitee.com/angle_god/tmvictor-localization-chinese
-// @version      1.3.0
+// @version      1.3.1
 // @description  try to take over the world!
 // @downloadURL  https://github.com/pengminxuan/new-tmvictor-chn/raw/main/main.user.js
 // @author       天使不见时
@@ -99,7 +99,7 @@ var CNZ_MAP = {
     // 威望重置设置
     "Prestige Settings": "威望重置设置",
     "Reset Prestige Settings": "威望重置设置还原",
-    "Prestige Type:": "威望重置类型：",
+    "Prestige Type": "威望重置类型：",
     "None": "无",
     "Mutual Assured Destruction": "核弹重置",
     "Bioseed": "播种重置",
@@ -343,6 +343,8 @@ var CNZ_MAP = {
     "Study": "研究先祖",
     "Deify": "神化先祖",
     "Ignored researches": "忽略的研究",
+    "Add": "增加",
+    "Remove": "移除",
 
     "Picks Anthropology for MAD prestige, and Fanaticism for others": "进行核弹重置时选择人类学，其余情况下选择狂热信仰",
     "Theology 1 technology to research, have no effect after getting Transcendence perk": "神学研究分支1的选择，获得超越特权以后失效",
@@ -546,6 +548,7 @@ var CNZ_MAP = {
     "Reset Market Settings": "市场设置还原",
     "Trade minimum money /s": "贸易允许的每秒资金收入最低值",
     "Trade minimum money percentage /s": "贸易允许的每秒资金收入最低比例",
+    "Sell excess resources": "是否出售多余的资源",
     "Resource": "资源名称",
     "Buy": "购买",
     "Sell": "出售",
@@ -559,6 +562,7 @@ var CNZ_MAP = {
 
     "Uses the highest per second amount of these two values. Will trade for resources until this minimum money per second amount is hit": "两项中较高的数值生效。达到每秒资金收入最低值后，才会购买资源",
     "Uses the highest per second amount of these two values. Will trade for resources until this percentage of your money per second amount is hit": "两项中较高的数值生效。达到每秒资金收入最低比例后，才会购买资源",
+    "With this option enabled script will be allowed to sell resources above amounts needed for constructions or researches, wihtout it script sell only capped resources.": "开启后将在建造或研究不需要的时候出售相应的资源，否则只会在接近上限时出售。",
 
     // 存储设置
     "Storage Settings": "存储设置",
@@ -724,6 +728,8 @@ var CNZ_MAP = {
     "No more Horseshoes needed": "暂时不需要马蹄铁",
     "Meditation Chamber": "冥想室",
     "No more Meditation Space needed": "暂时不需要冥想室",
+    "Gate Turret": "远古之门炮塔",
+    "Gate demons fully supressed": "远古之门的恶魔已经完全压制",
 
     // ARPA设置
     "A.R.P.A. Settings": "ARPA设置",
