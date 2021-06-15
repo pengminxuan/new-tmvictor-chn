@@ -23,8 +23,11 @@ var LISTENER_TIME = 1000;
 /**
  * 汉化配置
  *
+ * ==========2021.06.15 换行处理方案==========
+ * 使用"\n"来识别原文中的换行，或者对汉化文本进行换行
+ *
  * ==========2021.04.17 前缀空格处理方案==========
- * " "(全角空格) => "\xa0\xa0\xa0\xa0 "
+ * " "(全角空格) => "\xa0"
  *
  * 扒原文title语句：$("#配置项标签id值").find("*").each(function(index, e) {if($(e).attr('title')){console.log($(e).attr('title'))}})
  * 扒原文text语句：$("#配置项标签id值").find("*").each(function(index, e) {if($(e).prop('firstChild').nodeValue){console.log($(e).prop('firstChild').nodeValue)}})
