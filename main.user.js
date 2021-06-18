@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Evolve-新版TMVictor汉化
 // @namespace    https://gitee.com/angle_god/tmvictor-localization-chinese
-// @version      1.3.1
+// @version      1.3.3
 // @description  try to take over the world!
 // @downloadURL  https://github.com/pengminxuan/new-tmvictor-chn/raw/main/main.user.js
 // @author       天使不见时
@@ -156,7 +156,7 @@ var CNZ_MAP = {
     "Perform reset without making any changes to custom. This option is required, script won't ascend automatically without it enabled.": "不对自建种族进行任何修改就进行重置。只有开启此项才能自动进行飞升重置。",
     "Wait for Pillar before ascending, unless it was done earlier": "直到永恒之柱上嵌入水晶后才进行重置",
     "Perform reset after climbing up to this spire floor": "到达相应层数后才进行恶魔灌注",
-    "Perform reset only if current mech team potential below given amount. Full bay of best mechs will have `1` potential. This allows to postpone reset while your team is still good, and can clear some floors fast.": "只在当前机甲潜力低于相应数值后才进行恶魔灌注。机甲舱充满最好设计的机甲时潜力为1。这样就可以在机甲战斗力还较高的时候延迟恶魔灌注，同时也可以更快地通过一些楼层。",
+    "Perform reset only if current mech team potential below given amount. Full bay of best mechs will have `1` potential. This allows to postpone reset if your team is still good after reaching target floor, and can quickly clear another floor": "只在当前机甲潜力低于相应数值后才进行恶魔灌注。机甲舱充满最好设计的机甲时潜力为1。这样就可以在机甲战斗力还较高的时候延迟恶魔灌注，同时也可以更快地通过一些楼层。",
     "Kill Demon Lord with Dark Energy Bomb": "用暗能量炸弹送恶魔领主上西天",
 
     // 常规设置
@@ -406,7 +406,6 @@ var CNZ_MAP = {
     // 地狱维度设置
     "Hell Settings": "地狱维度设置",
     "Reset Hell Settings": "地狱维度设置还原",
-    "Show Souls Gems income rate": "显示灵魂宝石收入",
     "Entering Hell": "进入地狱维度",
     "Turn off patrol and surveyor log messages": "关闭巡逻队和勘探者相关的日志",
     "Automatically enter hell and adjust patrol count and hell garrison size": "自动进入地狱维度并调整巡逻队数量和规模",
@@ -430,7 +429,6 @@ var CNZ_MAP = {
     " All Attractors on below this threat": "\xa0\xa0\xa0\xa0 恶魔生物数量低于此数值时开启所有吸引器信标",
     " All Attractors off above this threat": "\xa0\xa0\xa0\xa0 恶魔生物数量高于此数值时关闭所有吸引器信标",
 
-    "Track gained soul gems, and show rate per hour. Shown number based only on past gains, thus it won't react on hell adjustments immediately - it'll need some time to accumulate new data. Also, for first hour\\few gems after enabling this option\\reloading page shown number will be aproximated.": "记录获得的灵魂宝石数量，并计算出每小时的获取量。因此，在进行调整以后，需要一定时间才能体现在数字上。在刚开启此选项，或者是刷新页面后，获取量将为预估值。",
     "Automatically turns off the hell patrol and surveyor log messages": "自动关闭巡逻队和勘探者相关的日志",
     "Sets patrol count according to required garrison and patrol size": "根据需要的驻扎士兵和巡逻队规模调整巡逻队数量",
     "Home garrison maximum": "驻军上限",
@@ -453,7 +451,8 @@ var CNZ_MAP = {
     "Mech & Spire Settings": "机甲及尖塔设置",
     "Reset Mech & Spire Settings": "机甲及尖塔设置还原",
     "Scrap mechs": "解体机甲",
-    "Single worst": "逐个低效",
+    "Scrap efficiency": "解体效率",
+    "Full bay": "机甲满舱",
     "All inefficient": "所有低效",
     "Excess inefficient": "超过低效",
     "Build mechs": "制造机甲",
@@ -484,9 +483,10 @@ var CNZ_MAP = {
 
     "Configures what will be scrapped. Infernal mechs won't ever be scrapped.": "设置解体机甲的情况。不会解体地狱化的机甲。",
     "Nothing will be scrapped automatically": "不自动解体机甲",
-    "Scrap mechs with worst efficiency one by one, when they can be replaced with better ones": "逐个解体效率最低的机甲，以更换为更好的机甲",
-    "Scrap all mechs with bad efficiency, replacing them with good ones, E.g. it will be able to scrap 30 mechs of 10% efficiency, and replace them with 10 mechs of 200% efficiency at once. This option will clear current floor at best possible speed, but if you're climbing spire too fast you may finish current floor before bay will be repopulated with new mechs back to full, and risking to enter next floor with half-empty bay of suboptimal mechs.": "解体所有效率低的机甲，并更换为更好的机甲。如果尖塔进度较快，不建议选择此项，因为可能会在建造机甲过程中又上了一层，导致再度解体。",
-    "Compromise between two options above: scrap as much inefficient mechs as possible, preserving enough of old mechs to have full mech bay by the moment when floor will be cleared, based on progress and earning estimations.": "结合以上两个选项，根据进度，在保留足够多机甲的前提下，尽可能解体所有低效的机甲。",
+    "Scrap mechs only when mech bay is full, and script need more room to build mechs": "只在机甲舱满且需要更多机舱空间的时候解体机甲",
+    "Scrap all inefficient mechs immediately, using refounded resources to build better ones": "解体所有效率低的机甲，并更换为更好的机甲。",
+    "Scrap as much inefficient mechs as possible, trying to preserve just  enough of old mechs to fill bay to max by the time when next floor will be reached, calculating threshold based on progress speed and resources incomes": "在保留差不多刚好能够到达下一层的机甲前提下，尽可能解体所有低效的机甲",
+    "Scrap mechs only when '((OldMechRefund / NewMechCost) / (OldMechPower / NewMechPower))' more than given number.&#xA;For the cases when exchanged mechs have same size(1/3 refund) it means that with 1 eff. script allowed to scrap mechs under 33.3%. 1.5 eff. - under 22.2%, 2 eff. - under 16.6%, 0.5 eff. - under 66.6%, 0 eff. - under 100%, etc.&#xA;Efficiency below '1' is not recommended, unless scrap set to 'Full bay', as it's a breakpoint when refunded resources can immidiately compensate lost power, resulting with best power growth rate.&#xA;Efficiency above '1' is useful to save resources for more desperate times, or to compensate low soul gems income.": "只在(旧机甲返还资源/新机甲资源花费)/(旧机甲攻击力/新机甲攻击力)超过相应数字时解体机甲。",
     "Configures what will be build. Infernal mechs won't ever be build.": "设置制造机甲的情况。不会制造地狱化的机甲。",
     "Nothing will be build automatically": "不自动制造机甲",
     "Build random mech with size chosen below, and best possible efficiency": "制造大小为下方选择的，效率最高的机甲",
@@ -500,7 +500,7 @@ var CNZ_MAP = {
     "Never add special equipment": "永不使用特殊装备",
     "Configures special equip": "设置特殊装备",
     "Scouts compensate terrain penalty of suboptimal mechs. Build them up to this ratio.": "侦察机甲可以抵消楼层生态对机甲的惩罚。以此比例建造它们。",
-    "Fight Demon Lord only when current mech team potential below given amount. Full bay of best mechs will have `1` potential. Damage against Demon Lord does not affected by floor modifiers, thus it most time-efficient to fight him while current mechs can't fight properly against regular monsters, and need some time for rebuilding. Auto Power needs to be on for this to work.": "只在机甲潜力低于相应数值时与恶魔领主进行战斗。机甲舱充满最好设计的机甲时潜力为1。恶魔领主的强度不受楼层影响，所以在普通敌人需要时间太久时转为攻击恶魔领主会更有效率。需要开启自动供能此项才能生效。",
+    "Fight Demon Lord only when current mech team potential below given amount. Full bay of best mechs will have `1` potential. Damage against Demon Lord does not affected by floor modifiers, all mechs always does 100% damage to him. Thus it's most time-efficient to fight him at times when mechs can't make good progress against regular monsters, and waiting for rebuilding. Auto Power needs to be on for this to work.": "只在机甲潜力低于相应数值时与恶魔领主进行战斗。机甲舱充满最好设计的机甲时潜力为1。恶魔领主的强度不受楼层和武器装备影响，所以在普通敌人需要时间太久时转为攻击恶魔领主会更有效率。需要开启自动供能此项才能生效。",
     "Fill mech bays up to current limit before spending resources on additional spire buildings": "在花费资源建造尖塔建筑之前，先建造机甲填满剩余的机舱空间",
     "Scrap old mechs only when no new bays and purifiers can be builded": "只在无法建造机甲舱和空气净化器时解体机甲",
     "This switch have no ingame effect, and used to configure calculator below": "用于下方计算",
