@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Evolve-新版TMVictor汉化
 // @namespace    https://gitee.com/angle_god/tmvictor-localization-chinese
-// @version      1.3.3
+// @version      1.3.4
 // @description  try to take over the world!
 // @downloadURL  https://github.com/pengminxuan/new-tmvictor-chn/raw/main/main.user.js
 // @author       天使不见时
@@ -113,7 +113,7 @@ var CNZ_MAP = {
     "Demonic Infusion": "恶魔灌注",
     "Use all Accelerated Time": "是否在重置前用完所有的加速时间",
     "Ignore useless buildings": "忽略无用的建筑",
-    "Barracks after unification": "研究统一后的兵营比例",
+    "Percent of active barracks after unification": "研究统一后的兵营比例",
     "Pre-MAD: Ignore A.R.P.A.": "是否在研究相互毁灭前不建造ARPA项目",
     "Wait for maximum population": "是否等待人口达到最大",
     "Required population": "人口阈值",
@@ -362,6 +362,7 @@ var CNZ_MAP = {
     "Pacifist": "是否为和平主义者",
     "Perform unification": "是否进行统一",
     "Occupy last foreign power": "是否占领最后一个未占领的国家",
+    "Sabotage foreign power when useful": "在有必要的时候对敌对国家进行破坏活动",
     "Train spies": "派遣间谍",
     "Maximum spies": "最大间谍数",
     "Military Power to switch target": "改变目标至少需要的军事力量",
@@ -374,10 +375,9 @@ var CNZ_MAP = {
     "Annex": "吞并",
     "Purchase": "收购",
     "Occupy": "占领",
-    "Sabotage foreign power when useful": "在有必要的时候对敌对国家进行破坏活动",
     "Campaigns": "战役相关",
-    "Attack only if at least this percentage of your garrison soldiers are alive": "只在驻扎士兵生存人数大于此比例时进攻",
-    "... and at least this percentage of your garrison is not injured": "...且需要未受伤士兵人数大于此比例",
+    "Minimum percentage of alive soldiers for attack": "只在士兵生存人数大于此比例时进攻",
+    "Minimum percentage of healthy soldiers for attack": "只在未受伤士兵人数大于此比例时进攻",
     "Hire mercenary if money storage greater than percent": "如果资金存量大于此比例，则聘请雇佣兵",
     "OR if cost lower than money earned in X seconds": "或者聘请花费小于此秒数的资金产量，则聘请雇佣兵",
     "AND amount of dead soldiers above this number": "并且需要阵亡士兵数量大于此数值，才会聘请雇佣兵",
@@ -386,14 +386,14 @@ var CNZ_MAP = {
     "Maximum siege battalion": "最高围城士兵数",
 
     "Turns attacks off and on": "是否进攻敌国",
-    "Perform unification once all three powers are subdued. autoResearch should be enabled for this to work.": "是否在控制了三个敌对国家后进行统一。需要开启自动研究后此项才能生效。",
-    "Occupy last foreign power once other two are subdued, and unification is researched. It will speed up unification. And even if you don't want to unify at all - disabled above checkbox, and just want to plunder enemies, this option still better to keep enabled. As a side effect it will prevent you from wasting money influencing and inciting last foreign power, and allow you to occupy it during looting with sieges, for additional production bonus. Disable it only if you want annex\\purchase achievements.": "当控制其他两个国家并研究统一后，自动占领最后一个国家。它可以加速统一。如果您并不想统一，只是想继续从敌国上获得资源，那么建议关闭上方的选项，仍然开启此项。开启此项有助于减少浪费资金，因为不会再进行亲善或煽动活动，在进攻时占领也能获得更多资源，还能获得一定的全局产量加成。除非您是要做统一方式相关的成就，否则不建议关闭此项。",
+    "Perform unification once all three powers are controlled. autoResearch should be enabled for this to work.": "是否在控制了三个敌对国家后进行统一。需要开启自动研究后此项才能生效。",
+    "Occupy last foreign power once other two are controlled, and unification is researched to speed up unification. Disable if you want annex\\purchase achievements.": "当控制其他两个国家并研究统一后，自动占领最后一个国家。它可以加速统一。除非您是要做统一方式相关的成就，否则不建议关闭此项。",
+    "Perform sabotage against current target if it's useful(power above 50), regardless of required power, and default action defined above": "在有需要的时候(军事力量大于50)，对当前的目标进行破坏活动。将无视下方选项的相应设置。",
     "Train spies to use against foreign powers": "训练间谍用于在外国势力执行任务",
     "Maximum spies per foreign power": "每个敌对国家最多训练的间谍数",
     "Switches to attack next foreign power once its power lowered down to this number. When exact numbers not know script tries to approximate it.": "当一个国家的军事实力低于此数值时，转为攻击它。如果确切数字无法看到，则脚本会尝试进行估计。",
     "Perform this against inferior foreign power, with military power equal or below given threshold. Complex actions includes required preparation - Annex and Purchase will incite and influence, Occupy will sabotage, until said options will be available.": "对较弱小的国家进行的间谍活动类型，较弱小指军事力量不高于上方数值的国家。复杂的活动将首先进行相应的准备——吞并和收购将先进行煽动和亲善，吞并将先进行破坏，直到相应的选项可用为止。",
     "Perform this against superior foreign power, with military power above given threshold. Complex actions includes required preparation - Annex and Purchase will incite and influence, Occupy will sabotage, until said options will be available.": "对较强大的国家进行的间谍活动类型，较强大指军事力量高于上方数值的国家。复杂的活动将首先进行相应的准备——吞并和收购将先进行煽动和亲善，吞并将先进行破坏，直到相应的选项可用为止。",
-    "Perform sabotage against current target if it's useful(power above 50), regardless of required power, and default action defined above": "在有需要的时候(军事力量大于50)，对当前的目标进行破坏活动。将无视上方三个选项的相应设置。",
     "Only attacks if you ALSO have the target battalion size of healthy soldiers available, so this setting will only take effect if your battalion does not include all of your soldiers": "下方的未受伤士兵比例也会生效，因此只在未让所有士兵进攻时生效",
     "Set to less than 100 to take advantage of being able to heal more soldiers in a game day than get wounded in a typical attack": "合理设置为某个低于100的值，可以有效利用游戏内的自然愈合机制",
     "Hire a mercenary if remaining money after purchase will be greater than this percent": "如果聘请后剩余资金大于此比例，则聘请雇佣兵",
@@ -458,6 +458,7 @@ var CNZ_MAP = {
     "Build mechs": "制造机甲",
     "Random good": "最佳设计",
     "Current design": "当前设计",
+    "Most efficient": "最高效的",
     "Prefered mech size": "偏好的机甲尺寸",
     "Gravity mech size": "重力环境下的机甲尺寸",
     "Always": "常时",
@@ -468,7 +469,7 @@ var CNZ_MAP = {
     "Minimum scouts ratio": "侦察机甲最低比例",
     "Maximum mech potential for Waygate": "是否在进入地狱之门之前先最大化机甲潜力",
     "Save up full supplies for next floor": "为下一层提前积攒补给",
-    "Fill remaining bay space with smaller mechs": "使用尺寸更小的机甲填充剩余的机舱空间",
+    "Build smaller mechs when preferred not available": "当无法再建造偏好机甲时建造尺寸更小的机甲",
     "Build spire buildings only with full bay": "是否在建造尖塔建筑之前先填满剩余的机舱空间",
     "Scrap mechs only after building maximum bays": "是否在解体机甲之前先最大化建造机甲舱",
     "Mech Stats": "机甲属性计算",
@@ -491,7 +492,7 @@ var CNZ_MAP = {
     "Nothing will be build automatically": "不自动制造机甲",
     "Build random mech with size chosen below, and best possible efficiency": "制造大小为下方选择的，效率最高的机甲",
     "Build whatever currently set in Mech Lab": "按照机甲实验室当前的设计来制造机甲",
-    "Select biggest affordable mech based on current amount of Soul Gems, and Supplies storage cap": "根据当前的灵魂宝石数量和补给上限，尽可能选择最佳的机甲尺寸",
+    "Select mech with best power per size for current floor, based on current amount of Soul Gems, and Supplies storage cap": "根据当前的灵魂宝石数量和补给上限，尽可能选择最佳的机甲",
     "Size of random mechs": "最佳设计的机甲尺寸",
     "Override prefered size with this on floors with high gravity": "重力环境下自动制造的机甲尺寸",
     "Add special equipment to all mechs": "所有机甲都使用特殊装备",
@@ -506,8 +507,8 @@ var CNZ_MAP = {
     "This switch have no ingame effect, and used to configure calculator below": "用于下方计算",
     "This input have no ingame effect, and used to configure calculator below": "用于下方计算",
     "Stop building new mechs close to next floor, preparing to build bunch of new mechs suited for next enemy": "在接近下一层时停止制造新的机甲，以保留补给",
-    "Once mech bay is packed with optimal mechs of prefered size up to the limit fill up remaining space with smaller mechs, if possible": "当机舱空间已经不足以再制造偏好尺寸的机甲时，将考虑制造尺寸更小的机甲",
-    "Enables special powering logic for Purifier, Port, Base Camp, and Mech Bays. Script will try to maximize supplies cap, building as many ports and camps as possible at best ratio, disabling mech bays when more support needed. With this cap it'll build up as many mech bays as possible, and once maximum bays is built - it'll turn them all on. This option requires Auto Build and Auto Power.": "启用空气净化器，港口，登陆营地和机甲舱专用的供能逻辑。脚本将首先最大化补给上限，以最佳比例建造港口和登陆营地，然后尽可能地建造机甲舱，之后再启用机甲舱。此项需要开启自动供能和自动建筑。",
+    "Build smaller mechs when prefered size can't be used due to low remaining bay space, or supplies cap": "当机舱空间不足或补给上限不足，无法制造偏好尺寸的机甲时，制造尺寸更小的机甲",
+    "Enables special powering logic for Purifier, Port, Base Camp, and Mech Bays. Script will try to maximize supplies cap, building as many ports and camps as possible at best ratio, disabling mech bays when more support needed. With this cap it'll build up as many mech bays as possible, and once maximum bays is built - it'll turn them all on. This option requires Auto Build and Auto Power.": "启用空气净化器，港口，登陆营地和机甲舱专用的供能逻辑。脚本将首先最大化补给上限，以最佳比例建造港口和登陆营地，然后尽可能地建造机甲舱，之后再启用机甲舱。需要开启自动供能和自动建筑此项才能生效。",
 
     // 舰队设置
     "Fleet Settings": "舰队设置",
@@ -598,7 +599,9 @@ var CNZ_MAP = {
     "Wood": "木材",
     "Star": "星辰",
     "Foundry": "铸造厂",
-    "Prioritize demanded craftables": "优先制造需要的锻造物",
+    "Weightings adjustments": "锻造物权重",
+    "Prioritize demanded": "优先制造需要的",
+    "Buildings weightings": "按建筑权重",
     "Min Ingredients": "锻造物原料保底产量",
     "Factory": "工厂",
     "Minimum materials to preserve": "工厂原料保底产量",
@@ -613,7 +616,10 @@ var CNZ_MAP = {
     "Produce both Iron and Steel at ratio which will fill both storages at same time for both": "以一定的比例同时冶炼铁和钢，保证它们同时达到存储上限",
     "Produce both Iron and Steel at ratio which will produce maximum amount of resources required for buildings at same time for both": "以一定的比例同时冶炼铁和钢，保证它们同时达到建筑的需求",
     "Distribution of smelters between iron and steel": "冶炼厂冶炼铁和钢的方式",
-    "Resources already produced above maximum amount required for constructing buildings won't be crafted, if there's better options enabled and available, ignoring weighted ratio": "如果有更好的选项，则建筑暂时不需要的锻造物将被忽略，同时忽略权重设置",
+    "Configures how exactly craftables will be weighted against each other": "控制锻造物与其他资源相比的权重",
+    "Use configured weightings with no additional adjustments, craftables with x2 weighting will be crafted two times more intense than with x1, etc.": "按照正常的权重制造。2倍权重的锻造物将比1倍权重的锻造物多制造1倍，以此类推。",
+    "Ignore craftables once stored amount surpass cost of most expensive building, until all missing resources will be crafted. After that works as with 'none' adjustments.": "当锻造物储量超过花费最高的建筑时忽略相应锻造物，直到所有锻造物都超过了相应数值。之后与上方“无”选项效果相同。",
+    "Uses weightings of buildings which are waiting for craftables, as multipliers to craftables weighting. This option requires autoBuild.": "使用需要锻造物建筑的权重，计入锻造物的权重。需要开启自动建筑此项才能生效。",
     "Factory will craft resources only when all required material above given ration": "工厂只在所有需要的材料都高于保底产量时制造相应产品",
     "Cast rituals only with full mana": "只在法力达到上限时激活仪式",
 
@@ -733,6 +739,8 @@ var CNZ_MAP = {
     "No more Meditation Space needed": "暂时不需要冥想室",
     "Gate Turret": "远古之门炮塔",
     "Gate demons fully supressed": "远古之门的恶魔已经完全压制",
+    "Warehouses, Garage, Cargo Yard": "仓库，格纳库，星际货仓",
+    "Need more storage": "需要更多提供储量上限的建筑",
 
     // ARPA设置
     "A.R.P.A. Settings": "ARPA设置",
