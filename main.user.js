@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Evolve-新版TMVictor汉化
 // @namespace    https://gitee.com/angle_god/tmvictor-localization-chinese
-// @version      1.3.4
+// @version      1.3.5
 // @description  try to take over the world!
 // @downloadURL  https://github.com/pengminxuan/new-tmvictor-chn/raw/main/main.user.js
 // @author       天使不见时
@@ -206,7 +206,7 @@ var CNZ_MAP = {
     "Use this to set a maximum allowed morale. The tax rate will be raised to lower morale to this maximum": "设置最高允许的士气。如果士气超过此数值，将提高税率",
     "Manage changes of government when they become available": "当可能的时候，自动改变社会体制",
     "Temporary low tier government until you research other governments": "当研究其他社会体制之前，用于过渡的临时社会体制",
-    "Second government choice, chosen once becomes avaiable. Can be the same as above": "第二社会体制，当此社会体制可用后立刻进行切换。可以与上面的社会体制相同。",
+    "Second government choice, chosen once becomes available. Can be the same as above": "第二社会体制，当此社会体制可用后立刻进行切换。可以与上面的社会体制相同。",
     "Government for bioseed+. Chosen once you researched Quantum Manufacturing. Can be the same as above": "用于播种之后的社会体制，当研究量子制造以后立刻进行切换。可以与上面的社会体制相同。",
     "Chosen governor will be appointed.": "将使用选中的总督。",
 
@@ -349,7 +349,7 @@ var CNZ_MAP = {
     "Add": "增加",
     "Remove": "移除",
 
-    "Picks Anthropology for MAD prestige, and Fanaticism for others": "进行核弹重置时选择人类学，其余情况下选择狂热信仰",
+    "Picks Anthropology for MAD prestige, and Fanaticism for others. Achieve-worthy combos are exception, on such runs Fanaticism will be always picked.": "进行核弹重置时选择人类学，其余情况下选择狂热信仰。需要狂热信仰祖先才能完成成就时例外，此时将一直选择狂热信仰。",
     "Theology 1 technology to research, have no effect after getting Transcendence perk": "神学研究分支1的选择，获得超越特权以后失效",
     "Picks Deify for Ascension prestige, and Study for others": "进行飞升重置时选择神化先祖，其余情况下选择研究先祖",
     "Theology 2 technology to research": "神学研究分支2的选择",
@@ -384,6 +384,7 @@ var CNZ_MAP = {
     "Minimum advantage": "最低优势",
     "Maximum advantage": "最高优势",
     "Maximum siege battalion": "最高围城士兵数",
+    "Protect soldiers": "是否保护士兵",
 
     "Turns attacks off and on": "是否进攻敌国",
     "Perform unification once all three powers are controlled. autoResearch should be enabled for this to work.": "是否在控制了三个敌对国家后进行统一。需要开启自动研究后此项才能生效。",
@@ -399,9 +400,10 @@ var CNZ_MAP = {
     "Hire a mercenary if remaining money after purchase will be greater than this percent": "如果聘请后剩余资金大于此比例，则聘请雇佣兵",
     "Combines with the money storage percent setting to determine when to hire mercenaries": "结合剩余资金比例，可以管理聘请雇佣兵的时机",
     "Hire a mercenary only when current amount of dead soldiers above given number": "只在阵亡士兵数量超过此数值时聘请雇佣兵",
-    "Minimum advantage to launch campaign, ignored during ambushes": "进行相应战役类型最少需要的优势。进行伏击时忽略此项",
-    "Once campaign is selected, your battalion will be limited in size down this advantage, reducing potential loses": "当选择相应战役类型后，参加战斗的士兵数将限制在尽可能接近此优势的数量，以减少损失",
-    "Maximum battalion for siege campaign. Only try to siege if it's possible with up to given amount of soldiers. Siege is expensive, if you'll be doing it with too big battalion it might be less profitable than other combat campaigns. This option does not applied for unification, it's only for regular looting.": "进行围城的最大士兵数。只在此数值的士兵数量可以进行围城时这么做。围城的损失通常很大，如果需要大量士兵才能进行的话，收益将无法弥补损失。此项与是否统一无关，只应用于攻击获取资源。",
+    "Minimum advantage to launch campaign, ignored during ambushes. 100% chance to win will be reached at approximately(influenced by traits and selected campaign) 75% advantage.": "进行相应战役类型最少需要的优势。进行伏击时忽略此项。大概在75%优势(受特质和战役类型影响)附近可以做到100%胜率。",
+    "Once campaign is selected, your battalion will be limited in size down to this advantage, reducing potential loses": "当选择相应战役类型后，参加战斗的士兵数将限制在尽可能接近此优势的数量，以减少损失",
+    "Maximum battalion for siege campaign. Only try to siege if it's possible with up to given amount of soldiers. Siege is expensive, if you'll be doing it with too big battalion it might be less profitable than other combat campaigns. This option does not applied to unifying sieges, it affect only looting.": "进行围城的最大士兵数。只在此数值的士兵数量可以进行围城时这么做。围城的损失通常很大，如果需要大量士兵才能进行的话，收益将无法弥补损失。此项不影响统一时的围城士兵数。",
+    "Limit battalions to sizes which will neven suffer any casualties in successful fights. You still will lose soldiers after failures, increasing minimum advantage can improve winning odds. This option designed to use with armored races favoring frequent attacks, with no approppriate build it may prevent any attacks from happening. This option does not applied to unifying sieges, it affect only looting.": "将士兵数限制为不会有任何损失的数量，但您还是有可能战斗失败。增加最低优势可以提升胜率。此项通常用于拥有减少战死士兵数量特质的种族，其余种族可能会导致不进行战斗。此项不影响统一时的围城士兵数。",
 
     // 地狱维度设置
     "Hell Settings": "地狱维度设置",
@@ -459,10 +461,10 @@ var CNZ_MAP = {
     "Random good": "最佳设计",
     "Current design": "当前设计",
     "Most efficient": "最高效的",
-    "Prefered mech size": "偏好的机甲尺寸",
+    "Preferred mech size": "偏好的机甲尺寸",
     "Gravity mech size": "重力环境下的机甲尺寸",
     "Always": "常时",
-    "Prefered": "偏好",
+    "Preferred": "偏好",
     "Random": "随机",
     "Never": "永不",
     "Special mechs": "特殊装备",
@@ -494,7 +496,7 @@ var CNZ_MAP = {
     "Build whatever currently set in Mech Lab": "按照机甲实验室当前的设计来制造机甲",
     "Select mech with best power per size for current floor, based on current amount of Soul Gems, and Supplies storage cap": "根据当前的灵魂宝石数量和补给上限，尽可能选择最佳的机甲",
     "Size of random mechs": "最佳设计的机甲尺寸",
-    "Override prefered size with this on floors with high gravity": "重力环境下自动制造的机甲尺寸",
+    "Override preferred size with this on floors with high gravity": "重力环境下自动制造的机甲尺寸",
     "Add special equipment to all mechs": "所有机甲都使用特殊装备",
     "Add special equipment when it doesn't reduce efficiency for current floor": "当特殊装备不降低当前层效率时使用特殊装备",
     "Special equipment will have same chance to be added as all others": "所有特殊装备都可能使用",
@@ -507,7 +509,7 @@ var CNZ_MAP = {
     "This switch have no ingame effect, and used to configure calculator below": "用于下方计算",
     "This input have no ingame effect, and used to configure calculator below": "用于下方计算",
     "Stop building new mechs close to next floor, preparing to build bunch of new mechs suited for next enemy": "在接近下一层时停止制造新的机甲，以保留补给",
-    "Build smaller mechs when prefered size can't be used due to low remaining bay space, or supplies cap": "当机舱空间不足或补给上限不足，无法制造偏好尺寸的机甲时，制造尺寸更小的机甲",
+    "Build smaller mechs when preferred size can't be used due to low remaining bay space, or supplies cap": "当机舱空间不足或补给上限不足，无法制造偏好尺寸的机甲时，制造尺寸更小的机甲",
     "Enables special powering logic for Purifier, Port, Base Camp, and Mech Bays. Script will try to maximize supplies cap, building as many ports and camps as possible at best ratio, disabling mech bays when more support needed. With this cap it'll build up as many mech bays as possible, and once maximum bays is built - it'll turn them all on. This option requires Auto Build and Auto Power.": "启用空气净化器，港口，登陆营地和机甲舱专用的供能逻辑。脚本将首先最大化补给上限，以最佳比例建造港口和登陆营地，然后尽可能地建造机甲舱，之后再启用机甲舱。需要开启自动供能和自动建筑此项才能生效。",
 
     // 舰队设置
@@ -746,7 +748,7 @@ var CNZ_MAP = {
     "A.R.P.A. Settings": "ARPA设置",
     "Reset A.R.P.A. Settings": "ARPA设置还原",
     "Scale weighting with progress": "进度权重",
-    "Prefered progress step": "每次建造进度百分比",
+    "Preferred progress step": "每次建造进度百分比",
     "Project": "项目",
     "Supercollider": "超级对撞机",
     "Stock Exchange": "证券交易所",
