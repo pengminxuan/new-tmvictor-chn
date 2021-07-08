@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Evolve-新版TMVictor汉化
 // @namespace    https://gitee.com/angle_god/tmvictor-localization-chinese
-// @version      1.3.5
+// @version      1.3.5.1
 // @description  try to take over the world!
 // @downloadURL  https://github.com/pengminxuan/new-tmvictor-chn/raw/main/main.user.js
 // @author       天使不见时
@@ -120,7 +120,7 @@ var CNZ_MAP = {
     "Required probes": "播种前至少需要的太空探测器数量",
     "Save up Soul Gems for reset": "是否保留重置所需数量的灵魂宝石",
     "Minimum solar mass for reset": "太阳质量阈值，达到后才会进行黑洞重置",
-    "Stabilise blackhole": "是否稳定黑洞",
+    "Stabilize blackhole": "是否稳定黑洞",
     "Enable mass ejector": "是否自动进行质量喷射",
     "Eject excess resources": "是否喷射多余的资源",
     "(Decay Challenge) Eject rate": "(衰变挑战)喷射比例",
@@ -148,7 +148,7 @@ var CNZ_MAP = {
     "Required number of probes before launching bioseeder ship": "达到太空探测器所需数量后，才进行播种重置",
     "Save up enough Soul Gems for reset, only excess gems will be used. This option does not affect triggers.": "保留重置所需数量的灵魂宝石，只使用超过相应数量的灵魂宝石。不影响触发器。",
     "Required minimum solar mass of blackhole before prestiging. Script do not stabilize on blackhole run, this number will need to be reached naturally": "达到太阳质量阈值后，才进行黑洞重置。脚本不会在威望重置类型为黑洞重置时稳定黑洞，需要自然达到此质量",
-    "Stabilises the blackhole with exotic materials, during whitehole run won't go beyond minimum mass set above": "一直选择稳定黑洞，进行黑洞重置时不会超过上面的太阳质量阈值",
+    "Stabilizes the blackhole with exotic materials, disabled on whitehole runs": "一直选择稳定黑洞，进行黑洞重置时无效",
     "If not enabled the mass ejector will not be managed by the script": "启用后，脚本才会自动管理质量喷射器喷射的物质",
     "Eject resources above amount required for buildings, normally only resources with full storages will be ejected, until 'Eject everything' option is activated.": "将超出建筑需要的资源用于喷射，而不是像通常只是喷射达到上限的资源。",
     "Set amount of ejected resources up to this percent of decay rate, only useful during Decay Challenge": "只要衰变比例高于这个数值，就会使用相应资源进行喷射，只在衰变挑战中有效。",
@@ -521,9 +521,11 @@ var CNZ_MAP = {
     "Mininum knowledge for Alien 2 Assault": "进行第五星系任务的知识阈值",
     "Chthonian Mission": "幽冥星系任务条件",
     "Manual assault": "不自动进行",
-    "Ignore casualties": "忽略损失",
-    "Lose 2 Frigates": "损失2艘大型护卫舰",
-    "Lose 1 Frigate": "损失1艘大型护卫舰",
+    "High casualties": "严重损失",
+    "Average casualties": "一般损失",
+    "Low casualties": "低损失",
+    "Frigate": "损失大型护卫舰",
+    "Dreadnought": "损失无畏舰",
     "Region": "地区",
 
     "Adjusts ships distribution to fully supress piracy in prioritized regions. Some potential defence will be wasted, as it will use big ships to cover small holes, when it doesn't have anything fitting better. This option is not required: all your dreadnoughts still will be used even without this option.": "会优先分配舰船给优先级高的地区以完全压制相应地区的海盗活动。可能会在大船较多小船较少时浪费舰船。即使不开启此项，无畏舰仍然会正常进行分配。",
@@ -531,10 +533,12 @@ var CNZ_MAP = {
     "Researching Alien Gift increases maximum piracy up to 250, script won't Auto Research it until this knowledge cap is reached.": "研究外星礼物后，海盗的活动会更加剧烈，因此脚本只会在到达相应数值的知识上限时进行研究。",
     "Assaulting Alien 2 increases maximum piracy up to 500, script won't do it until this knowledge cap is reached. Regardless of set value it won't ever try to assault until you have big enough fleet to do it without loses.": "进行第五星系任务后，海盗的活动会更加剧烈，因此脚本只会在到达相应数值的知识上限时进行研究。另外，除非您能够无损伤地完成任务，否则脚本也不会自动进行此任务。",
     "Won't ever launch assault mission on Chthonian": "不会自动进行幽冥星系任务",
-    "Launch Chthonian Assault Mission when it can be won with any loses (1250+ total fleet power, many ships will be lost)": "不计损失，当战力达到最低要求时自动进行幽冥星系任务(1250以上总战力，损失会极大)",
-    "Not available in Banana Republic challenge. Launch Chthonian Assault Mission when it can be won with average loses (2500+ total fleet power, two Frigates will be lost)": "在香蕉共和国挑战中不可用。当战力达到中等要求时自动进行幽冥星系任务(2500以上总战力，将损失2艘大型护卫舰)",
-    "Not available in Banana Republic challenge. Launch Chthonian Assault Mission when it can be won with minimal loses (4500+ total fleet power, one Frigate will be lost)": "在香蕉共和国挑战中不可用。当战力达到最高要求时自动进行幽冥星系任务(4500以上总战力，将损失1艘大型护卫舰)",
-    "Assault Chthonian when chosen outcome is achievable": "当满足任务条件时自动进行幽冥星系任务",
+    "Unlock Chthonian using mixed fleet, high casualties (1250+ total fleet power, 500 will be lost)": "使用混合舰队进行幽冥星系任务，损失极大(1250以上总战力，损失500左右战力的舰队)",
+    "Unlock Chthonian using mixed fleet, average casualties (2500+ total fleet power, 160 will be lost)": "使用混合舰队进行幽冥星系任务，损失一般(2500以上总战力，损失160左右战力的舰队)",
+    "Unlock Chthonian using mixed fleet, low casualties (4500+ total fleet power, 80 will be lost)": "使用混合舰队进行幽冥星系任务，损失低(4500以上总战力，损失80左右战力的舰队)",
+    "Unlock Chthonian loosing Frigate ship(s) (4500+ total fleet power, suboptimal for banana\\instinct runs)": "只损失大型护卫舰进行幽冥星系任务(4500以上总战力，对于香蕉共和国挑战或直觉特质的种族更好一些)",
+    "Unlock Chthonian with Dreadnought suicide mission": "看着无畏舰燃烧吧",
+    "Assault Chthonian when chosen outcome is achievable. Mixed fleet formed to clear mission with minimum possible wasted ships, e.g. for low causlities it can sacriface 8 scouts, or 2 corvettes and 2 scouts, or frigate, and such. Whatever will be first available. It also takes in account perks and challenges, adjusting fleet accordingly.": "当满足任务条件时自动进行幽冥星系任务。会尽可能少损失舰队，同时会考虑特权和挑战来调整舰队。",
 
     // 质量喷射设置
     "Ejector & Supply Settings": "质量喷射及补给设置",
@@ -1167,10 +1171,12 @@ var CNZ_MAP = {
     "Auto Supply": "是否自动补给",
     "Enable ejecting of this resource. When to eject is set in the Prestige Settings tab.": "允许喷射此项资源。进行喷射的时机在威望重置设置下。",
     "Enable supply of this resource.": "允许使用此项资源进行补给。",
-    "Enable buying of this resource. When to buy is set in the Settings tab.": "允许购买此项资源。进行购买的时机在市场设置下。",
-    "Enable selling of this resource. When to sell is set in the Settings tab.": "允许出售此项资源。进行出售的时机在市场设置下。",
-    "Enable trading for this resource. Max routes is set in the Settings tab.": "允许使用贸易路线购买此项资源。贸易路线的上限在市场设置下。",
-    "Enable trading this resource away. Min income is set in the Settings tab.": "允许使用贸易路线出售此项资源。最低的资金收入在市场设置下。",
+    "Enable buying of this resource.": "允许购买此项资源。",
+    "Enable selling of this resource.": "允许出售此项资源。",
+    "Enable trading for this resource.": "允许使用贸易路线购买此项资源。",
+    "Enable trading this resource away.": "允许使用贸易路线出售此项资源。",
+    "Enable storing of this resource.": "允许此项资源的存储分配。",
+    "Enable storing overflow of this resource.": "允许此项资源对溢出部分的存储分配。",
 };
 
 (function() {
