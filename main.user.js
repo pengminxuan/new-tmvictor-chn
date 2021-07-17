@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Evolve-新版TMVictor汉化
 // @namespace    https://gitee.com/angle_god/tmvictor-localization-chinese
-// @version      1.3.5.1
+// @version      1.3.6
 // @description  try to take over the world!
 // @downloadURL  https://github.com/pengminxuan/new-tmvictor-chn/raw/main/main.user.js
 // @author       天使不见时
@@ -469,6 +469,8 @@ var CNZ_MAP = {
     "Never": "永不",
     "Special mechs": "特殊装备",
     "Minimum scouts ratio": "侦察机甲最低比例",
+    "Minimum supply income": "最低补给收入",
+    "Maximum collectors ratio": "搜集机甲最高比例",
     "Maximum mech potential for Waygate": "是否在进入地狱之门之前先最大化机甲潜力",
     "Save up full supplies for next floor": "为下一层提前积攒补给",
     "Build smaller mechs when preferred not available": "当无法再建造偏好机甲时建造尺寸更小的机甲",
@@ -503,6 +505,8 @@ var CNZ_MAP = {
     "Never add special equipment": "永不使用特殊装备",
     "Configures special equip": "设置特殊装备",
     "Scouts compensate terrain penalty of suboptimal mechs. Build them up to this ratio.": "侦察机甲可以抵消楼层生态对机甲的惩罚。以此比例建造它们。",
+    "Build collectors if current supply income above given number": "如果当前补给收入超过相应数字，则开始建造搜集机甲",
+    "Limiter for above option, maximum space used by collectors": "限制上方选项的搜集机甲数量。",
     "Fight Demon Lord only when current mech team potential below given amount. Full bay of best mechs will have `1` potential. Damage against Demon Lord does not affected by floor modifiers, all mechs always does 100% damage to him. Thus it's most time-efficient to fight him at times when mechs can't make good progress against regular monsters, and waiting for rebuilding. Auto Power needs to be on for this to work.": "只在机甲潜力低于相应数值时与恶魔领主进行战斗。机甲舱充满最好设计的机甲时潜力为1。恶魔领主的强度不受楼层和武器装备影响，所以在普通敌人需要时间太久时转为攻击恶魔领主会更有效率。需要开启自动供能此项才能生效。",
     "Fill mech bays up to current limit before spending resources on additional spire buildings": "在花费资源建造尖塔建筑之前，先建造机甲填满剩余的机舱空间",
     "Scrap old mechs only when no new bays and purifiers can be builded": "只在无法建造机甲舱和空气净化器时解体机甲",
