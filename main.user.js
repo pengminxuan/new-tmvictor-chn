@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Evolve-新版TMVictor汉化
 // @namespace    https://gitee.com/angle_god/tmvictor-localization-chinese
-// @version      1.3.6
+// @version      1.3.7
 // @description  try to take over the world!
 // @downloadURL  https://github.com/pengminxuan/new-tmvictor-chn/raw/main/main.user.js
 // @author       天使不见时
@@ -177,11 +177,10 @@ var CNZ_MAP = {
     "Always autoclick resources": "是否总是自动收集资源",
     "Maximum clicks per second": "每秒最高点击次数",
 
-    "Readjust trade routes and production to resources required for active triggers": "将贸易路线和生产资源调整为触发器所需要的资源",
-    "Readjust trade routes and production to resources required for buildings and researches in queue": "将贸易路线和生产资源调整为队列中的建筑和研究所需要的资源",
-    "Readjust trade routes and production to resources required for unlocked and affordable researches (Works only with no active triggers, or queue)": "将贸易路线和生产资源调整为已解锁且上限足够的研究所需要的资源(只在触发器和队列中没有内容激活时生效)",
-    "Readjust trade routes and production to resources required for unlocked and affordable researches (Works only with no active triggers, or queue": "将贸易路线和生产资源调整为已解锁且上限足够的研究所需要的资源(只在触发器和队列中没有内容激活时生效)",
-    "Readjust trade routes and production to resources required for unlocked and affordable missions": "将贸易路线和生产资源调整为已解锁且上限足够的任务所需要的资源",
+    "Readjust trade routes and production to resources required for active triggers. Missing resources will have 100 priority where applicable(autoMarket, autoGalaxyMarket, autoFactory, autoMiningDroid), or just 'top priority' where not(autoTax, autoCraft, autoCraftsmen, autoQuarry, autoSmelter).": "将贸易路线和生产资源调整为触发器所需要的资源。缺少的资源对于自动贸易、自动银河贸易、自动工厂和自动采矿机器人来说权重为100，对于自动税率、自动锻造、自动温石棉控制、自动冶炼来说为最高优先级。",
+    "Readjust trade routes and production to resources required for buildings and researches in queue. Missing resources will have 100 priority where applicable(autoMarket, autoGalaxyMarket, autoFactory, autoMiningDroid), or just 'top priority' where not(autoTax, autoCraft, autoCraftsmen, autoQuarry, autoSmelter).": "将贸易路线和生产资源调整为队列中的建筑和研究所需要的资源。缺少的资源对于自动贸易、自动银河贸易、自动工厂和自动采矿机器人来说权重为100，对于自动税率、自动锻造、自动温石棉控制、自动冶炼来说为最高优先级。",
+    "Readjust trade routes and production to resources required for unlocked and affordable researches. Works only with no active triggers, or queue. Missing resources will have 100 priority where applicable(autoMarket, autoGalaxyMarket, autoFactory, autoMiningDroid), or just 'top priority' where not(autoTax, autoCraft, autoCraftsmen, autoQuarry, autoSmelter).": "将贸易路线和生产资源调整为已解锁且上限足够的研究所需要的资源。只在触发器和队列中没有内容激活时生效。缺少的资源对于自动贸易、自动银河贸易、自动工厂和自动采矿机器人来说权重为100，对于自动税率、自动锻造、自动温石棉控制、自动冶炼来说为最高优先级。",
+    "Readjust trade routes and production to resources required for unlocked and affordable missions. Missing resources will have 100 priority where applicable(autoMarket, autoGalaxyMarket, autoFactory, autoMiningDroid), or just 'top priority' where not(autoTax, autoCraft, autoCraftsmen, autoQuarry, autoSmelter).": "将贸易路线和生产资源调整为已解锁且上限足够的任务所需要的资源。缺少的资源对于自动贸易、自动银河贸易、自动工厂和自动采矿机器人来说权重为100，对于自动税率、自动锻造、自动温石棉控制、自动冶炼来说为最高优先级。",
     "Script won't use resources needed for queued buildings. 'No Queue Order' game setting switches whether it save resources for next item, or whole queue.": "脚本不会使用队列中建筑所需要的资源。如果开启乱序队列，则整个队列中的资源都将不会使用，否则只会考虑队列中第一项。",
     "Script won't use resources needed for queued researches. 'No Queue Order' game setting switches whether it save resources for next item, or whole queue.": "脚本不会使用队列中研究所需要的资源。如果开启乱序队列，则整个队列中的资源都将不会使用，否则只会考虑队列中第一项。",
     "Script won't use resources needed for queued projects. 'No Queue Order' game setting switches whether it save resources for next item, or whole queue.": "脚本不会使用队列中ARPA项目所需要的资源。如果开启乱序队列，则整个队列中的资源都将不会使用，否则只会考虑队列中第一项。",
@@ -415,7 +414,7 @@ var CNZ_MAP = {
     "Minimum soldiers to be available for hell (pull out if below)": "进入地狱维度最少士兵总数(低于此值时撤出)",
     "Alive soldier percentage for entering hell": "进入地狱维度需拥有生存士兵的比例",
     "Hell Garrison": "地狱维度驻扎士兵",
-    "Target wall damage per siege (overestimates threat)": "围攻减少城墙耐久(尽量高估威胁)",
+    "Target wall damage per siege (overestimates threat)": "围攻后城墙耐久减少为相应数值(尽量高估威胁)",
     "Garrison bolster factor for damaged walls": "受损城墙驻扎士兵增援因子",
     "Patrol Size": "巡逻队规模",
     "Automatically adjust patrol size": "自动调整巡逻队规模",
@@ -482,21 +481,21 @@ var CNZ_MAP = {
     "Special": "特殊",
     "Gravity": "重力",
     "Scouts": "侦察机甲",
-    "Power Per Size\xa0": "每空间战斗力",
-    "Power Per Supply\xa0": "每补给战斗力",
-    "Power Per Gems\xa0": "每宝石战斗力",
+    "Damage Per Size\xa0": "每空间战斗力",
+    "Damage Per Supply\xa0": "每补给战斗力",
+    "Damage Per Gems\xa0": "每宝石战斗力",
 
     "Configures what will be scrapped. Infernal mechs won't ever be scrapped.": "设置解体机甲的情况。不会解体地狱化的机甲。",
     "Nothing will be scrapped automatically": "不自动解体机甲",
     "Scrap mechs only when mech bay is full, and script need more room to build mechs": "只在机甲舱满且需要更多机舱空间的时候解体机甲",
     "Scrap all inefficient mechs immediately, using refounded resources to build better ones": "解体所有效率低的机甲，并更换为更好的机甲。",
-    "Scrap as much inefficient mechs as possible, trying to preserve just  enough of old mechs to fill bay to max by the time when next floor will be reached, calculating threshold based on progress speed and resources incomes": "在保留差不多刚好能够到达下一层的机甲前提下，尽可能解体所有低效的机甲",
-    "Scrap mechs only when '((OldMechRefund / NewMechCost) / (OldMechPower / NewMechPower))' more than given number.&#xA;For the cases when exchanged mechs have same size(1/3 refund) it means that with 1 eff. script allowed to scrap mechs under 33.3%. 1.5 eff. - under 22.2%, 2 eff. - under 16.6%, 0.5 eff. - under 66.6%, 0 eff. - under 100%, etc.&#xA;Efficiency below '1' is not recommended, unless scrap set to 'Full bay', as it's a breakpoint when refunded resources can immidiately compensate lost power, resulting with best power growth rate.&#xA;Efficiency above '1' is useful to save resources for more desperate times, or to compensate low soul gems income.": "只在(旧机甲返还资源/新机甲资源花费)/(旧机甲攻击力/新机甲攻击力)超过相应数字时解体机甲。",
+    "Scrap as much inefficient mechs as possible, trying to preserve just enough of old mechs to fill bay to max by the time when next floor will be reached, calculating threshold based on progress speed and resources incomes": "在保留差不多刚好能够到达下一层的机甲前提下，尽可能解体所有低效的机甲",
+    "Scrap mechs only when '((OldMechRefund / NewMechCost) / (OldMechDamage / NewMechDamage))' more than given number.&#xA;For the cases when exchanged mechs have same size(1/3 refund) it means that with 1 eff. script allowed to scrap mechs under 33.3%. 1.5 eff. - under 22.2%, 2 eff. - under 16.6%, 0.5 eff. - under 66.6%, 0 eff. - under 100%, etc.&#xA;Efficiency below '1' is not recommended, unless scrap set to 'Full bay', as it's a breakpoint when refunded resources can immidiately compensate lost damage, resulting with best damage growth rate.&#xA;Efficiency above '1' is useful to save resources for more desperate times, or to compensate low soul gems income.": "只在(旧机甲返还资源/新机甲资源花费)/(旧机甲攻击力/新机甲攻击力)超过相应数字时解体机甲。",
     "Configures what will be build. Infernal mechs won't ever be build.": "设置制造机甲的情况。不会制造地狱化的机甲。",
     "Nothing will be build automatically": "不自动制造机甲",
     "Build random mech with size chosen below, and best possible efficiency": "制造大小为下方选择的，效率最高的机甲",
     "Build whatever currently set in Mech Lab": "按照机甲实验室当前的设计来制造机甲",
-    "Select mech with best power per size for current floor, based on current amount of Soul Gems, and Supplies storage cap": "根据当前的灵魂宝石数量和补给上限，尽可能选择最佳的机甲",
+    "Select mech with best damage per size for current floor, based on current amount of Soul Gems, and Supplies storage cap": "根据当前的灵魂宝石数量和补给上限，尽可能选择最佳的机甲",
     "Size of random mechs": "最佳设计的机甲尺寸",
     "Override preferred size with this on floors with high gravity": "重力环境下自动制造的机甲尺寸",
     "Add special equipment to all mechs": "所有机甲都使用特殊装备",
@@ -505,7 +504,7 @@ var CNZ_MAP = {
     "Never add special equipment": "永不使用特殊装备",
     "Configures special equip": "设置特殊装备",
     "Scouts compensate terrain penalty of suboptimal mechs. Build them up to this ratio.": "侦察机甲可以抵消楼层生态对机甲的惩罚。以此比例建造它们。",
-    "Build collectors if current supply income above given number": "如果当前补给收入超过相应数字，则开始建造搜集机甲",
+    "Build collectors if current supply income below given number": "如果当前补给收入低于相应数字，则开始建造搜集机甲",
     "Limiter for above option, maximum space used by collectors": "限制上方选项的搜集机甲数量。",
     "Fight Demon Lord only when current mech team potential below given amount. Full bay of best mechs will have `1` potential. Damage against Demon Lord does not affected by floor modifiers, all mechs always does 100% damage to him. Thus it's most time-efficient to fight him at times when mechs can't make good progress against regular monsters, and waiting for rebuilding. Auto Power needs to be on for this to work.": "只在机甲潜力低于相应数值时与恶魔领主进行战斗。机甲舱充满最好设计的机甲时潜力为1。恶魔领主的强度不受楼层和武器装备影响，所以在普通敌人需要时间太久时转为攻击恶魔领主会更有效率。需要开启自动供能此项才能生效。",
     "Fill mech bays up to current limit before spending resources on additional spire buildings": "在花费资源建造尖塔建筑之前，先建造机甲填满剩余的机舱空间",
@@ -563,20 +562,20 @@ var CNZ_MAP = {
     "Trade minimum money /s": "贸易允许的每秒资金收入最低值",
     "Trade minimum money percentage /s": "贸易允许的每秒资金收入最低比例",
     "Sell excess resources": "是否出售多余的资源",
+    "Manual Trades": "手动贸易",
+    "Trade Routes": "贸易路线",
     "Resource": "资源名称",
     "Buy": "购买",
     "Sell": "出售",
-    "Trade For": "贸易路线购买",
-    "Trade Away": "贸易路线出售",
+    "In": "购买用路线数",
+    "Away": "出售用路线数",
     "Ratio": "比例",
-    "Routes": "贸易路线数",
-    "Min p/s": "资源收入保留",
-    "Galaxy Trades": "星际贸易",
     "Priority": "优先级",
+    "Galaxy Trades": "星际贸易",
 
     "Uses the highest per second amount of these two values. Will trade for resources until this minimum money per second amount is hit": "两项中较高的数值生效。达到每秒资金收入最低值后，才会购买资源",
     "Uses the highest per second amount of these two values. Will trade for resources until this percentage of your money per second amount is hit": "两项中较高的数值生效。达到每秒资金收入最低比例后，才会购买资源",
-    "With this option enabled script will be allowed to sell resources above amounts needed for constructions or researches, wihtout it script sell only capped resources.": "开启后将在建造或研究不需要的时候出售相应的资源，否则只会在接近上限时出售。",
+    "With this option enabled script will be allowed to sell resources above amounts needed for constructions or researches, without it script sell only capped resources. As side effect boughts will also be limited to that amounts, to avoid 'buy up to cap -> sell excess' loops.": "开启后将在建造或研究不需要的时候出售相应的资源，否则只会在接近上限时出售。同时，购买相应资源时也有会类似限制，以避免进入购买-出售的死循环。",
 
     // 存储设置
     "Storage Settings": "存储设置",
@@ -584,7 +583,7 @@ var CNZ_MAP = {
     "Limit Pre-MAD Storage": "限制核弹重置之前阶段的存储",
     "Reassign only empty storages": "只在板条箱或集装箱有空余时进行重新分配",
     "Assign buffer storage": "是否分配缓冲用的存储",
-    "Assign only for prioritized resources": "只对优先的资源分配存储",
+    "Assign per buildings": "根据每种建筑分配存储",
     "Store Overflow": "是否对溢出部分分配存储",
     "Max Crates": "最大板条箱",
     "Max Containers": "最大集装箱",
@@ -592,7 +591,7 @@ var CNZ_MAP = {
     "Saves resources and shortens run time by limiting storage pre-MAD": "限制核弹重置之前阶段的存储来节省资源和相应时间",
     "Wait until storage is empty before reassigning containers to another resource, to prevent overflowing and wasting resources": "直到相应的板条箱或集装箱未装有相应资源时才考虑将它重新分配给其他资源，以防止资源溢出浪费",
     "Assigns 3% more resources above required amounts, ensuring that required quantity will be actually reached, even if other part of script trying to sell\\eject\\switch production, etc.": "以超过需要数值的3%进行分配，以保证能达到所需要的数值，以避免脚本其他功能的干扰。",
-    "Assign storages only for prioritized resources, up to amount required by whatever demanded it. Such as queue or trigger costs. You don't normally need it, this can be useful when you need all your storage space to afford single building, and want to fully focus on it. Warning! Enabling this option without `Reassign only empty storages` will instantly unassign all your crates and containers, and may lead to loss of resources.": "只对优先的资源分配存储，即触发器或队列等所需要的资源，上限为所需要的数值。通常只建议在非常需要集中所有存储来进行建造时选择此项。另外请注意，如果选择此项时没有选择“只在板条箱或集装箱有空余时进行重新分配”，则会立刻取消分配所有板条箱和集装箱，由此可能会导致资源损失。",
+    "Assign storage based of individual costs of each enabled buildings, instead of going for maximums. Allows to prioritize storages for queue and trigger, and skip assigning for unaffrdable expensive buildings. Experimental feature.": "根据启用的建筑每一个的花费来分配存储，而不是考虑总量来分配。可以优先对触发器或队列等所需要的资源分配存储，并可以跳过超过储量上限的建筑。实验性的功能。",
 
     // 生产设置
     "Production Settings": "生产设置",
@@ -617,7 +616,7 @@ var CNZ_MAP = {
     "Minimum materials to preserve": "工厂原料保底产量",
     "Mining Drone": "采矿机器人",
     "Pylon": "水晶塔",
-    "Wait for full mana": "等待法力恢复至上限",
+    "Mana income used": "法力产量使用的比例",
     "Ritual": "仪式",
 
     "Chrysotile weighting for autoQuarry, applies after adjusting to difference between current amounts of Stone and Chrysotile": "自动温石棉控制使用的权重，根据当前的石头和温石棉差值来应用权重",
@@ -631,7 +630,7 @@ var CNZ_MAP = {
     "Ignore craftables once stored amount surpass cost of most expensive building, until all missing resources will be crafted. After that works as with 'none' adjustments.": "当锻造物储量超过花费最高的建筑时忽略相应锻造物，直到所有锻造物都超过了相应数值。之后与上方“无”选项效果相同。",
     "Uses weightings of buildings which are waiting for craftables, as multipliers to craftables weighting. This option requires autoBuild.": "使用需要锻造物建筑的权重，计入锻造物的权重。需要开启自动建筑此项才能生效。",
     "Factory will craft resources only when all required material above given ration": "工厂只在所有需要的材料都高于保底产量时制造相应产品",
-    "Cast rituals only with full mana": "只在法力达到上限时激活仪式",
+    "Income portion to use on rituals. Setting to 1 is not recomended, as it will halt mana regeneration. Applied only when mana not capped - with capped mana script will always use all income.": "仪式使用的法力产量比例。不建议设为1，这样会使法力产量为零。只在法力未达到上限时生效，达到上限后将使用所有法力产量。",
 
     // 工作设置
     "Job Settings": "工作设置",
@@ -751,6 +750,8 @@ var CNZ_MAP = {
     "Gate demons fully supressed": "远古之门的恶魔已经完全压制",
     "Warehouses, Garage, Cargo Yard": "仓库，格纳库，星际货仓",
     "Need more storage": "需要更多提供储量上限的建筑",
+    "Housing": "住房",
+    "Less than 90% of houses are used": "有市民居住的住房没有超过90%",
 
     // ARPA设置
     "A.R.P.A. Settings": "ARPA设置",
