@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Evolve-新版TMVictor汉化
 // @namespace    https://gitee.com/angle_god/tmvictor-localization-chinese
-// @version      1.3.7
+// @version      1.3.8
 // @description  try to take over the world!
 // @downloadURL  https://github.com/pengminxuan/new-tmvictor-chn/raw/main/main.user.js
 // @author       天使不见时
@@ -453,13 +453,16 @@ var CNZ_MAP = {
     "Reset Mech & Spire Settings": "机甲及尖塔设置还原",
     "Scrap mechs": "解体机甲",
     "Scrap efficiency": "解体效率",
+    "Collector value": "搜集机甲价值",
     "Full bay": "机甲满舱",
     "All inefficient": "所有低效",
     "Excess inefficient": "超过低效",
     "Build mechs": "制造机甲",
     "Random good": "最佳设计",
     "Current design": "当前设计",
-    "Most efficient": "最高效的",
+    "Damage Per Size": "每空间战斗力",
+    "Damage Per Gems": "每宝石战斗力",
+    "Damage Per Supply": "每补给战斗力",
     "Preferred mech size": "偏好的机甲尺寸",
     "Gravity mech size": "重力环境下的机甲尺寸",
     "Always": "常时",
@@ -482,8 +485,10 @@ var CNZ_MAP = {
     "Gravity": "重力",
     "Scouts": "侦察机甲",
     "Damage Per Size\xa0": "每空间战斗力",
-    "Damage Per Supply\xa0": "每补给战斗力",
-    "Damage Per Gems\xa0": "每宝石战斗力",
+    "Damage Per Supply (New)\xa0": "每补给战斗力(新)",
+    "Damage Per Gems (New)\xa0": "每宝石战斗力(新)",
+    "Damage Per Supply (Rebuild)\xa0": "每补给战斗力(重新制造)",
+    "Damage Per Gems (Rebuild)\xa0": "每宝石战斗力(重新制造)",
 
     "Configures what will be scrapped. Infernal mechs won't ever be scrapped.": "设置解体机甲的情况。不会解体地狱化的机甲。",
     "Nothing will be scrapped automatically": "不自动解体机甲",
@@ -491,11 +496,14 @@ var CNZ_MAP = {
     "Scrap all inefficient mechs immediately, using refounded resources to build better ones": "解体所有效率低的机甲，并更换为更好的机甲。",
     "Scrap as much inefficient mechs as possible, trying to preserve just enough of old mechs to fill bay to max by the time when next floor will be reached, calculating threshold based on progress speed and resources incomes": "在保留差不多刚好能够到达下一层的机甲前提下，尽可能解体所有低效的机甲",
     "Scrap mechs only when '((OldMechRefund / NewMechCost) / (OldMechDamage / NewMechDamage))' more than given number.&#xA;For the cases when exchanged mechs have same size(1/3 refund) it means that with 1 eff. script allowed to scrap mechs under 33.3%. 1.5 eff. - under 22.2%, 2 eff. - under 16.6%, 0.5 eff. - under 66.6%, 0 eff. - under 100%, etc.&#xA;Efficiency below '1' is not recommended, unless scrap set to 'Full bay', as it's a breakpoint when refunded resources can immidiately compensate lost damage, resulting with best damage growth rate.&#xA;Efficiency above '1' is useful to save resources for more desperate times, or to compensate low soul gems income.": "只在(旧机甲返还资源/新机甲资源花费)/(旧机甲攻击力/新机甲攻击力)超过相应数字时解体机甲。",
+    "Collectors can't be directly compared with combat mechs, having no firepower. Script will assume that one collector/size is equal to this amount of scout/size. If you feel that script is too reluctant to scrap old collectors - you can decrease this value. Or increase, to make them more persistant. 1 value - 50% collector equial to 50% scout, 0.5 value - 50% collector equial to 25% scout, 2 value - 50% collector equial to 100% scout, etc.": "搜集机甲没有战斗力，所以无法直接与其他机甲进行比较。脚本将以设定的比例来衡量搜集机甲的价值。如果您觉得脚本不太愿意解体旧的搜集机甲，您可以降低此数值，反之也可以提高此数值。设为1的情况下视为与侦察机甲等同战斗力，设为0.5则视为一半，设为2则视为两倍，以此类推。",
     "Configures what will be build. Infernal mechs won't ever be build.": "设置制造机甲的情况。不会制造地狱化的机甲。",
     "Nothing will be build automatically": "不自动制造机甲",
     "Build random mech with size chosen below, and best possible efficiency": "制造大小为下方选择的，效率最高的机甲",
     "Build whatever currently set in Mech Lab": "按照机甲实验室当前的设计来制造机甲",
-    "Select mech with best damage per size for current floor, based on current amount of Soul Gems, and Supplies storage cap": "根据当前的灵魂宝石数量和补给上限，尽可能选择最佳的机甲",
+    "Select affordable mech with most damage per size on current floor": "根据当前层的每空间战斗力，尽可能选择最佳的机甲",
+    "Select affordable mech with most damage per gems on current floor": "根据当前层的每宝石战斗力，尽可能选择最佳的机甲",
+    "Select affordable mech with most damage per supply on current floor": "根据当前层的每补给战斗力，尽可能选择最佳的机甲",
     "Size of random mechs": "最佳设计的机甲尺寸",
     "Override preferred size with this on floors with high gravity": "重力环境下自动制造的机甲尺寸",
     "Add special equipment to all mechs": "所有机甲都使用特殊装备",
@@ -591,7 +599,7 @@ var CNZ_MAP = {
     "Saves resources and shortens run time by limiting storage pre-MAD": "限制核弹重置之前阶段的存储来节省资源和相应时间",
     "Wait until storage is empty before reassigning containers to another resource, to prevent overflowing and wasting resources": "直到相应的板条箱或集装箱未装有相应资源时才考虑将它重新分配给其他资源，以防止资源溢出浪费",
     "Assigns 3% more resources above required amounts, ensuring that required quantity will be actually reached, even if other part of script trying to sell\\eject\\switch production, etc.": "以超过需要数值的3%进行分配，以保证能达到所需要的数值，以避免脚本其他功能的干扰。",
-    "Assign storage based of individual costs of each enabled buildings, instead of going for maximums. Allows to prioritize storages for queue and trigger, and skip assigning for unaffrdable expensive buildings. Experimental feature.": "根据启用的建筑每一个的花费来分配存储，而不是考虑总量来分配。可以优先对触发器或队列等所需要的资源分配存储，并可以跳过超过储量上限的建筑。实验性的功能。",
+    "Assign storage based of individual costs of each enabled buildings, instead of going for maximums. Allows to prioritize storages for queue and trigger, and skip assigning for unaffordable expensive buildings. Experimental feature.": "根据启用的建筑每一个的花费来分配存储，而不是考虑总量来分配。可以优先对触发器或队列等所需要的资源分配存储，并可以跳过超过储量上限的建筑。实验性的功能。",
 
     // 生产设置
     "Production Settings": "生产设置",
