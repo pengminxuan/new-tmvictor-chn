@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Evolve-新版TMVictor汉化
 // @namespace    https://gitee.com/angle_god/tmvictor-localization-chinese
-// @version      1.4.2
+// @version      1.4.3
 // @description  try to take over the world!
 // @downloadURL  https://github.com/pengminxuan/new-tmvictor-chn/raw/main/main.user.js
 // @author       天使不见时
@@ -39,7 +39,8 @@ var LISTENER_TIME = 1000;
 var CNZ_MAP = {
     // 侧边栏
     "More script options available in Settings tab": "设置选项卡中可以进行更详细的设置",
-    "Ctrl+click options to open advanced configuration": "按住Ctrl键再点击选项，可以开启进阶设置",
+    "Ctrl+click options to open ": "按住Ctrl键再点击选项，可以开启",
+    "advanced configuration": "进阶设置",
     "masterScriptToggle": "启用脚本",
     "showSettings": "显示设置",
     "autoEvolution": "自动进化",
@@ -70,9 +71,6 @@ var CNZ_MAP = {
     "autoSupply": "自动补给",
     "Prestige Options": "威望重置选项",
     "Bulk Sell": "批量销售",
-    "Minimum money to keep :": "最低保留资金:",
-    "Set": "设置",
-    "Set %": "设置百分比",
 
     "Stop taking any actions on behalf of the player.": "在玩家需要的时候，停止所有脚本的活动。",
     "You can disable rendering of settings UI once you\'ve done with configuring script, if you experiencing performance issues. It can help a little.": "在设置选项卡中是否显示脚本相关设置。可能略微提升游戏速度。",
@@ -534,8 +532,8 @@ var CNZ_MAP = {
     "Train spies to use against foreign powers": "训练间谍用于在外国势力执行任务",
     "Maximum spies per foreign power": "每个敌对国家最多训练的间谍数",
     "Switches to attack next foreign power once its power lowered down to this number. When exact numbers not know script tries to approximate it.": "当一个国家的军事实力低于此数值时，转为攻击它。如果确切数字无法看到，则脚本会尝试进行估计。",
-    "Perform this against inferior foreign power, with military power equal or below given threshold. Complex actions includes required preparation - Annex and Purchase will incite and influence, Occupy will sabotage, until said options will be available.": "对较弱小的国家进行的间谍活动类型，较弱小指军事力量不高于上方数值的国家。复杂的活动将首先进行相应的准备——吞并和收购将先进行煽动和亲善，吞并将先进行破坏，直到相应的选项可用为止。",
-    "Perform this against superior foreign power, with military power above given threshold. Complex actions includes required preparation - Annex and Purchase will incite and influence, Occupy will sabotage, until said options will be available.": "对较强大的国家进行的间谍活动类型，较强大指军事力量高于上方数值的国家。复杂的活动将首先进行相应的准备——吞并和收购将先进行煽动和亲善，吞并将先进行破坏，直到相应的选项可用为止。",
+    "Perform this against inferior foreign power, with military power equal or below given threshold. Complex actions includes required preparation - Annex and Purchase will incite and influence, Occupy will sabotage, until said options will be available.": "对较弱小的国家进行的间谍活动类型，较弱小指军事力量不高于上方数值的国家。复杂的活动将首先进行相应的准备——吞并和收购将先进行煽动和亲善，占领将先进行破坏，直到相应的选项可用为止。",
+    "Perform this against superior foreign power, with military power above given threshold. Complex actions includes required preparation - Annex and Purchase will incite and influence, Occupy will sabotage, until said options will be available.": "对较强大的国家进行的间谍活动类型，较强大指军事力量高于上方数值的国家。复杂的活动将首先进行相应的准备——吞并和收购将先进行煽动和亲善，占领将先进行破坏，直到相应的选项可用为止。",
     "Only attacks if you ALSO have the target battalion size of healthy soldiers available, so this setting will only take effect if your battalion does not include all of your soldiers": "下方的未受伤士兵比例也会生效，因此只在未让所有士兵进攻时生效",
     "Set to less than 100 to take advantage of being able to heal more soldiers in a game day than get wounded in a typical attack": "合理设置为某个低于100的值，可以有效利用游戏内的自然愈合机制",
     "Hire a mercenary if remaining money after purchase will be greater than this percent": "如果聘请后剩余资金大于此比例，则聘请雇佣兵",
@@ -612,11 +610,13 @@ var CNZ_MAP = {
     "Random": "随机",
     "Never": "永不",
     "Special mechs": "特殊装备",
-    "Minimum scouts ratio": "侦察机甲最低比例",
+    "Maximum mech potential for Waygate": "进入地狱之门的机甲潜力阈值",
     "Minimum supply income": "最低补给收入",
     "Maximum collectors ratio": "搜集机甲最高比例",
-    "Maximum mech potential for Waygate": "进入地狱之门的机甲潜力阈值",
-    "Save up full supplies for next floor": "为下一层提前积攒补给",
+    "Save up supplies for next floor": "为下一层提前积攒补给的比例",
+    "Minimum scouts ratio": "侦察机甲最低比例",
+    "Build infernal collectors": "是否建造地狱化搜集机甲",
+    "Rebuild scouts": "是否重新建造侦察机甲",
     "Build smaller mechs when preferred not available": "当无法再建造偏好机甲时建造尺寸更小的机甲",
     "Build spire buildings only with full bay": "是否在建造尖塔建筑之前先填满剩余的机舱空间",
     "Scrap mechs only after building maximum bays": "是否在解体机甲之前先最大化建造机甲舱",
@@ -637,7 +637,7 @@ var CNZ_MAP = {
     "Scrap mechs only when mech bay is full, and script need more room to build mechs": "只在机甲舱满且需要更多机舱空间的时候解体机甲",
     "Scrap all inefficient mechs immediately, using refounded resources to build better ones": "解体所有效率低的机甲，并更换为更好的机甲。",
     "Scrap as much inefficient mechs as possible, trying to preserve just enough of old mechs to fill bay to max by the time when next floor will be reached, calculating threshold based on progress speed and resources incomes": "在保留差不多刚好能够到达下一层的机甲前提下，尽可能解体所有低效的机甲",
-    "Scrap mechs only when '((OldMechRefund / NewMechCost) / (OldMechDamage / NewMechDamage))' more than given number.&#xA;For the cases when exchanged mechs have same size(1/3 refund) it means that with 1 eff. script allowed to scrap mechs under 33.3%. 1.5 eff. - under 22.2%, 2 eff. - under 16.6%, 0.5 eff. - under 66.6%, 0 eff. - under 100%, etc.&#xA;Efficiency below '1' is not recommended, unless scrap set to 'Full bay', as it's a breakpoint when refunded resources can immidiately compensate lost damage, resulting with best damage growth rate.&#xA;Efficiency above '1' is useful to save resources for more desperate times, or to compensate low soul gems income.": "只在(旧机甲返还资源/新机甲资源花费)/(旧机甲攻击力/新机甲攻击力)超过相应数字时解体机甲。",
+    "Scrap mechs only when '((OldMechRefund / NewMechCost) / (OldMechDamage / NewMechDamage))' more than given number.\nFor the cases when exchanged mechs have same size(1/3 refund) it means that with 1 eff. script allowed to scrap mechs under 33.3%. 1.5 eff. - under 22.2%, 2 eff. - under 16.6%, 0.5 eff. - under 66.6%, 0 eff. - under 100%, etc.\nEfficiency below '1' is not recommended, unless scrap set to 'Full bay', as it's a breakpoint when refunded resources can immidiately compensate lost damage, resulting with best damage growth rate.\nEfficiency above '1' is useful to save resources for more desperate times, or to compensate low soul gems income.": "只在(旧机甲返还资源/新机甲资源花费)/(旧机甲攻击力/新机甲攻击力)超过相应数字时解体机甲。",
     "Collectors can't be directly compared with combat mechs, having no firepower. Script will assume that one collector/size is equal to this amount of scout/size. If you feel that script is too reluctant to scrap old collectors - you can decrease this value. Or increase, to make them more persistant. 1 value - 50% collector equial to 50% scout, 0.5 value - 50% collector equial to 25% scout, 2 value - 50% collector equial to 100% scout, etc.": "搜集机甲没有战斗力，所以无法直接与其他机甲进行比较。脚本将以设定的比例来衡量搜集机甲的价值。如果您觉得脚本不太愿意解体旧的搜集机甲，您可以降低此数值，反之也可以提高此数值。设为1的情况下视为与侦察机甲等同战斗力，设为0.5则视为一半，设为2则视为两倍，以此类推。",
     "Configures what will be build. Infernal mechs won't ever be build.": "设置制造机甲的情况。不会制造地狱化的机甲。",
     "Nothing will be build automatically": "不自动制造机甲",
@@ -653,15 +653,17 @@ var CNZ_MAP = {
     "Special equipment will have same chance to be added as all others": "所有特殊装备都可能使用",
     "Never add special equipment": "永不使用特殊装备",
     "Configures special equip": "设置特殊装备",
-    "Scouts compensate terrain penalty of suboptimal mechs. Build them up to this ratio.": "侦察机甲可以抵消楼层生态对机甲的惩罚。以此比例建造它们。",
+    "Fight Demon Lord only when current mech team potential below given amount. Full bay of best mechs will have `1` potential. Damage against Demon Lord does not affected by floor modifiers, all mechs always does 100% damage to him. Thus it's most time-efficient to fight him at times when mechs can't make good progress against regular monsters, and waiting for rebuilding. Auto Power needs to be on for this to work.": "只在机甲潜力低于相应数值时与恶魔领主进行战斗。机甲舱充满最好设计的机甲时潜力为1。恶魔领主的强度不受楼层和武器装备影响，所以在普通敌人需要时间太久时转为攻击恶魔领主会更有效率。需要开启自动供能此项才能生效。",
     "Build collectors if current supply income below given number": "如果当前补给收入低于相应数字，则开始建造搜集机甲",
     "Limiter for above option, maximum space used by collectors": "限制上方选项的搜集机甲数量。",
-    "Fight Demon Lord only when current mech team potential below given amount. Full bay of best mechs will have `1` potential. Damage against Demon Lord does not affected by floor modifiers, all mechs always does 100% damage to him. Thus it's most time-efficient to fight him at times when mechs can't make good progress against regular monsters, and waiting for rebuilding. Auto Power needs to be on for this to work.": "只在机甲潜力低于相应数值时与恶魔领主进行战斗。机甲舱充满最好设计的机甲时潜力为1。恶魔领主的强度不受楼层和武器装备影响，所以在普通敌人需要时间太久时转为攻击恶魔领主会更有效率。需要开启自动供能此项才能生效。",
     "Fill mech bays up to current limit before spending resources on additional spire buildings": "在花费资源建造尖塔建筑之前，先建造机甲填满剩余的机舱空间",
     "Scrap old mechs only when no new bays and purifiers can be builded": "只在无法建造机甲舱和空气净化器时解体机甲",
     "This switch have no ingame effect, and used to configure calculator below": "用于下方计算",
     "This input have no ingame effect, and used to configure calculator below": "用于下方计算",
-    "Stop building new mechs close to next floor, preparing to build bunch of new mechs suited for next enemy": "在接近下一层时停止制造新的机甲，以保留补给",
+    "Ratio of supplies to save up for next floor. Script will stop spending supplies on new mechs when it estimates that by the time when floor will be cleared you'll be under this supply ratio. That allows build bunch of new mechs suited for next enemy right after entering new floor. With 1 value script will try to start new floors with full supplies, 0.5 - with half, 0 - any, effectively disabling this option, etc.": "为下一层保留的补给比例。脚本将估计您在这一层剩余的时间，如果通过这一层时补给会低于这个比例，则将开始保留补给。这样您就可以在进入新一层时立刻建造最佳的机甲了。设为1则将以满补给进入下一层，设为0.5则将以一半补给进入下一层，设为0则将无视此项，以此类推。",
+    "Scouts compensate terrain penalty of suboptimal mechs. Build them up to this ratio.": "侦察机甲可以抵消楼层生态对机甲的惩罚。以此比例建造它们。",
+    "Infernal collectors have incresed supply cost, and payback time, but becomes more profitable after ~30 minutes of uptime.": "地狱化搜集机甲需要花费更多补给，但收益也更高，如果建造完以后可以持续30分钟左右运行，则净收益将超过普通搜集机甲。",
+    "Scouts provides full bonus to other mechs even being infficient, this option prevent rebuilding them saving resources.": "侦察机甲即使在效率下降时，对其他机甲的加成也不会受到影响，此项可以阻止脚本重新建造侦察机甲，以节省资源。",
     "Build smaller mechs when preferred size can't be used due to low remaining bay space, or supplies cap": "当机舱空间不足或补给上限不足，无法制造偏好尺寸的机甲时，制造尺寸更小的机甲",
     "Enables special powering logic for Purifier, Port, Base Camp, and Mech Bays. Script will try to maximize supplies cap, building as many ports and camps as possible at best ratio, disabling mech bays when more support needed. With this cap it'll build up as many mech bays as possible, and once maximum bays is built - it'll turn them all on. This option requires Auto Build and Auto Power.": "启用空气净化器，港口，登陆营地和机甲舱专用的供能逻辑。脚本将首先最大化补给上限，以最佳比例建造港口和登陆营地，然后尽可能地建造机甲舱，之后再启用机甲舱。需要开启自动供能和自动建筑此项才能生效。",
 
@@ -722,6 +724,8 @@ var CNZ_MAP = {
     // 市场设置
     "Market Settings": "市场设置",
     "Reset Market Settings": "市场设置还原",
+    "Manual trade minimum money": "手动贸易保留的资金数量",
+    "Manual trade minimum money percentage": "手动贸易保留的资金比例",
     "Trade minimum money /s": "贸易允许的每秒资金收入最低值",
     "Trade minimum money percentage /s": "贸易允许的每秒资金收入最低比例",
     "Sell excess resources": "是否出售多余的资源",
@@ -736,6 +740,8 @@ var CNZ_MAP = {
     "Priority": "优先级",
     "Galaxy Trades": "星际贸易",
 
+    "Minimum money to keep after bulk buying": "批量购买后至少保留相应的资金数量",
+    "Minimum percentage of money to keep after bulk buying": "批量购买后至少保留相应的资金比例",
     "Uses the highest per second amount of these two values. Will trade for resources until this minimum money per second amount is hit": "两项中较高的数值生效。达到每秒资金收入最低值后，才会购买资源",
     "Uses the highest per second amount of these two values. Will trade for resources until this percentage of your money per second amount is hit": "两项中较高的数值生效。达到每秒资金收入最低比例后，才会购买资源",
     "With this option enabled script will be allowed to sell resources above amounts needed for constructions or researches, without it script sell only capped resources. As side effect boughts will also be limited to that amounts, to avoid 'buy up to cap -> sell excess' loops.": "开启后将在建造或研究不需要的时候出售相应的资源，否则只会在接近上限时出售。同时，购买相应资源时也有会类似限制，以避免进入购买-出售的死循环。",
@@ -842,7 +848,7 @@ var CNZ_MAP = {
     "Automatically sets the default job in order of Quarry Worker -> Lumberjack -> Crystal Miner -> Scavenger -> Hunter -> Farmer": "自动以石工->伐木工人->水晶矿工->清道夫->猎人->农民的顺序设置默认工作",
     "AFTER allocating breakpoints this weighting will be used to split lumberjacks, quarry workers, crystal miners and scavengers": "用于分配伐木工人，石工，水晶矿工和清道夫的数量",
     "Disable Miners and Coal Miners after reaching Andromeda": "到达仙女座星系以后禁用矿工和煤矿工人",
-    "Disable non-Scarletite crafters when manual craft is allowed": "如果可以手动进行锻造，则禁用除了绯绯色金工匠以外的其他所有工匠",
+    "Disable foundry crafters when manual craft is allowed": "如果可以手动进行锻造，则禁用可手动锻造资源的所有工匠",
 
     // 建筑设置
     "Building Settings": "建筑设置",
