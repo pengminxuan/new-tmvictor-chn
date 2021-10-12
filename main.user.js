@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Evolve-新版TMVictor汉化
 // @namespace    https://gitee.com/angle_god/tmvictor-localization-chinese
-// @version      1.4.3
+// @version      1.4.4
 // @description  try to take over the world!
 // @downloadURL  https://github.com/pengminxuan/new-tmvictor-chn/raw/main/main.user.js
 // @author       天使不见时
@@ -110,7 +110,7 @@ var CNZ_MAP = {
     "Value": "值",
     "AND": "与",
     "OR": "或",
-    "NOR": "非",
+    "NOR": "或非",
     "NAND": "与非",
     "XOR": "异或",
     "XNOR": "同或",
@@ -128,6 +128,10 @@ var CNZ_MAP = {
     "Returns result of evaluating code": "返回代码求值后的值",
     "Building Unlocked": "建筑是否解锁",
     "Return true when building is unlocked": "如果建筑已解锁，则返回真值",
+    "Building Clickable": "建筑是否可点击",
+    "Return true when building is clickable": "如果建筑可点击，则返回真值",
+    "Building Affordable": "建筑是否足够资源建造",
+    "Return true when building is affordable": "如果建筑足够资源建造，则返回真值",
     "Building Count": "建筑数量",
     "Returns amount of buildings as number": "以数值形式返回建筑数量",
     "Building Enabled": "建筑启用数量",
@@ -157,7 +161,7 @@ var CNZ_MAP = {
     "Resource Storage": "资源上限",
     "Returns maximum amount of resource or support as number": "以数值形式返回资源或支持上限的数量",
     "Resource Income": "资源收入",
-    "Returns current income of resource as number": "以数值形式返回当前资源收入的数量",
+    "Returns current income of resource or unused support as number": "以数值形式返回当前资源收入或未使用的支持的数量",
     "Resource Ratio": "资源比例",
     "Returns storage ratio of resource as number. Number 0.5 means that storage is 50% full, and such.": "以数值形式返回当前资源与上限比值的数量。0.5意味着资源到达了储量上限的50%，以此类推。",
     "Resource Satisfied": "资源满足率",
@@ -301,6 +305,7 @@ var CNZ_MAP = {
     // 常规设置
     "General Settings": "常规设置",
     "Reset General Settings": "常规设置还原",
+    "Script tick rate": "脚本运算频率",
     "Production": "生产",
     "Prioritize resources for triggers": "资源是否优先分配给触发器",
     "Prioritize resources for queue": "资源是否优先分配给队列",
@@ -316,6 +321,7 @@ var CNZ_MAP = {
     "Always autoclick resources": "是否总是自动收集资源",
     "Maximum clicks per second": "每秒最高点击次数",
 
+    "Script runs once per this amount of game ticks. Game tick every 250ms, thus with rate 4 script will run once per second. You can set it lower to make script act faster, or increase it if you have performance issues. Tick rate should be a positive integer.": "每达到相应时刻后脚本就进行一次运算。游戏每250毫秒达到一个时刻，因此设为4以后脚本将每秒运算一次。您可以将此值调低以使脚本更快运行，也可以将此值调高来避免卡顿。时刻数值需要为正整数。",
     "Readjust trade routes and production to resources required for active triggers. Missing resources will have 100 priority where applicable(autoMarket, autoGalaxyMarket, autoFactory, autoMiningDroid), or just 'top priority' where not(autoTax, autoCraft, autoCraftsmen, autoQuarry, autoSmelter).": "将贸易路线和生产资源调整为触发器所需要的资源。缺少的资源对于自动贸易、自动银河贸易、自动工厂和自动采矿机器人来说权重为100，对于自动税率、自动锻造、自动温石棉控制、自动冶炼来说为最高优先级。",
     "Readjust trade routes and production to resources required for buildings and researches in queue. Missing resources will have 100 priority where applicable(autoMarket, autoGalaxyMarket, autoFactory, autoMiningDroid), or just 'top priority' where not(autoTax, autoCraft, autoCraftsmen, autoQuarry, autoSmelter).": "将贸易路线和生产资源调整为队列中的建筑和研究所需要的资源。缺少的资源对于自动贸易、自动银河贸易、自动工厂和自动采矿机器人来说权重为100，对于自动税率、自动锻造、自动温石棉控制、自动冶炼来说为最高优先级。",
     "Readjust trade routes and production to resources required for unlocked and affordable researches. Works only with no active triggers, or queue. Missing resources will have 100 priority where applicable(autoMarket, autoGalaxyMarket, autoFactory, autoMiningDroid), or just 'top priority' where not(autoTax, autoCraft, autoCraftsmen, autoQuarry, autoSmelter).": "将贸易路线和生产资源调整为已解锁且上限足够的研究所需要的资源。只在触发器和队列中没有内容激活时生效。缺少的资源对于自动贸易、自动银河贸易、自动工厂和自动采矿机器人来说权重为100，对于自动税率、自动锻造、自动温石棉控制、自动冶炼来说为最高优先级。",
@@ -374,12 +380,13 @@ var CNZ_MAP = {
     "Picks most habitable planet, based on biome and trait": "根据生物群系和星球特性，选择最佳的星球",
     "Picks planet with most unearned achievements. Takes in account extinction achievements for planet exclusive races, and greatness achievements for planet biome, trait, and exclusive genus.": "选择可以尽可能多完成成就的星球。将考虑毁灭类成就中星球特有的种族，以及伟大类成就中生物群系，星球特征和特有的种群。",
     "Picks planet with highest weighting. Should be configured in Planet Weighting Settings section.": "选择星球权重最高的星球。可以在下面的星球权重设置中进行更进一步的设置。",
-    "Picks race with not infused pillar for Ascension, with unearned Greatness achievement for Bioseed, or with unearned Extinction achievement in other cases. Conditional races are prioritized, when available.": "优先选择还没有在永恒立柱上嵌入和谐水晶的种族，或者是完成伟大类成就的种群，或者是还没有完成毁灭类成就的种族。特有的种族如果可以选择，将优先进行选择。",
+    "Picks race giving most achievements upon completing run. Tracks all achievements limited to specific races and resets. Races unique to current planet biome are prioritized, when available.": "优先选择可以获得更多成就的种族，会将所有种族和种群限定，或是重置方式限定的成就纳入考虑。生物群系特有的种族如果可以选择，将优先进行选择。",
     "Chosen race will be automatically selected during next evolution": "下个进化阶段自动选择相应的种族",
     "Perform soft resets until you'll get chosen race. Useless after getting mass exintion perk.": "直到选中想要选择的种族之前一直进行软重置。在获得大灭绝特权后就没有必要选择了。",
     "When enabled script with evolve with queued settings, from top to bottom. During that script settings will be overriden with settings stored in queue. Queued target will be removed from list after evolution.": "按照队列从上至下进行进化。队列中有项目存在时，优先于脚本的进化设置生效。在完成进化后，相应的队列项目将被移除。",
     "When enabled applied evolution targets will be moved to the end of queue, instead of being removed": "开启后，队列中的项目在完成进化后将回到队列末尾，而不是被移除",
     "Inherited from current Prestige Settings": "与当前的威望重置类型一致",
+    "Settings applied before evolution. Changed settings not limited to initial template, you can manually add any script options to JSON.": "进化之前生效的设置。不仅限于模板，您还可以将其他的脚本设置以JSON形式输入。",
 
     // 星球独有种族警告
     "This race have special requirements: Hellscape planet. This condition is met.": "此种族的特殊要求为：地狱星球。当前满足此条件。",
@@ -796,6 +803,8 @@ var CNZ_MAP = {
     "Produce both Iron and Steel at ratio which will produce maximum amount of resources required for buildings at same time for both": "以一定的比例同时冶炼铁和钢，保证它们同时达到建筑的需求",
     "Distribution of smelters between iron and steel": "冶炼厂冶炼铁和钢的方式",
     "Configures how exactly craftables will be weighted against each other": "控制锻造物与其他资源相比的权重",
+    "Ratio between resources. Script assign craftsmans to resource with lowest 'amount / weighting'. Ignored by manual crafting.": "资源的权重。脚本会优先将工匠分配给(资源数量除以权重)较低的锻造物。手动锻造时无效。",
+    "Only craft resource when storage ratio of all required ingredients above given number. E.g. bricks with 0.1 min ingredients will be crafted only when cement storage at least 10% filled.": "只在原材料大于相应比例时进行锻造。例如，将砌砖设为0.1，则只会在水泥数量超过库存上限10%的时候锻造砌砖。",
     "Use configured weightings with no additional adjustments, craftables with x2 weighting will be crafted two times more intense than with x1, etc.": "按照正常的权重制造。2倍权重的锻造物将比1倍权重的锻造物多制造1倍，以此类推。",
     "Ignore craftables once stored amount surpass cost of most expensive building, until all missing resources will be crafted. After that works as with 'none' adjustments.": "当锻造物储量超过花费最高的建筑时忽略相应锻造物，直到所有锻造物都超过了相应数值。之后与上方“无”选项效果相同。",
     "Uses weightings of buildings which are waiting for craftables, as multipliers to craftables weighting. This option requires autoBuild.": "使用需要锻造物建筑的权重，计入锻造物的权重。需要开启自动建筑此项才能生效。",
@@ -881,6 +890,9 @@ var CNZ_MAP = {
     "Build only Knowledge Shrines": "只建造提升知识的圣地",
     "Build only Tax Shrines": "只建造提升税收的圣地",
     "Auto Build shrines only at moons of chosen shrine": "只在对应月相时建造相应的圣地",
+    "Enables auto building. Triggers ignores this option, allowing to build disabled things.": "开启自动建造。触发器无视此选项。",
+    "Maximum amount of buildings to build. Triggers ignores this option, allowing to build above limit. Can be also used to limit amount of enabled buildings, with respective option above.": "建造上限。触发器无视此选项。开启上方相应选项以后还可以用来限制供能的建筑数量。",
+    "Script will try to spend 2x amount of resources on building having 2x weighting, and such.": "权重越高，将优先使用越多资源来进行建造",
     "First toggle enables basic automation based on priority, power, support, and consumption. Second enables logic made specially for particlular building, their effects are different, but generally it tries to behave smarter than just staying enabled all the time.": "第一个开关会根据优先级，供能情况，支持，和消耗情况来控制供能。第二个开关可以更好地根据当前情况控制特定建筑的供能。",
 
     // 自动建筑权重设置
