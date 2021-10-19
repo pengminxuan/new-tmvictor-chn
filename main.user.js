@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Evolve-新版TMVictor汉化
 // @namespace    https://gitee.com/angle_god/tmvictor-localization-chinese
-// @version      1.4.4
+// @version      1.4.5
 // @description  try to take over the world!
 // @downloadURL  https://github.com/pengminxuan/new-tmvictor-chn/raw/main/main.user.js
 // @author       天使不见时
@@ -1539,6 +1539,19 @@ function buildingNameTextCH()
         delete tempTitle
         delete tempTitleStr
     }
+    //为特殊建筑手动添加对照
+    buildingCNNameObj["尖塔"] = "Spire Tower"
+    buildingENNameObj["Spire Tower"] = "尖塔"
+
+    buildingCNNameObj["奥利哈刚戴森球"] = "Proxima Dyson Sphere (Orichalcum)"
+    buildingENNameObj["Proxima Dyson Sphere (Orichalcum)"] = "奥利哈刚戴森球"
+    buildingCNNameObj["戴森球"] = "Proxima Dyson Sphere (Bolognium)"
+    buildingENNameObj["Proxima Dyson Sphere (Bolognium)"] = "戴森球"
+
+    buildingCNNameObj["风车（邪恶种群）"] = "Windmill (Evil)"
+    buildingENNameObj["Windmill (Evil)"] = "风车（邪恶种群）"
+    buildingCNNameObj["风车"] = "Windmill"
+    buildingENNameObj["Windmill"] = "风车"
 
 }
 
