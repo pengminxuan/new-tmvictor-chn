@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Evolve-新版TMVictor汉化
 // @namespace    https://github.com/pengminxuan/new-tmvictor-chn
-// @version      1.4.6
+// @version      1.4.7
 // @description  try to take over the world!
 // @downloadURL  https://github.com/pengminxuan/new-tmvictor-chn/raw/main/main.user.js
 // @author       天使不见时
@@ -98,7 +98,7 @@ var CNZ_MAP = {
     "Manages graphene plant. Not user configurable - just uses least demanded resource for fuel.": "自动管理石墨烯厂的燃料。无法手动控制，会自动使用需求最少的燃料。",
     "Automatically assembles genes only when your knowledge is at max. Stops when DNA Sequencing is researched.": "当知识满了以后，自动进行基因重组。进行首次测序时不生效。",
     "Purchase minor traits using genes according to their weighting settings.": "根据相应的权重，自动使用基因购买次要特质。",
-    "Eject excess resoruces to black hole. Normal resources ejected when they close to storage cap, craftables - when above requirements.": "将多余的资源用于黑洞质量喷射。普通资源将在接近上限时用于喷射，锻造物将在超过需求时用于喷射。",
+    "Eject excess resources to black hole. Normal resources ejected when they close to storage cap, craftables - when above requirements.": "将多余的资源用于黑洞质量喷射。普通资源将在接近上限时用于喷射，锻造物将在超过需求时用于喷射。",
     "Send excess resources to Spire. Normal resources sent when they close to storage cap, craftables - when above requirements. Takes priority over ejector.": "将多余的资源用于补给。普通资源将在接近上限时用于补给，锻造物将在超过需求时用于补给。优先级高于质量喷射器。",
     "eg. 10 equals 10%": "例如：10代表10%",
 
@@ -166,6 +166,8 @@ var CNZ_MAP = {
     "Returns storage ratio of resource as number. Number 0.5 means that storage is 50% full, and such.": "以数值形式返回当前资源与上限比值的数量。0.5意味着资源到达了储量上限的50%，以此类推。",
     "Resource Satisfied": "资源满足率",
     "Returns satisfied ratio of resource as number. Number above 1 means than current amount of resource above maximum costs": "以数值形式返回当前资源满足率的数量。超过1的数字意味着当前资源超过了最大花费。",
+    "Race Genus": "当前种群",
+    "Returns true when playing selected genus": "如果当前种群为所选择的种群，则返回真值",
     "Race Current": "当前种族",
     "Returns true when playing selected race": "如果当前种族为所选择的种族，则返回真值",
     "Race Fanaticism": "狂热信仰种族",
@@ -211,14 +213,13 @@ var CNZ_MAP = {
     "Hell Soldiers": "地狱维度士兵数",
     "Hell Patrols": "地狱维度巡逻队数量",
     "Hell Patrol Size": "地狱维度巡逻队规模",
-    "Battalion Size": "投入兵力的士兵数",
     "Wounded Soldiers": "伤兵数",
+    "Dead Soldiers": "士兵阵亡数",
     "Ship Crew": "船员数",
     "Planet Biome": "行星生物群系",
     "Returns true when playing in selected biome": "如果当前行星的生物群系为所选择的生物群系，则返回真值",
     "Planet Trait": "行星星球特性",
     "Returns true when planet have selected trait": "如果当前行星的星球特性为所选择的星球特性，则返回真值",
-    "Default value, applied when all checks above are false": "默认值，以上条件均不满足时使用",
     "Population": "人口",
     "Slave": "奴隶",
     "Mana": "法力",
@@ -251,6 +252,8 @@ var CNZ_MAP = {
     "Alien Support": "第五星系支持",
     "Lake Support": "湖泊支持",
     "Spire Support": "尖塔支持",
+    "All values passed checks will be added or removed from list": "所有满足条件的数值将添加入列表，或者从列表中移除",
+    "First value passed check will be used. Default value:": "从上往下，首个条件满足时，将使用相应数值。默认值为：",
 
     // 威望重置设置
     "Prestige Settings": "威望重置设置",
@@ -312,6 +315,8 @@ var CNZ_MAP = {
     "Prioritize resources for Pre-MAD researches": "资源是否优先分配给相互毁灭前的研究",
     "Prioritize resources for Space+ researches": "资源是否优先分配给太空后的研究",
     "Prioritize resources for missions": "资源是否优先分配给任务",
+    "Prioritize money for unification": "资金是否优先分配给统一",
+    "Allow using prioritized resources for crafting": "允许使用优先分配的资源来进行制造",
     "Queue": "队列",
     "Save resources for queued buildings": "是否保留资源以保证队列中建筑物的建造",
     "Save resources for queued researches": "是否保留资源以保证队列中的研究",
@@ -319,19 +324,21 @@ var CNZ_MAP = {
     "Auto clicker": "自动点击",
     "Always assemble genes": "是否总是用脚本进行基因组装",
     "Always autoclick resources": "是否总是自动收集资源",
-    "Maximum clicks per second": "每秒最高点击次数",
+    "Maximum clicks per tick": "每时刻最高点击次数",
 
     "Script runs once per this amount of game ticks. Game tick every 250ms, thus with rate 4 script will run once per second. You can set it lower to make script act faster, or increase it if you have performance issues. Tick rate should be a positive integer.": "每达到相应时刻后脚本就进行一次运算。游戏每250毫秒达到一个时刻，因此设为4以后脚本将每秒运算一次。您可以将此值调低以使脚本更快运行，也可以将此值调高来避免卡顿。时刻数值需要为正整数。",
     "Readjust trade routes and production to resources required for active triggers. Missing resources will have 100 priority where applicable(autoMarket, autoGalaxyMarket, autoFactory, autoMiningDroid), or just 'top priority' where not(autoTax, autoCraft, autoCraftsmen, autoQuarry, autoSmelter).": "将贸易路线和生产资源调整为触发器所需要的资源。缺少的资源对于自动贸易、自动银河贸易、自动工厂和自动采矿机器人来说权重为100，对于自动税率、自动锻造、自动温石棉控制、自动冶炼来说为最高优先级。",
     "Readjust trade routes and production to resources required for buildings and researches in queue. Missing resources will have 100 priority where applicable(autoMarket, autoGalaxyMarket, autoFactory, autoMiningDroid), or just 'top priority' where not(autoTax, autoCraft, autoCraftsmen, autoQuarry, autoSmelter).": "将贸易路线和生产资源调整为队列中的建筑和研究所需要的资源。缺少的资源对于自动贸易、自动银河贸易、自动工厂和自动采矿机器人来说权重为100，对于自动税率、自动锻造、自动温石棉控制、自动冶炼来说为最高优先级。",
     "Readjust trade routes and production to resources required for unlocked and affordable researches. Works only with no active triggers, or queue. Missing resources will have 100 priority where applicable(autoMarket, autoGalaxyMarket, autoFactory, autoMiningDroid), or just 'top priority' where not(autoTax, autoCraft, autoCraftsmen, autoQuarry, autoSmelter).": "将贸易路线和生产资源调整为已解锁且上限足够的研究所需要的资源。只在触发器和队列中没有内容激活时生效。缺少的资源对于自动贸易、自动银河贸易、自动工厂和自动采矿机器人来说权重为100，对于自动税率、自动锻造、自动温石棉控制、自动冶炼来说为最高优先级。",
     "Readjust trade routes and production to resources required for unlocked and affordable missions. Missing resources will have 100 priority where applicable(autoMarket, autoGalaxyMarket, autoFactory, autoMiningDroid), or just 'top priority' where not(autoTax, autoCraft, autoCraftsmen, autoQuarry, autoSmelter).": "将贸易路线和生产资源调整为已解锁且上限足够的任务所需要的资源。缺少的资源对于自动贸易、自动银河贸易、自动工厂和自动采矿机器人来说权重为100，对于自动税率、自动锻造、自动温石棉控制、自动冶炼来说为最高优先级。",
+    "Prioritize money to buy spies and purchase foreign, when unification enabled and avaialble": "如果开启统一，且可以进行统一，则优先使用资金来训练间谍和收购国家。",
+    "When disabled script won't make craftables out of prioritized resources in foundry and factory.": "关闭后脚本不会在铸造厂和工厂中使用优先分配的资源。",
     "Script won't use resources needed for queued buildings. 'No Queue Order' game setting switches whether it save resources for next item, or whole queue.": "脚本不会使用队列中建筑所需要的资源。如果开启乱序队列，则整个队列中的资源都将不会使用，否则只会考虑队列中第一项。",
     "Script won't use resources needed for queued researches. 'No Queue Order' game setting switches whether it save resources for next item, or whole queue.": "脚本不会使用队列中研究所需要的资源。如果开启乱序队列，则整个队列中的资源都将不会使用，否则只会考虑队列中第一项。",
     "Script won't use resources needed for queued projects. 'No Queue Order' game setting switches whether it save resources for next item, or whole queue.": "脚本不会使用队列中ARPA项目所需要的资源。如果开启乱序队列，则整个队列中的资源都将不会使用，否则只会考虑队列中第一项。",
     "Will continue assembling genes even after De Novo Sequencing is researched": "即使研究自动组装基因后，仍然用脚本进行基因组装",
     "By default script will click only during early stage of autoBuild, to bootstrap production. With this toggled on it will continue clicking forever": "默认情况下脚本只在游戏初期自动收集资源，开启此项后将一直自动收集资源",
-    "Number of clicks performed at once, each second. Hardcapped by amount of missed resources": "每秒自动收集资源的点击次数。上限为当前资源数量与库存上限的差值",
+    "Number of clicks performed at once, each script tick. Will not ever click more than needed to fill storage.": "每时刻自动收集资源的点击次数。只在库存未满的范围内有效。",
 
     // 政府设置
     "Government Settings": "政府设置",
@@ -530,6 +537,7 @@ var CNZ_MAP = {
     "Minimum advantage": "最低优势",
     "Maximum advantage": "最高优势",
     "Maximum siege battalion": "最高围城士兵数",
+    "Auto": "自动",
     "Protect soldiers": "是否保护士兵",
 
     "Turns attacks off and on": "是否进攻敌国",
@@ -549,7 +557,10 @@ var CNZ_MAP = {
     "Minimum advantage to launch campaign, ignored during ambushes. 100% chance to win will be reached at approximately(influenced by traits and selected campaign) 75% advantage.": "进行相应战役类型最少需要的优势。进行伏击时忽略此项。大概在75%优势(受特质和战役类型影响)附近可以做到100%胜率。",
     "Once campaign is selected, your battalion will be limited in size down to this advantage, reducing potential loses": "当选择相应战役类型后，参加战斗的士兵数将限制在尽可能接近此优势的数量，以减少损失",
     "Maximum battalion for siege campaign. Only try to siege if it's possible with up to given amount of soldiers. Siege is expensive, if you'll be doing it with too big battalion it might be less profitable than other combat campaigns. This option does not applied to unifying sieges, it affect only looting.": "进行围城的最大士兵数。只在此数值的士兵数量可以进行围城时这么做。围城的损失通常很大，如果需要大量士兵才能进行的话，收益将无法弥补损失。此项不影响统一时的围城士兵数。",
-    "Limit battalions to sizes which will neven suffer any casualties in successful fights. You still will lose soldiers after failures, increasing minimum advantage can improve winning odds. This option designed to use with armored races favoring frequent attacks, with no approppriate build it may prevent any attacks from happening. This option does not applied to unifying sieges, it affect only looting.": "将士兵数限制为不会有任何损失的数量，但您还是有可能战斗失败。增加最低优势可以提升胜率。此项通常用于拥有减少战死士兵数量特质的种族，其余种族可能会导致不进行战斗。此项不影响统一时的围城士兵数。",
+    "No additional limits to battalion size. Always send maximum soldiers allowed with current Max Advantage.": "不限制参加战斗的士兵数。永远尽可能使用最高优势对应的士兵数。",
+    "Limit battalions to sizes which will neven suffer any casualties in successful fights. You still will lose soldiers after failures, increasing minimum advantage can improve winning odds. This option designed to use with armored races favoring frequent attacks, with no approppriate build it may prevent any attacks from happening.": "将参加战斗的士兵数限制为战斗胜利后不损失任何士兵的数值。战败则仍然可能损失士兵，此时提升最低优势可以增加胜率。此项是供有装甲相关特质的种族优化进攻频率使用，如果设置不当，可能会导致士兵永远不进攻。",
+    "Tries to maximize total number of attacks, alternating between full and safe attacks based on soldiers condition, to get most from both healing and recruiting.": "尽可能增加战斗总次数，根据士兵情况，自动在前两个选项之间切换，以优化战斗结果。",
+    "Configures safety of attacks. This option does not applies to unifying sieges, it affect only looting.": "设置士兵攻击的烈度。此项不影响统一时的围城士兵数。",
 
     // 地狱维度设置
     "Hell Settings": "地狱维度设置",
@@ -788,7 +799,7 @@ var CNZ_MAP = {
     "Weightings adjustments": "锻造物权重",
     "Prioritize demanded": "优先制造需要的",
     "Buildings weightings": "按建筑权重",
-    "Min Ingredients": "锻造物原料保底产量",
+    "Min Materials": "锻造物原料保底产量",
     "Factory": "工厂",
     "Minimum materials to preserve": "原料保底产量",
     "Mining Drone": "采矿机器人",
@@ -804,7 +815,7 @@ var CNZ_MAP = {
     "Distribution of smelters between iron and steel": "冶炼厂冶炼铁和钢的方式",
     "Configures how exactly craftables will be weighted against each other": "控制锻造物与其他资源相比的权重",
     "Ratio between resources. Script assign craftsmans to resource with lowest 'amount / weighting'. Ignored by manual crafting.": "资源的权重。脚本会优先将工匠分配给(资源数量除以权重)较低的锻造物。手动锻造时无效。",
-    "Only craft resource when storage ratio of all required ingredients above given number. E.g. bricks with 0.1 min ingredients will be crafted only when cement storage at least 10% filled.": "只在原材料大于相应比例时进行锻造。例如，将砌砖设为0.1，则只会在水泥数量超过库存上限10%的时候锻造砌砖。",
+    "Only craft resource when storage ratio of all required materials above given number. E.g. bricks with 0.1 min materials will be crafted only when cement storage at least 10% filled.": "只在原材料大于相应比例时进行锻造。例如，将砌砖设为0.1，则只会在水泥数量超过库存上限10%的时候锻造砌砖。",
     "Use configured weightings with no additional adjustments, craftables with x2 weighting will be crafted two times more intense than with x1, etc.": "按照正常的权重制造。2倍权重的锻造物将比1倍权重的锻造物多制造1倍，以此类推。",
     "Ignore craftables once stored amount surpass cost of most expensive building, until all missing resources will be crafted. After that works as with 'none' adjustments.": "当锻造物储量超过花费最高的建筑时忽略相应锻造物，直到所有锻造物都超过了相应数值。之后与上方“无”选项效果相同。",
     "Uses weightings of buildings which are waiting for craftables, as multipliers to craftables weighting. This option requires autoBuild.": "使用需要锻造物建筑的权重，计入锻造物的权重。需要开启自动建筑此项才能生效。",
