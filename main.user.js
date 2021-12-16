@@ -1479,10 +1479,10 @@ function settingsListener() {
         if(item.length === 1) {
 
             //建筑名单独汉化
-            buildingNameTextCH();
+            //buildingNameTextCH();
 
             //建立建筑名英汉对照框
-            triggerBuildingNameTextCH();
+            //triggerBuildingNameTextCH();
 
             // 汉化脚本设置
             textCH(item);
